@@ -207,6 +207,28 @@ body {
   font-weight: normal;
   color: var(--tp-common-black);
   font-family: var(--tp-ff-body);
+  scroll-behavior: smooth;
+  --webkit-scroll-behavior: smooth;
+}
+
+/* Width */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+/* Track (background) */
+::-webkit-scrollbar-track {
+  background: var(--tp-common-black);
+}
+
+/* Handle (scroll thumb) */
+::-webkit-scrollbar-thumb {
+  background: var(--tp-theme-primary);
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: var(--tp-common-white);
 }
 
 img {
@@ -5809,6 +5831,7 @@ body.tp-magic-cursor #magic-cursor {
   transition: all 0s 2s;
   width: 50%;
   z-index: 10;
+  overflow: auto;
 }
 @media only screen and (min-width: 768px) and (max-width: 991px), only screen and (min-width: 576px) and (max-width: 767px), (max-width: 574.98px) {
   .tp-offcanvas-2-area.menu-open,
@@ -14777,7 +14800,7 @@ body.tp-magic-cursor #magic-cursor {
 }
 .cunnet-dark .tp-btn-red {
   background-color: var(--tp-theme-primary);
-  color: var(--tp-common-white);
+  color: var(--tp-common-dark);
 }
 .cunnet-dark .ca-footer-btn {
   background: none;
@@ -14818,7 +14841,7 @@ body.tp-magic-cursor #magic-cursor {
   color: var(--tp-common-white);
 }
 .cunnet-dark .mp-portfolio-tab ul li a.active {
-  background: var(--tp-common-white);
+  background: var(--tp-theme-primary);
   color: var(--tp-common-black);
 }
 .cunnet-dark .mp-portfolio-slider-control {
@@ -16635,6 +16658,10 @@ body.tp-magic-cursor #magic-cursor {
   color: var(--tp-common-black);
   margin-bottom: 30px;
   letter-spacing: -2.4px;
+}
+.tp-contact-info svg {
+  width: 40px;
+  height: 40px;
 }
 @media only screen and (min-width: 992px) and (max-width: 1199px), only screen and (min-width: 768px) and (max-width: 991px), only screen and (min-width: 576px) and (max-width: 767px), (max-width: 574.98px) {
   .tp-career-details-title {

@@ -1,0 +1,47 @@
+{
+  "slider1": [
+    {
+      "image": "assets/img/portfolio/mp/portfolio.jpg",
+      "title": "Reshape",
+      "tag": "Branding - product design"
+    },
+    {
+      "image": "assets/img/portfolio/mp/portfolio-2.jpg",
+      "title": "Designshop",
+      "tag": "product design"
+    },
+    {
+      "image": "assets/img/portfolio/mp/portfolio-3.jpg",
+      "title": "Reshape",
+      "tag": "Branding - product design"
+    },
+    {
+      "image": "assets/img/portfolio/mp/portfolio-4.jpg",
+      "title": "Reshape",
+      "tag": "Branding - product design"
+    },
+    {
+      "image": "assets/img/portfolio/mp/portfolio-5.jpg",
+      "title": "Reshape",
+      "tag": "Branding - product design"
+    }
+    
+  ],
+  "slider2": [
+    {
+      "image": "assets/img/portfolio/mp/portfolio-3.jpg",
+      "title": "NeoMarket",
+      "tag": "Branding - product design"
+    },
+    {
+      "image": "assets/img/portfolio/mp/portfolio-4.jpg",
+      "title": "LocalArt",
+      "tag": "product design"
+    },
+    {
+      "image": "assets/img/portfolio/mp/portfolio-5.jpg",
+      "title": "Storefront",
+      "tag": "Branding - product design"
+    }
+  ]
+}

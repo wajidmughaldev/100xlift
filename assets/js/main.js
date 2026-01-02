@@ -169,7 +169,7 @@
 	}
 	var sideMenuList = $('.tp-offcanvas-menu nav > ul > li button.tp-menu-close, .tp-offcanvas-menu nav > ul li.has-dropdown > a, .tp-offcanvas-menu nav > ul li.has-dropdown > ul > li.menu-item-has-children > a');
 	$(sideMenuList).on('click', function (e) {
-		e.preventDefault();
+		// e.preventDefault();
 		if (!($(this).parent().hasClass('active'))) {
 			$(this).parent().addClass('active');
 			$(this).siblings('.tp-submenu').slideDown();
