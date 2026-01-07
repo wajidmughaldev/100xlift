@@ -96,13 +96,13 @@
 	////////////////////////////////////////////////////
 	// 04. mp-portfolio-slider
 	var slider = new Swiper('.mp-portfolio-slider', {
-		slidesPerView: 4,
+		slidesPerView: 3,
 		speed:1000,
 		spaceBetween: 24,
 		loop: true,
 		breakpoints: {
 			'1200': {
-				slidesPerView: 4,
+				slidesPerView: 3,
 			},
 			'992': {
 				slidesPerView: 3,
@@ -127,13 +127,13 @@
 	////////////////////////////////////////////////////
 	// 05. mp-portfolio-slider-2
 	var slider = new Swiper('.mp-portfolio-slider-2', {
-		slidesPerView: 4,
+		slidesPerView: 3,
 		speed:1000,
 		spaceBetween: 24,
 		loop: true,
 		breakpoints: {
 			'1200': {
-				slidesPerView: 4,
+				slidesPerView: 3,
 			},
 			'992': {
 				slidesPerView: 3,

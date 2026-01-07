@@ -8913,8 +8913,8 @@ body.tp-magic-cursor #magic-cursor {
   top: -1px;
   padding: 30px 30px 78px 30px;
   bottom: 0;
-  left: calc(25% - 0.5555555556rem);
-  width: calc(25% + 0.8333333333rem);
+  left: calc(34% - 0.5555555556rem);
+  width: calc(32% + 0.8333333333rem);
   z-index: 2;
   background: var(--tp-common-white);
 }
@@ -8928,7 +8928,7 @@ body.tp-magic-cursor #magic-cursor {
 }
 .mp-portfolio-slider-control-bottom {
   left: auto;
-  right: calc(25% - 0.5555555556rem);
+  right: calc(34% - 0.5555555556rem);
 }
 @media only screen and (min-width: 992px) and (max-width: 1199px), only screen and (min-width: 768px) and (max-width: 991px), only screen and (min-width: 576px) and (max-width: 767px), (max-width: 574.98px) {
   .mp-portfolio-slider-control-bottom {
