@@ -47,6 +47,7 @@
 44. Smooth btn Scroll Js
 45. career animation
 46. no-animrtion
+47. WhatsApp CTA
 ****************************************************
 ****************************************************/
 
@@ -1324,6 +1325,54 @@
 		});
 
 	});
+
+
+	////////////////////////////////////////////////////
+	// 47. WhatsApp CTA
+	var $btnWrapper = $('.whatsapp-wrapper');
+    var $chatBtn = $('#whatsapp-btn');
+
+    // Scroll event to show/hide button
+    $(window).on('scroll', function(){
+        if($(this).scrollTop() > 300){
+            $btnWrapper.addClass('whatsapp-wrapper-show');
+        } else {
+            $btnWrapper.removeClass('whatsapp-wrapper-show');
+        }
+    });
+
+    // Toggle chat box
+    $chatBtn.click(function(){
+        $('#whatsapp-box').fadeToggle();
+    });
+
+    // Close chat box
+    $('#whatsapp-close').click(function(){
+        $('#whatsapp-box').fadeOut();
+    });
+
+    // Send message
+    $('#whatsapp-send').click(function(){
+        var msg = $('#whatsapp-input').val();
+        if(msg.trim() !== ''){
+            $('#whatsapp-body').append('<p><strong>You:</strong> ' + msg + '</p>');
+            $('#whatsapp-input').val('');
+            $('#whatsapp-body').scrollTop($('#whatsapp-body')[0].scrollHeight);
+
+            // Optional: open WhatsApp web
+            var phone = '923001234567';
+            var url = 'https://wa.me/' + phone + '?text=' + encodeURIComponent(msg);
+            window.open(url, '_blank');
+        }
+    });
+
+    // Send message on Enter key
+    $('#whatsapp-input').keypress(function(e){
+        if(e.which === 13){
+            $('#whatsapp-send').click();
+        }
+    });
+
 
 })(jQuery);
 
