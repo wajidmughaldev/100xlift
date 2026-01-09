@@ -1374,6 +1374,33 @@
     });
 
 
+	// modal js code 
+// 	$('#portfolioModal').on('show.bs.modal', function (event) {
+
+//   let trigger = $(event.relatedTarget);
+
+//   $('#modalTitle').text(trigger.data('title'));
+//   $('#modalCategory').text(trigger.data('category'));
+//   $('#modalDesc').text(trigger.data('desc'));
+//   $('#modalImage').attr('src', trigger.data('img'));
+//   $('#modalLink').attr('href', trigger.data('link'));
+
+//   let tags = trigger.data('tags').split(',');
+//   let tagHtml = '';
+
+//   tags.forEach(function(tag){
+//     tagHtml += `<span>${tag.trim()}</span>`;
+//   });
+
+//   $('#modalTags').html(tagHtml);
+//   console.log(trigger.data());
+//   console.log($('#modalTitle').length);
+
+
+
+// });
+
+
 })(jQuery);
 
 

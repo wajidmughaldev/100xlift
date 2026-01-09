@@ -935,7 +935,7 @@
             <div class="row align-items-center mt-80">
               <div class="col-lg-12">
                 <h2
-                  class="tp-section-title tp-ff-sequel-roman reveal-text mb-20 p-3"
+                  class="tp-section-title tp-ff-sequel-roman reveal-text mb-20 pt-3 pb-3"
                 >
                   Industries served
                 </h2>
@@ -1119,7 +1119,51 @@
                   </h2>
                 </div>
                 <div class="col-lg-7">
-                  <div class="mp-portfolio-tab text-lg-end mt-20">
+                  <div
+                      class="tp-btn-group ms-md-auto tp_fade_anim"
+                      data-delay=".4"
+                      data-fade-from="bottom"
+                      data-ease="bounce"
+                    >
+                      <a class="tp-btn-circle" href="#">
+                        <svg
+                          width="14"
+                          height="14"
+                          viewBox="0 0 14 14"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            fill-rule="evenodd"
+                            clip-rule="evenodd"
+                            d="M2.41379 3.30208C5.97452 3.05821 10.6092 1.55558 14 0C12.4438 3.39014 10.9406 8.02425 10.6973 11.585L8.35765 6.59331L1.14783 13.8037C1.02165 13.9295 0.850656 14.0001 0.672431 14C0.539461 14 0.409486 13.9605 0.298934 13.8866C0.188382 13.8128 0.102217 13.7077 0.0513353 13.5849C0.000453949 13.462 -0.0128613 13.3269 0.013072 13.1965C0.0390053 13.066 0.103024 12.9462 0.197034 12.8522L7.40683 5.64241L2.41379 3.30208Z"
+                            fill="currentColor"
+                          />
+                        </svg>
+                      </a>
+                      <a
+                        class="tp-btn z-index-1"
+                        href="#"
+                        >See All Work</a
+                      >
+                      <a class="tp-btn-circle" href="#">
+                        <svg
+                          width="14"
+                          height="14"
+                          viewBox="0 0 14 14"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            fill-rule="evenodd"
+                            clip-rule="evenodd"
+                            d="M2.41379 3.30208C5.97452 3.05821 10.6092 1.55558 14 0C12.4438 3.39014 10.9406 8.02425 10.6973 11.585L8.35765 6.59331L1.14783 13.8037C1.02165 13.9295 0.850656 14.0001 0.672431 14C0.539461 14 0.409486 13.9605 0.298934 13.8866C0.188382 13.8128 0.102217 13.7077 0.0513353 13.5849C0.000453949 13.462 -0.0128613 13.3269 0.013072 13.1965C0.0390053 13.066 0.103024 12.9462 0.197034 12.8522L7.40683 5.64241L2.41379 3.30208Z"
+                            fill="currentColor"
+                          />
+                        </svg>
+                      </a>
+                    </div>
+                  <!-- <div class="mp-portfolio-tab text-lg-end mt-20">
                     <ul role="tablist">
                       <li class="nav-tab-item" role="presentation">
                         <a href="#web-dev" class="active" data-bs-toggle="tab"
@@ -1138,7 +1182,7 @@
                         <a href="#seo" data-bs-toggle="tab">SEO</a>
                       </li>
                     </ul>
-                  </div>
+                  </div> -->
                 </div>
                 <div class="col-12">
                   <div class="tab-content p-relative">
@@ -1197,34 +1241,70 @@
                                 </div>
                               </div>
                             </div>
+
+                            <!-- Popup Modal for portfolio section start  -->
+                            <!-- <div class="modal fade mp-portfolio-modal" id="portfolioModal" tabindex="-1">
+                              <div class="modal-dialog modal-xl modal-dialog-centered">
+                                <div class="modal-content">
+
+                                  <button type="button" class="btn-close modal-close" data-bs-dismiss="modal"></button>
+
+                                  <div class="row g-0 align-items-center">
+
+                                    <div class="col-lg-6">
+                                      <div class="modal-img-wrap">
+                                        <img id="modalImage" src="" alt="">
+                                      </div>
+                                    </div>
+
+                                    <div class="col-lg-6">
+                                      <div class="modal-content-wrap">
+                                        <h2 id="modalTitle"></h2>
+                                        <p class="modal-category" id="modalCategory"></p>
+
+                                        <div class="modal-tags" id="modalTags"></div>
+
+                                        <p class="modal-desc" id="modalDesc"></p>
+
+                                        <a id="modalLink" href="#" target="_blank" class="btn visit-btn">
+                                          Visit Project →
+                                        </a>
+                                      </div>
+                                    </div>
+
+                                  </div>
+
+                                </div>
+                              </div>
+                            </div> -->
+
+                            <!-- Popup Modal for portfolio section end  -->
+
                             <div class="swiper mp-portfolio-slider">
                               <div class="swiper-wrapper">
                                 <div class="swiper-slide">
                                   <div class="mp-portfolio-item">
-                                    <a
-                                      href="https://goldenhomeaustin.com/" target="_blank"
-                                      class="mp-portfolio-thumb mb-25"
-                                    >
-                                      <img
-                                        class="w-100"
-                                        src="assets/img/portfolio/mp/portfolio.webp"
-                                        alt=""
-                                      />
+                                    <a href="javascript:void(0)"
+                                      class="mp-portfolio-thumb mb-25 portfolio-open"
+                                      data-bs-toggle="modal"
+                                      data-bs-target="#portfolioModal"
+                                      data-title="GoldenHome"
+                                      data-category="Web Design - Development"
+                                      data-img="assets/img/portfolio/mp/portfolio.webp"
+                                      data-desc="GoldenHome is a premium interior and home solutions website designed to showcase craftsmanship, product quality, and a modern digital experience."
+                                      data-tags="UI/UX, WordPress, Performance, SEO, Custom Design"
+                                      data-link="https://goldenhomeaustin.com/">
+
+                                      <img class="w-100" src="assets/img/portfolio/mp/portfolio.webp" alt="">
                                     </a>
-                                    <div
-                                      class="mp-portfolio-content d-inline-block"
-                                    >
-                                      <h3
-                                        class="mp-portfolio-title tp-ff-sequel-semi-bold text-uppercase tp-title-anim fix"
-                                      >
-                                        <a href="https://goldenhomeaustin.com/" target="_blank" class="tp-title-text"
-                                          >GoldernHome</a
-                                        >
+
+                                    <div class="mp-portfolio-content d-inline-block">
+                                      <h3 class="mp-portfolio-title text-uppercase">
+                                        <a href="javascript:void(0)">GoldenHome</a>
                                       </h3>
-                                      <span
-                                        class="mp-portfolio-tag text-uppercase"
-                                        >Web Design - Development</span
-                                      >
+                                      <span class="mp-portfolio-tag text-uppercase">
+                                        Web Design - Development
+                                      </span>
                                     </div>
                                   </div>
                                 </div>
@@ -2763,52 +2843,6 @@
                       </div>
                     </div>
                   </div>
-                  <div class="d-flex justify-content-center mt-70">
-                    <div
-                      class="tp-btn-group tp_fade_anim"
-                      data-delay=".4"
-                      data-fade-from="bottom"
-                      data-ease="bounce"
-                    >
-                      <a class="tp-btn-circle" href="portfolio-dark.html">
-                        <svg
-                          width="14"
-                          height="14"
-                          viewBox="0 0 14 14"
-                          fill="none"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path
-                            fill-rule="evenodd"
-                            clip-rule="evenodd"
-                            d="M2.41379 3.30208C5.97452 3.05821 10.6092 1.55558 14 0C12.4438 3.39014 10.9406 8.02425 10.6973 11.585L8.35765 6.59331L1.14783 13.8037C1.02165 13.9295 0.850656 14.0001 0.672431 14C0.539461 14 0.409486 13.9605 0.298934 13.8866C0.188382 13.8128 0.102217 13.7077 0.0513353 13.5849C0.000453949 13.462 -0.0128613 13.3269 0.013072 13.1965C0.0390053 13.066 0.103024 12.9462 0.197034 12.8522L7.40683 5.64241L2.41379 3.30208Z"
-                            fill="currentColor"
-                          />
-                        </svg>
-                      </a>
-                      <a
-                        class="tp-btn z-index-1"
-                        href="#"
-                        >See All Work</a
-                      >
-                      <a class="tp-btn-circle" href="#">
-                        <svg
-                          width="14"
-                          height="14"
-                          viewBox="0 0 14 14"
-                          fill="none"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path
-                            fill-rule="evenodd"
-                            clip-rule="evenodd"
-                            d="M2.41379 3.30208C5.97452 3.05821 10.6092 1.55558 14 0C12.4438 3.39014 10.9406 8.02425 10.6973 11.585L8.35765 6.59331L1.14783 13.8037C1.02165 13.9295 0.850656 14.0001 0.672431 14C0.539461 14 0.409486 13.9605 0.298934 13.8866C0.188382 13.8128 0.102217 13.7077 0.0513353 13.5849C0.000453949 13.462 -0.0128613 13.3269 0.013072 13.1965C0.0390053 13.066 0.103024 12.9462 0.197034 12.8522L7.40683 5.64241L2.41379 3.30208Z"
-                            fill="currentColor"
-                          />
-                        </svg>
-                      </a>
-                    </div>
-                  </div>
                 </div>
               </div>
             </div>
@@ -2929,27 +2963,27 @@
           <!-- about-area-end -->
 
           <!-- services-area-start -->
-          <div class="pp-porfolio-area p-relative fix pt-115 pb-80 mb-50">
+          <div class="pp-porfolio-area p-relative fix pt-120 pb-120 mb-50">
             <div class="pp-porfolio-bg-wrap">
               <div id="pp-porfolio-bg-box" class="pp-porfolio-bg-1">
                 <img
                   class="pp-porfolio-bg-1"
-                  src="assets/img/portfolio/pp/portfolio-3.png"
+                  src="assets/img/portfolio/pp/portfolio.webp"
                   alt=""
                 />
                 <img
                   class="pp-porfolio-bg-2"
-                  src="assets/img/portfolio/pp/portfolio-2.png"
+                  src="assets/img/portfolio/pp/portfolio-2.webp"
                   alt=""
                 />
                 <img
                   class="pp-porfolio-bg-3"
-                  src="assets/img/portfolio/pp/portfolio-4.png"
+                  src="assets/img/portfolio/pp/portfolio-3.webp"
                   alt=""
                 />
                 <img
                   class="pp-porfolio-bg-4"
-                  src="assets/img/portfolio/pp/portfolio-4.jpg"
+                  src="assets/img/portfolio/pp/portfolio-4.webp"
                   alt=""
                 />
               </div>
@@ -2970,8 +3004,8 @@
                           >Website Development</a
                         >
                         <div class="pp-porfolio-date">
-                          <span>Photography</span>
-                          <span>2024</span>
+                          <span>Designing</span>
+                          <span>Developement</span>
                         </div>
                       </li>
                       <li rel="pp-porfolio-bg-2">
@@ -2979,8 +3013,8 @@
                           >CMS Development</a
                         >
                         <div class="pp-porfolio-date">
-                          <span>Website Design</span>
-                          <span>2024</span>
+                          <span>Theme Cutomization</span>
+                          <span>E-commerce</span>
                         </div>
                       </li>
                       <li rel="pp-porfolio-bg-3">
@@ -2988,51 +3022,18 @@
                           >UI/UX Designing</a
                         >
                         <div class="pp-porfolio-date">
-                          <span>Web branding</span>
-                          <span>2024</span>
+                          <span>Website Designing</span>
+                          <span>Template Designing</span>
                         </div>
                       </li>
                       <li rel="pp-porfolio-bg-4">
                         <a href="#">SEO</a>
                         <div class="pp-porfolio-date">
-                          <span>Photography</span>
-                          <span>2024</span>
+                          <span>On-page</span>
+                          <span>Off-page</span>
                         </div>
                       </li>
                     </ul>
-                    <div class="pp-porfolio-slider mt-115">
-                      <div class="swiper pp-slide-active">
-                        <div class="swiper-wrapper slide-transtion">
-                          <div class="swiper-slide">
-                            <span>Real Estate <span></span></span>
-                          </div>
-                          <div class="swiper-slide">
-                            <span>Clinics <span></span></span>
-                          </div>
-                          <div class="swiper-slide">
-                            <span>E-Commerce <span></span></span>
-                          </div>
-                          <div class="swiper-slide">
-                            <span>Education <span></span></span>
-                          </div>
-                          <div class="swiper-slide">
-                            <span>SaaS <span></span></span>
-                          </div>
-                          <div class="swiper-slide">
-                            <span>Restaurants <span></span></span>
-                          </div>
-                          <div class="swiper-slide">
-                            <span>Automative <span></span></span>
-                          </div>
-                          <div class="swiper-slide">
-                            <span>Beauty & Wellness <span></span></span>
-                          </div>
-                          <div class="swiper-slide">
-                            <span>Other Businesses <span></span></span>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
                   </div>
                 </div>
               </div>
@@ -3074,15 +3075,21 @@
                       >
                         Helping world-class<br />
                         company by creative<br />
-                        design.
+                        design & development.
                       </h2>
                       <div class="ca-testimonial-navigation">
                         <span class="ca-testimonial-arrow-prev"
-                          ><i class="fa-solid fa-arrow-left"></i
-                        ></span>
+                          ><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="19" y1="12" x2="5" y2="12"/>
+                            <polyline points="12 19 5 12 12 5"/>
+                          </svg>
+                        </span>
                         <span class="ca-testimonial-arrow-next"
-                          ><i class="fa-solid fa-arrow-right"></i
-                        ></span>
+                          ><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="5" y1="12" x2="19" y2="12"/>
+                            <polyline points="12 5 19 12 12 19"/>
+                          </svg>
+                        </span>
                       </div>
                     </div>
                   </div>
@@ -3237,7 +3244,7 @@
                           <a
                             href="#"
                             class="common-underline"
-                            >Addul Wajid</a
+                            >Abdul Wajid</a
                           >
                         </h5>
                         <span>Founder & CEO</span>
@@ -3303,7 +3310,7 @@
                       data-fade-from="bottom"
                       data-ease="bounce"
                     >
-                      <a class="tp-btn-circle" href="portfolio-dark.html">
+                      <a class="tp-btn-circle" href="#">
                         <svg
                           width="14"
                           height="14"
@@ -3321,10 +3328,10 @@
                       </a>
                       <a
                         class="tp-btn z-index-1"
-                        href="portfolio-col-3-dark.html"
+                        href="#"
                         >Contact Us</a
                       >
-                      <a class="tp-btn-circle" href="portfolio-dark.html">
+                      <a class="tp-btn-circle" href="#">
                         <svg
                           width="14"
                           height="14"
@@ -3623,5 +3630,6 @@
     <script src="assets/js/main.js"></script>
     <script src="assets/js/tp-cursor.js"></script>
     <script src="assets/js/portfolio.js"></script>
+
   </body>
 </html>
