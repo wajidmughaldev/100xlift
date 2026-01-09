@@ -985,8 +985,8 @@ input[type=color] {
 /*----------------------------------------*/
 .whatsapp-wrapper {
     position: fixed;
-    bottom: 120px;
-    right: 20px;
+    bottom: 300px;
+    left: 20px;
     display: none; /* Hidden initially, will show on scroll */
     z-index: 1000;
 }
@@ -996,22 +996,20 @@ input[type=color] {
 }
 
 #whatsapp-btn {
-    background-color: #25D366;
+  background-color: var(--tp-theme-primary);
     color: white;
-    padding: 12px 20px;
+    padding: 20px 20px;
     border-radius: 50px;
     font-weight: bold;
     font-family: Arial, sans-serif;
     display: flex;
     align-items: center;
     cursor: pointer;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.3);
 }
 
 #whatsapp-btn img {
-    width: 24px;
-    height: 24px;
-    margin-right: 10px;
+    width: 30px;
+    height: 30px;
 }
 
 /* Chat box */
