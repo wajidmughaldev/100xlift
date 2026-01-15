@@ -1,0 +1,367 @@
+---
+
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+---
+
+<BaseLayout
+  title="100XLIFT – Portfolio"
+  description="100xLift is a full-service digital agency delivering web design, development, SEO, and branding solutions to help businesses grow online."
+  keywords="digital agency, web design, web development, SEO services, branding, UI UX design, website optimization, business growth online"
+  ogTitle="100xLift – Digital Agency for Web Design & SEO"
+  ogImage="/assets/img/logo/logo-white.png"
+  ogUrl="https://www.100xlift.com/"
+  twitterTitle="100xLift – Digital Agency for Web Design & SEO"
+  headerVariant="promo"
+>
+
+<style slot="head">
+      .portfolio-popup {
+         position: fixed;
+         inset: 0;
+         background: rgba(8, 8, 8, 0.96);
+         opacity: 0;
+         visibility: hidden;
+         transition: opacity 0.25s ease, visibility 0.25s ease;
+         z-index: 99999;
+      }
+
+      .portfolio-popup.is-open {
+         opacity: 1;
+         visibility: visible;
+      }
+
+      .portfolio-popup__inner {
+         position: relative;
+         width: 100%;
+         height: 100%;
+      }
+
+      .portfolio-popup__frame {
+         width: 100%;
+         height: 100%;
+         border: 0;
+         display: block;
+         background: #0b0b0b;
+      }
+
+      .portfolio-popup__close {
+         position: absolute;
+         top: 20px;
+         right: 20px;
+         width: 46px;
+         height: 46px;
+         border-radius: 999px;
+         border: 1px solid rgba(255, 255, 255, 0.4);
+         background: rgba(0, 0, 0, 0.4);
+         color: #fff;
+         display: inline-flex;
+         align-items: center;
+         justify-content: center;
+         cursor: pointer;
+         transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+         z-index: 2;
+      }
+
+      .portfolio-popup__close:hover {
+         background: #fff;
+         color: #0b0b0b;
+         border-color: #fff;
+      }
+
+      .portfolio-popup-open {
+         overflow: hidden;
+      }
+   </style>
+
+<main>
+
+            <!-- tp-breadcrumb-details-area-start -->
+            <div class="tp-breadcrumb-area about-us-spacing pb-40">
+               <div class="container">
+                  <div class="row">
+                     <div class="col-12">
+                        <div class="tp-tp-breadcrumb-main text-center">
+                           <span class="tp-breadcrumb-subtitle text-uppercase fw-600 mb-10 tp_fade_anim" data-delay=".3">Selected Project</span>
+                           <h2 class="tp-breadcrumb-title tp-ff-sequel-bold-head text-uppercase tp_fade_anim" data-delay=".5">Multiplied<br> By One Hundred</h2>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <!-- tp-breadcrumb-details-area-end -->
+
+            <!-- portfolio area start -->
+            <div class="tp-portfolio-inner-ptb tp-animate-tab pb-100">
+               <div class="container">
+                  <div class="tp-portfolio-tab-content-wrap">
+                     <div class="tp-portfolio-inner-tab-wrap mb-55 tp_fade_anim" data-delay=".7">
+                        <nav>
+                           <div class="nav nav-tabs justify-content-center" id="nav-tab" role="tablist">
+                              <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" data-portfolio-filter="all" type="button" role="tab" aria-controls="nav-home" aria-selected="true">All</button>
+                              <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" data-portfolio-filter="design" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Design</button>
+                              <!-- <button class="nav-link" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-contact" data-portfolio-filter="motion" type="button" role="tab" aria-controls="nav-contact" aria-selected="false">Motion</button> -->
+                              <button class="nav-link" id="nav-four-tab" data-bs-toggle="tab" data-bs-target="#nav-four" data-portfolio-filter="web-dev" type="button" role="tab" aria-controls="nav-four" aria-selected="false">Web dev</button>
+                              <!-- <button class="nav-link" id="nav-five-tab" data-bs-toggle="tab" data-bs-target="#nav-five" data-portfolio-filter="ai-tools" type="button" role="tab" aria-controls="nav-five" aria-selected="false">AI Tools</button> -->
+                           </div>
+                        </nav>
+                     </div>
+                     <div class="tab-content p-relative" id="nav-tabContent">
+                        <div class="tab-pane show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab" tabindex="0" data-portfolio-pane data-portfolio-filter="all"></div>
+                        <div class="tab-pane" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab" tabindex="0" data-portfolio-pane data-portfolio-filter="design"></div>
+                        <div class="tab-pane" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab" tabindex="0" data-portfolio-pane data-portfolio-filter="motion"></div>
+                        <div class="tab-pane" id="nav-four" role="tabpanel" aria-labelledby="nav-four-tab" tabindex="0" data-portfolio-pane data-portfolio-filter="web-dev"></div>
+                        <div class="tab-pane" id="nav-five" role="tabpanel" aria-labelledby="nav-five-tab" tabindex="0" data-portfolio-pane data-portfolio-filter="ai-tools"></div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <!-- portfolio area end -->
+
+
+         </main>
+
+<div slot="body-end" class="portfolio-popup" aria-hidden="true">
+      <div class="portfolio-popup__inner">
+         <button class="portfolio-popup__close" type="button" aria-label="Close portfolio details">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+               <path d="M2 2L14 14" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" />
+               <path d="M14 2L2 14" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" />
+            </svg>
+         </button>
+         <iframe class="portfolio-popup__frame" title="Portfolio details"></iframe>
+      </div>
+   </div>
+
+<script is:inline slot="body-end">
+      var portfolioData = [
+         {
+            title: "GOLDEN HOME",
+            image: "assets/img/portfolio/mp/portfolio.webp",
+            detailsUrl: "portfolio-details.html",
+            tags: ["Branding", "Web Design"],
+            filters: ["design"]
+         },
+         {
+            title: "PPC DESIGNS",
+            image: "assets/img/portfolio/mp/portfolio-5.webp",
+            detailsUrl: "portfolio-details.html",
+            tags: ["Branding", "Web Design"],
+            filters: ["design","web-dev"]
+         },
+         {
+            title: "BANYAN TECHNOLOGY",
+            image: "assets/img/portfolio/mp/portfolio-4.webp",
+            detailsUrl: "portfolio-details.html",
+            tags: ["Branding", "Web Development"],
+            filters: ["design","web-dev"]
+         },
+         {
+            title: "NEO LEDGE",
+            image: "assets/img/portfolio/mp/portfolio-3.webp",
+            detailsUrl: "portfolio-details.html",
+            tags: ["Web Design", "Web Development"],
+            filters: ["design", "web-dev"]
+         },
+         {
+            title: "REAL STELL SOFTWARE",
+            image: "assets/img/portfolio/mp/portfolio-2.webp",
+            detailsUrl: "portfolio-details.html",
+            tags: ["Branding", "Web Design"],
+            filters: ["design","web-dev"]
+         },
+         {
+            title: "GOLDEN HOME",
+            image: "assets/img/portfolio/mp/portfolio.webp",
+            detailsUrl: "portfolio-details.html",
+            tags: ["Branding", "Web Development"],
+            filters: ["design","web-dev"]
+         },
+         {
+            title: "MEDIEVALDEPOT",
+            image: "assets/img/portfolio/mp/portfolio-6.webp",
+            detailsUrl: "portfolio-details.html",
+            tags: ["Motion", "Web Design"],
+            filters: ["design","web-dev"]
+         },
+         {
+            title: "WORKWISE",
+            image: "assets/img/portfolio/mp/portfolio-10.webp",
+            detailsUrl: "portfolio-details.html",
+            tags: ["Motion", "Branding"],
+            filters: ["design","web-dev"]
+         },
+         {
+            title: "MIXHAEL MANCHUSO",
+            image: "assets/img/portfolio/mp/portfolio-9.webp",
+            detailsUrl: "portfolio-details.html",
+            tags: ["AI Tools", "Web Design"],
+            filters: ["design","web-dev"]
+         },
+          {
+            title: "LUXURY WELLNESS",
+            image: "assets/img/portfolio/mp/portfolio-8.webp",
+            detailsUrl: "portfolio-details.html",
+            tags: ["AI Tools", "Web Design"],
+            filters: ["design","web-dev"]
+         },
+           {
+            title: "THRIVE MASTER MIND",
+            image: "assets/img/portfolio/mp/portfolio-7.webp",
+            detailsUrl: "portfolio-details.html",
+            tags: ["AI Tools", "Web Design"],
+            filters: ["design","web-dev"]
+         }
+        
+      ];
+   </script>
+<script is:inline slot="body-end">
+      (function () {
+         function escapeHtml(value) {
+            return String(value)
+               .replace(/&/g, '&amp;')
+               .replace(/</g, '&lt;')
+               .replace(/>/g, '&gt;')
+               .replace(/\"/g, '&quot;')
+               .replace(/'/g, '&#39;');
+         }
+
+         function buildTags(tags) {
+            if (!Array.isArray(tags) || !tags.length) {
+               return '';
+            }
+            var tagItems = tags.map(function (tag) {
+               return '<li><a href="#">' + escapeHtml(tag) + '</a></li>';
+            }).join('');
+            return '<div class="cs-portfolio-tag"><ul>' + tagItems + '</ul></div>';
+         }
+
+         function buildItem(item) {
+            var title = escapeHtml(item.title || '');
+            var image = escapeHtml(item.image || '');
+            var detailsUrl = escapeHtml(item.detailsUrl || '#');
+            var tags = buildTags(item.tags);
+
+            return [
+               '<div class="col-xl-4 col-lg-6">',
+               '   <div class="mg-portfolio-item anim-zoomin-wrap mb-55" data-portfolio-url="' + detailsUrl + '">',
+               '      <div class="mg-portfolio-thumb anim-zoomin not-hide-cursor" data-cursor="View<br>Demo">',
+               '         <a class="cursor-hide" href="' + detailsUrl + '" data-portfolio-link>',
+               '            <img class="w-100" src="' + image + '" alt="' + title + '">',
+               '         </a>',
+               '      </div>',
+               '      <div class="mg-portfolio-content cs-portfolio-content d-flex align-items-center flex-wrap justify-content-between">',
+               '         <h3 class="cs-portfolio-title tp-title-anim fix mr-20 tp-ff-sequel-semi-bold">',
+               '            <a href="' + detailsUrl + '" class="tp-title-text" data-portfolio-link>' + title + '</a>',
+               '         </h3>',
+               tags,
+               '      </div>',
+               '   </div>',
+               '</div>'
+            ].join('');
+         }
+
+         function matchesFilter(item, filterKey) {
+            if (!filterKey || filterKey === 'all') {
+               return true;
+            }
+            return Array.isArray(item.filters) && item.filters.indexOf(filterKey) !== -1;
+         }
+
+         function renderPortfolioItems(filterKey, container) {
+            var data = Array.isArray(window.portfolioData) ? window.portfolioData : [];
+            var html = data.filter(function (item) {
+               return matchesFilter(item, filterKey);
+            }).map(buildItem).join('');
+
+            if (!html) {
+               html = '<div class="col-12"><p class="text-center">No items yet.</p></div>';
+            }
+
+            container.innerHTML = html;
+         }
+
+         function initPortfolioTabs() {
+            var panes = document.querySelectorAll('[data-portfolio-pane]');
+            panes.forEach(function (pane) {
+               var filterKey = pane.getAttribute('data-portfolio-filter') || 'all';
+               var grid = pane.querySelector('[data-portfolio-grid]');
+               if (!grid) {
+                  grid = document.createElement('div');
+                  grid.className = 'row gx-40';
+                  grid.setAttribute('data-portfolio-grid', '');
+                  pane.appendChild(grid);
+               }
+               renderPortfolioItems(filterKey, grid);
+            });
+         }
+
+         function initPortfolioPopup() {
+            var popup = document.querySelector('.portfolio-popup');
+            if (!popup) {
+               return;
+            }
+
+            var frame = popup.querySelector('.portfolio-popup__frame');
+            var closeBtn = popup.querySelector('.portfolio-popup__close');
+
+            var openPopup = function (url) {
+               if (!url || url === '#') {
+                  return;
+               }
+               frame.setAttribute('src', url);
+               popup.classList.add('is-open');
+               document.body.classList.add('portfolio-popup-open');
+            };
+
+            var closePopup = function () {
+               popup.classList.remove('is-open');
+               document.body.classList.remove('portfolio-popup-open');
+               frame.setAttribute('src', '');
+            };
+
+            document.addEventListener('click', function (event) {
+               var link = event.target.closest('[data-portfolio-link]');
+               if (link) {
+                  event.preventDefault();
+                  openPopup(link.getAttribute('href'));
+                  return;
+               }
+
+               var item = event.target.closest('.mg-portfolio-item');
+               if (!item || event.target.closest('.cs-portfolio-tag a')) {
+                  return;
+               }
+
+               var url = item.getAttribute('data-portfolio-url');
+               if (url) {
+                  event.preventDefault();
+                  openPopup(url);
+               }
+            });
+
+            closeBtn.addEventListener('click', function () {
+               closePopup();
+            });
+
+            popup.addEventListener('click', function (event) {
+               if (event.target === popup) {
+                  closePopup();
+               }
+            });
+
+            document.addEventListener('keydown', function (event) {
+               if (event.key === 'Escape' && popup.classList.contains('is-open')) {
+                  closePopup();
+               }
+            });
+         }
+
+         document.addEventListener('DOMContentLoaded', function () {
+            initPortfolioTabs();
+            initPortfolioPopup();
+         });
+      })();
+   </script>
+
+</BaseLayout>

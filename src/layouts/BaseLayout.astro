@@ -1,0 +1,1120 @@
+---
+/**
+ * BaseLayout.astro
+ * SEO-safe defaults + per-page overrides via props
+ */
+const {
+  title = "100xLift",
+  description = "",
+  canonical = "",
+  robots = "index,follow",
+  ogImage = "/assets/img/og/default-og.jpg",
+  ogType = "website",
+  locale = "en_US",
+  siteName = "100xLift",
+  twitterSite = "",
+  twitterCreator = "",
+  themeColor = "#0b0f1a",
+  keywords = "",
+  author = "",
+  publishedTime = "",
+  modifiedTime = "",
+  structuredData = null,
+  lang = "zxx",
+  htmlClass = "no-js cunnet-dark",
+  bodyClass = "tp-magic-cursor",
+  ogTitle = "",
+  ogDescription = "",
+  ogUrl = "",
+  twitterTitle = "",
+  twitterDescription = "",
+  showPreloader = true,
+  headerVariant = "simple",
+} = Astro.props;
+
+const url = Astro.url; // current page URL object
+const resolvedCanonical = canonical || url.href;
+
+// Title guard: keep it clean and non-empty
+const safeTitle = (title || "100xLift").trim();
+
+// Description guard
+const safeDescription = (description || "").trim();
+
+const resolvedOgTitle = (ogTitle || safeTitle).trim();
+const resolvedOgDescription = (ogDescription || safeDescription).trim();
+const resolvedOgUrl = ogUrl || resolvedCanonical;
+const resolvedTwitterTitle = (twitterTitle || resolvedOgTitle).trim();
+const resolvedTwitterDescription = (twitterDescription || resolvedOgDescription).trim();
+
+// Optional OG absolute URL if you set site in astro.config.mjs
+// If `site` isn't set, it will still work as relative for most crawlers.
+const ogImageUrl = ogImage;
+
+const headerPromoHtml = `<!-- header area start -->
+      <div class="tp-header-area tp-header-spacing header-transparent px-md-5">
+        <div class="container">
+          <div class="pp-header-top">
+            <div class="row">
+              <div class="col-lg-6 col-sm-6 col-8 d-flex align-items-center">
+                <div class="pp-header-top-wrap mb-10">
+                  <a href="/"
+                    ><img
+                      class="logo-2"
+                      data-width="140"
+                      src="/assets/img/logo/logo-white.png"
+                      alt=""
+                  /></a>
+                </div>
+              </div>
+              <div
+                class="col-xxl-5 col-xl-5 col-lg-5 col-md-5 d-none d-md-block text-end"
+              >
+                <div class="pp-header-btn ml-60 mb-20 mt-35">
+                  <a
+                    class="tp-btn pp-btn-nobg text-uppercase"
+                    href="/audit"
+                    target="_blank"
+                  >
+                    <span>
+                      <span class="text-1">Free Audit</span>
+                      <span class="text-2">Free Audit</span>
+                    </span>
+                    <i>
+                      <svg
+                        width="11"
+                        height="11"
+                        viewBox="0 0 11 11"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M0.21967 9.40717C-0.0732232 9.70006 -0.0732232 10.1749 0.21967 10.4678C0.512563 10.7607 0.987437 10.7607 1.28033 10.4678L0.21967 9.40717ZM10.6875 0.75C10.6875 0.335786 10.3517 2.97145e-09 9.9375 1.50485e-07L3.1875 -2.70983e-07C2.77329 -2.70983e-07 2.4375 0.335786 2.4375 0.75C2.4375 1.16421 2.77329 1.5 3.1875 1.5H9.1875V7.5C9.1875 7.91421 9.52329 8.25 9.9375 8.25C10.3517 8.25 10.6875 7.91421 10.6875 7.5L10.6875 0.75ZM0.75 9.9375L1.28033 10.4678L10.4678 1.28033L9.9375 0.75L9.40717 0.21967L0.21967 9.40717L0.75 9.9375Z"
+                          fill="currentColor"
+                        />
+                      </svg>
+                      <svg
+                        width="11"
+                        height="11"
+                        viewBox="0 0 11 11"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M0.21967 9.40717C-0.0732232 9.70006 -0.0732232 10.1749 0.21967 10.4678C0.512563 10.7607 0.987437 10.7607 1.28033 10.4678L0.21967 9.40717ZM10.6875 0.75C10.6875 0.335786 10.3517 2.97145e-09 9.9375 1.50485e-07L3.1875 -2.70983e-07C2.77329 -2.70983e-07 2.4375 0.335786 2.4375 0.75C2.4375 1.16421 2.77329 1.5 3.1875 1.5H9.1875V7.5C9.1875 7.91421 9.52329 8.25 9.9375 8.25C10.3517 8.25 10.6875 7.91421 10.6875 7.5L10.6875 0.75ZM0.75 9.9375L1.28033 10.4678L10.4678 1.28033L9.9375 0.75L9.40717 0.21967L0.21967 9.40717L0.75 9.9375Z"
+                          fill="currentColor"
+                        />
+                      </svg>
+                    </i>
+                  </a>
+                </div>
+              </div>
+              <div class="col-lg-1 col-sm-1 col-4">
+                <div
+                  class="pp-header-top-logo-wrap d-flex align-items-center justify-content-sm-end justify-content-sm-start ml-55 h-100"
+                >
+                  <button
+                    class="pp-header-hamburger hamburger-open-btn mt-20 ml-40"
+                  >
+                    <svg
+                      width="12"
+                      height="12"
+                      viewBox="0 0 12 12"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path d="M12 6H0M6 12L6 0" stroke="currentColor" />
+                    </svg>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="pp-header-main mt-15 mb-20">
+            <div class="row align-items-center justify-content-end">
+              <div class="col-xxl-6 col-xl-6 d-none">
+                <div class="pp-main-menu mb-20">
+                  <nav>
+                    <ul>
+                      <li><a href="/">Home</a></li>
+                      <li><a href="/portfolio">Portfolio</a></li>
+                      <li><a href="/#about">About</a></li>
+                      <li><a href="/#services">Services</a></li>
+                      <li><a href="/#testimonials">Testimonials</a></li>
+                      <li><a href="/contact-me-dark">Contract</a></li>
+                    </ul>
+                  </nav>
+                  <div class="tp-main-menu d-none">
+                    <nav class="tp-mobile-menu-active">
+                      <ul>
+                        <li class="has-dropdown">
+                          <a href="/">Home</a>
+                          <!-- <div class="tp-submenu submenu tp-megamenu">
+                                       <div class="row">
+                                          <div class="col-xl-4">
+                                             <div class="tp-megamenu-box">
+                                                <div class="tp-megamenu-title-wrap">
+                                                   <span class="tp-megamenu-title">Light Version</span>
+                                                </div>
+                                                <ul>
+                                                   <li><a href="/">Creative Agency</a></li>
+                                                   <li><a href="/index-digital-light">Digital Studio</a></li>
+                                                   <li><a href="/index-modern-light">Modern Agency</a></li>
+                                                   <li><a href="/index-personal-portfolio-light">Personal Portfolio</a></li>
+                                                   <li><a href="/index-branding-studio-light">Branding Studio</a></li>
+                                                   <li><a href="/index-motion-graphic-light">Motion Graphics</a></li>
+                                                   <li><a href="/index-shop-light">Agency Shop</a></li>
+                                                </ul>
+                                             </div>
+                                          </div>
+                                          <div class="col-xl-4">
+                                             <div class="tp-megamenu-box">
+                                                <div class="tp-megamenu-title-wrap">
+                                                   <span class="tp-megamenu-title">Dark Version</span>
+                                                </div>
+                                                <ul>
+                                                   <li><a href="/index-dark">Creative Agency</a></li>
+                                                   <li><a href="/index-digital-dark">Digital Studio</a></li>
+                                                   <li><a href="/index-modern-dark">Modern Agency</a></li>
+                                                   <li><a href="/index-personal-portfolio-dark">Personal Portfolio</a></li>
+                                                   <li><a href="/index-branding-studio-dark">Branding Studio</a></li>
+                                                   <li><a href="/index-motion-graphic-dark">Motion Graphics</a></li>
+                                                   <li><a href="/index-shop-dark">Agency Shop</a></li>
+                                                </ul>
+                                             </div>
+                                          </div>
+                                          <div class="col-xl-4">
+                                             <div class="tp-megamenu-box">
+                                                <div class="tp-megamenu-title-wrap">
+                                                   <span class="tp-megamenu-title">All Showcase</span>
+                                                </div>
+                                                <ul>
+                                                   <li><a href="/portfolio-mix-slicer">Mix Slicer</a></li>
+                                                   <li><a href="/portfolio-creative-skew-slider">Creative Skew</a></li>
+                                                   <li><a href="/portfolio-creative-thumb-slider">Creative Thumb</a></li>
+                                                   <li><a href="/portfolio-revealing-slider">Revealing Slider</a></li>
+                                                </ul>
+                                             </div>
+                                          </div>
+                                       </div>
+                                    </div> -->
+                        </li>
+                        <li class="has-dropdown">
+                          <a href="/portfolio">Portfolio</a>
+                        </li>
+                        <li class="has-dropdown">
+                          <a href="/#why-us">Why us</a>
+                        </li>
+                        <li class="has-dropdown">
+                          <a href="/#services">Services</a>
+                        </li>
+                        <li class="has-dropdown">
+                          <a href="/#testimonials">Testimonials</a>
+                        </li>
+                        <li class="has-dropdown">
+                          <a href="/contact">Contact</a>
+                        </li>
+                        <!-- <li class="has-dropdown">
+                                    <a href="#">Page</a>
+                                    <div class="tp-submenu submenu tp-megamenu">
+                                       <div class="row">
+                                          <div class="col-xl-4">
+                                             <div class="tp-megamenu-box">
+                                                <div class="tp-megamenu-title-wrap">
+                                                   <span class="tp-megamenu-title">Special Pages</span>
+                                                </div>
+                                                <ul>
+                                                   <li><a href="/about-me-dark">About Me</a></li>
+                                                   <li><a href="/about-us-dark">About Us</a></li>
+                                                   <li><a href="/service-dark">Service</a></li>
+                                                   <li><a href="/service-2-dark">Service Two</a></li>
+                                                   <li><a href="/service-details-dark">Service Details</a></li>
+                                                   <li><a href="/faq-dark">Faq</a></li>
+                                                </ul>
+                                             </div>
+                                          </div>
+                                          <div class="col-xl-4">
+                                             <div class="tp-megamenu-box">
+                                                <div class="tp-megamenu-title-wrap">
+                                                   <span class="tp-megamenu-title">Special Pages</span>
+                                                </div>
+                                                <ul>
+                                                   <li><a href="/team-dark">Team</a></li>
+                                                   <li><a href="/team-details-dark">Team Details</a></li>
+                                                   <li><a href="/pricing-dark">Pricing</a></li>
+                                                   <li><a href="/login-dark">Login</a></li>
+                                                   <li><a href="/register-dark">Register</a></li>
+                                                   <li><a href="/forgot-dark">Forgot</a></li>
+                                                </ul>
+                                             </div>
+                                          </div>
+                                          <div class="col-xl-4">
+                                             <div class="tp-megamenu-box">
+                                                <div class="tp-megamenu-title-wrap">
+                                                   <span class="tp-megamenu-title">Special Pages</span>
+                                                </div>
+                                                <ul>
+                                                   <li><a href="/career-dark">Career</a></li>
+                                                   <li><a href="/career-details-dark">Career Details</a></li>
+                                                   <li><a href="/job-application-form-dark">Application Form</a></li>
+                                                   <li><a href="/profile-dark">Profile</a></li>
+                                                   <li><a href="/error-dark">404 Page</a></li>
+                                                </ul>
+                                             </div>
+                                          </div>
+                                       </div>
+                                    </div>
+                                 </li>
+                                 <li class="has-dropdown">
+                                    <a href="/portfolio-dark">Porject</a>
+                                    <ul class="tp-submenu submenu">
+                                       <li><a href="/portfolio-dark">Portfolio</a></li>
+                                       <li><a href="/portfolio-2-dark">Portfolio Two</a></li>
+                                       <li><a href="/portfolio-3-dark">Portfolio Three</a></li>
+                                       <li><a href="/portfolio-4-dark">Portfolio Four</a></li>
+                                       <li><a href="/portfolio-col-3-dark">Three Columns</a></li>
+                                       <li><a href="/portfolio-col-4-dark">Four Columns</a></li>
+                                       <li><a href="/portfolio-details-gallery-dark">Gallery</a></li>
+                                       <li><a href="#">Modern</a></li>
+                                    </ul>
+                                 </li>
+                                 <li class="has-dropdown">
+                                    <a href="/shop-dark">Shop</a>
+                                    <ul class="tp-submenu submenu">
+                                       <li><a href="/shop-dark">Shop</a></li>
+                                       <li><a href="/shop-details-dark">Shop Details</a></li>
+                                       <li><a href="/cart-dark">Cart</a></li>
+                                       <li><a href="/checkout-dark">Checkout</a></li>
+                                       <li><a href="/wishlist-dark">Wishlist</a></li>
+                                    </ul>
+                                 </li>
+                                 <li class="has-dropdown">
+                                    <a href="/blog-dark">News</a>
+                                    <ul class="tp-submenu submenu">
+                                       <li><a href="/blog-dark">Blog</a></li>
+                                       <li><a href="/blog-list-dark">Blog List</a></li>
+                                       <li><a href="/blog-grid-with-sidebar-dark">Blog Grid Sidebar</a></li>
+                                       <li><a href="/blog-standard-dark">Blog Standard</a></li>
+                                       <li><a href="/blog-details-dark">Blog Details</a></li>
+                                    </ul>
+                                 </li>
+                                 <li class="has-dropdown">
+                                    <a href="/contact">Contact</a>
+                                    <ul class="tp-submenu submenu">
+                                       <li><a href="/contact">Contact Me</a></li>
+                                       <li><a href="/contact">Contact Us</a></li>
+                                    </ul>
+                                 </li> -->
+                      </ul>
+                    </nav>
+                  </div>
+                </div>
+              </div>
+              <div
+                class="col-xxl-3 col-xl-3 col-lg-6 col-md-4 d-md-none d-block offset-xxl-1"
+              >
+                <div class="pp-header-btn ml-60 mb-20">
+                  <a
+                    class="tp-btn pp-btn-nobg text-uppercase"
+                    href="/contact-me-dark"
+                  >
+                    <span>
+                      <span class="text-1">Start A Project</span>
+                      <span class="text-2">Start A Project</span>
+                    </span>
+                    <i>
+                      <svg
+                        width="11"
+                        height="11"
+                        viewBox="0 0 11 11"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M0.21967 9.40717C-0.0732232 9.70006 -0.0732232 10.1749 0.21967 10.4678C0.512563 10.7607 0.987437 10.7607 1.28033 10.4678L0.21967 9.40717ZM10.6875 0.75C10.6875 0.335786 10.3517 2.97145e-09 9.9375 1.50485e-07L3.1875 -2.70983e-07C2.77329 -2.70983e-07 2.4375 0.335786 2.4375 0.75C2.4375 1.16421 2.77329 1.5 3.1875 1.5H9.1875V7.5C9.1875 7.91421 9.52329 8.25 9.9375 8.25C10.3517 8.25 10.6875 7.91421 10.6875 7.5L10.6875 0.75ZM0.75 9.9375L1.28033 10.4678L10.4678 1.28033L9.9375 0.75L9.40717 0.21967L0.21967 9.40717L0.75 9.9375Z"
+                          fill="currentColor"
+                        />
+                      </svg>
+                      <svg
+                        width="11"
+                        height="11"
+                        viewBox="0 0 11 11"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M0.21967 9.40717C-0.0732232 9.70006 -0.0732232 10.1749 0.21967 10.4678C0.512563 10.7607 0.987437 10.7607 1.28033 10.4678L0.21967 9.40717ZM10.6875 0.75C10.6875 0.335786 10.3517 2.97145e-09 9.9375 1.50485e-07L3.1875 -2.70983e-07C2.77329 -2.70983e-07 2.4375 0.335786 2.4375 0.75C2.4375 1.16421 2.77329 1.5 3.1875 1.5H9.1875V7.5C9.1875 7.91421 9.52329 8.25 9.9375 8.25C10.3517 8.25 10.6875 7.91421 10.6875 7.5L10.6875 0.75ZM0.75 9.9375L1.28033 10.4678L10.4678 1.28033L9.9375 0.75L9.40717 0.21967L0.21967 9.40717L0.75 9.9375Z"
+                          fill="currentColor"
+                        />
+                      </svg>
+                    </i>
+                  </a>
+                </div>
+              </div>
+              <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-8">
+                <div class="pp-header-social mb-20">
+                  <a class="tp-btn tp-btn-white text-uppercase" href="https://www.facebook.com/profile.php?id=61586106101272">
+                    <span>
+                      <span class="text-1">Facebook</span>
+                      <span class="text-2">Facebook</span>
+                    </span>
+                    <i>
+                      <svg
+                        width="11"
+                        height="11"
+                        viewBox="0 0 11 11"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M0.21967 9.40717C-0.0732232 9.70006 -0.0732232 10.1749 0.21967 10.4678C0.512563 10.7607 0.987437 10.7607 1.28033 10.4678L0.21967 9.40717ZM10.6875 0.75C10.6875 0.335786 10.3517 2.97145e-09 9.9375 1.50485e-07L3.1875 -2.70983e-07C2.77329 -2.70983e-07 2.4375 0.335786 2.4375 0.75C2.4375 1.16421 2.77329 1.5 3.1875 1.5H9.1875V7.5C9.1875 7.91421 9.52329 8.25 9.9375 8.25C10.3517 8.25 10.6875 7.91421 10.6875 7.5L10.6875 0.75ZM0.75 9.9375L1.28033 10.4678L10.4678 1.28033L9.9375 0.75L9.40717 0.21967L0.21967 9.40717L0.75 9.9375Z"
+                          fill="currentColor"
+                        />
+                      </svg>
+                      <svg
+                        width="11"
+                        height="11"
+                        viewBox="0 0 11 11"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M0.21967 9.40717C-0.0732232 9.70006 -0.0732232 10.1749 0.21967 10.4678C0.512563 10.7607 0.987437 10.7607 1.28033 10.4678L0.21967 9.40717ZM10.6875 0.75C10.6875 0.335786 10.3517 2.97145e-09 9.9375 1.50485e-07L3.1875 -2.70983e-07C2.77329 -2.70983e-07 2.4375 0.335786 2.4375 0.75C2.4375 1.16421 2.77329 1.5 3.1875 1.5H9.1875V7.5C9.1875 7.91421 9.52329 8.25 9.9375 8.25C10.3517 8.25 10.6875 7.91421 10.6875 7.5L10.6875 0.75ZM0.75 9.9375L1.28033 10.4678L10.4678 1.28033L9.9375 0.75L9.40717 0.21967L0.21967 9.40717L0.75 9.9375Z"
+                          fill="currentColor"
+                        />
+                      </svg>
+                    </i>
+                  </a>
+                  <a class="tp-btn tp-btn-white text-uppercase" href="https://www.linkedin.com/company/100xlift/">
+                    <span>
+                      <span class="text-1">LinkedIn</span>
+                      <span class="text-2">LinkedIn</span>
+                    </span>
+                    <i>
+                      <svg
+                        width="11"
+                        height="11"
+                        viewBox="0 0 11 11"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M0.21967 9.40717C-0.0732232 9.70006 -0.0732232 10.1749 0.21967 10.4678C0.512563 10.7607 0.987437 10.7607 1.28033 10.4678L0.21967 9.40717ZM10.6875 0.75C10.6875 0.335786 10.3517 2.97145e-09 9.9375 1.50485e-07L3.1875 -2.70983e-07C2.77329 -2.70983e-07 2.4375 0.335786 2.4375 0.75C2.4375 1.16421 2.77329 1.5 3.1875 1.5H9.1875V7.5C9.1875 7.91421 9.52329 8.25 9.9375 8.25C10.3517 8.25 10.6875 7.91421 10.6875 7.5L10.6875 0.75ZM0.75 9.9375L1.28033 10.4678L10.4678 1.28033L9.9375 0.75L9.40717 0.21967L0.21967 9.40717L0.75 9.9375Z"
+                          fill="currentColor"
+                        />
+                      </svg>
+                      <svg
+                        width="11"
+                        height="11"
+                        viewBox="0 0 11 11"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M0.21967 9.40717C-0.0732232 9.70006 -0.0732232 10.1749 0.21967 10.4678C0.512563 10.7607 0.987437 10.7607 1.28033 10.4678L0.21967 9.40717ZM10.6875 0.75C10.6875 0.335786 10.3517 2.97145e-09 9.9375 1.50485e-07L3.1875 -2.70983e-07C2.77329 -2.70983e-07 2.4375 0.335786 2.4375 0.75C2.4375 1.16421 2.77329 1.5 3.1875 1.5H9.1875V7.5C9.1875 7.91421 9.52329 8.25 9.9375 8.25C10.3517 8.25 10.6875 7.91421 10.6875 7.5L10.6875 0.75ZM0.75 9.9375L1.28033 10.4678L10.4678 1.28033L9.9375 0.75L9.40717 0.21967L0.21967 9.40717L0.75 9.9375Z"
+                          fill="currentColor"
+                        />
+                      </svg>
+                    </i>
+                  </a>
+                  <a class="tp-btn tp-btn-white text-uppercase" href="https://www.instagram.com/100xlift/">
+                    <span>
+                      <span class="text-1">Instagram</span>
+                      <span class="text-2">Instagram</span>
+                    </span>
+                    <i>
+                      <svg
+                        width="11"
+                        height="11"
+                        viewBox="0 0 11 11"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M0.21967 9.40717C-0.0732232 9.70006 -0.0732232 10.1749 0.21967 10.4678C0.512563 10.7607 0.987437 10.7607 1.28033 10.4678L0.21967 9.40717ZM10.6875 0.75C10.6875 0.335786 10.3517 2.97145e-09 9.9375 1.50485e-07L3.1875 -2.70983e-07C2.77329 -2.70983e-07 2.4375 0.335786 2.4375 0.75C2.4375 1.16421 2.77329 1.5 3.1875 1.5H9.1875V7.5C9.1875 7.91421 9.52329 8.25 9.9375 8.25C10.3517 8.25 10.6875 7.91421 10.6875 7.5L10.6875 0.75ZM0.75 9.9375L1.28033 10.4678L10.4678 1.28033L9.9375 0.75L9.40717 0.21967L0.21967 9.40717L0.75 9.9375Z"
+                          fill="currentColor"
+                        />
+                      </svg>
+                      <svg
+                        width="11"
+                        height="11"
+                        viewBox="0 0 11 11"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M0.21967 9.40717C-0.0732232 9.70006 -0.0732232 10.1749 0.21967 10.4678C0.512563 10.7607 0.987437 10.7607 1.28033 10.4678L0.21967 9.40717ZM10.6875 0.75C10.6875 0.335786 10.3517 2.97145e-09 9.9375 1.50485e-07L3.1875 -2.70983e-07C2.77329 -2.70983e-07 2.4375 0.335786 2.4375 0.75C2.4375 1.16421 2.77329 1.5 3.1875 1.5H9.1875V7.5C9.1875 7.91421 9.52329 8.25 9.9375 8.25C10.3517 8.25 10.6875 7.91421 10.6875 7.5L10.6875 0.75ZM0.75 9.9375L1.28033 10.4678L10.4678 1.28033L9.9375 0.75L9.40717 0.21967L0.21967 9.40717L0.75 9.9375Z"
+                          fill="currentColor"
+                        />
+                      </svg>
+                    </i>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- header area end -->
+
+      <!-- sticky-menu-area -->
+      <button
+        id="header-sticky"
+        class="hamburger-open-btn tp-header-sidebar-btn hamburger-sticky-menu"
+      >
+        <span></span>
+        <span></span>
+      </button>
+      <!-- sticky-menu-end -->`;
+const headerSimpleHtml = `<!-- header area start -->
+      <div class="tp-header-area tp-header-spacing header-transparent">
+         <div class="container">
+            <div class="row align-items-center">
+               <div class="col-xl-3 col-6">
+                  <div class="tp-header-logo">
+                     <a href="/">
+                        <img class="logo-1" data-width="140" src="/assets/img/logo/logo.png" alt="">
+                        <img class="logo-2" data-width="140" src="/assets/img/logo/logo-white.png" alt="">
+                     </a>
+                  </div>
+               </div>
+               <div class="col-xl-6 d-none d-xl-block">
+                  <div class="tp-main-menu d-flex justify-content-center">
+                     <nav class="tp-mobile-menu-active">
+                        <ul>
+                           <li class="has-dropdown">
+                              <a href="/">Home</a>
+                              <div class="tp-submenu submenu tp-megamenu">
+                                 <div class="row">
+                                    <div class="col-xl-4">
+                                       <div class="tp-megamenu-box">
+                                          <div class="tp-megamenu-title-wrap">
+                                             <span class="tp-megamenu-title">Light Version</span>
+                                          </div>
+                                          <ul>
+                                             <li><a href="/">Creative Agency</a></li>
+                                             <li><a href="/index-digital-light">Digital Studio</a></li>
+                                             <li><a href="/index-modern-light">Modern Agency</a></li>
+                                             <li><a href="/index-personal-portfolio-light">Personal Portfolio</a></li>
+                                             <li><a href="/index-branding-studio-light">Branding Studio</a></li>
+                                             <li><a href="/index-motion-graphic-light">Motion Graphics</a></li>
+                                             <li><a href="/index-shop-light">Agency Shop</a></li>
+                                          </ul>
+                                       </div>
+                                    </div>
+                                    <div class="col-xl-4">
+                                       <div class="tp-megamenu-box">
+                                          <div class="tp-megamenu-title-wrap">
+                                             <span class="tp-megamenu-title">Dark Version</span>
+                                          </div>
+                                          <ul>
+                                             <li><a href="/">Creative Agency</a></li>
+                                             <li><a href="/index-digital-dark">Digital Studio</a></li>
+                                             <li><a href="/index-modern-dark">Modern Agency</a></li>
+                                             <li><a href="/index-personal-portfolio-dark">Personal Portfolio</a></li>
+                                             <li><a href="/index-branding-studio-dark">Branding Studio</a></li>
+                                             <li><a href="/index-motion-graphic-dark">Motion Graphics</a></li>
+                                             <li><a href="/index-shop-dark">Agency Shop</a></li>
+                                          </ul>
+                                       </div>
+                                    </div>
+                                    <div class="col-xl-4">
+                                       <div class="tp-megamenu-box">
+                                          <div class="tp-megamenu-title-wrap">
+                                             <span class="tp-megamenu-title">All Showcase</span>
+                                          </div>
+                                          <ul>
+                                             <li><a href="/portfolio-mix-slicer">Mix Slicer</a></li>
+                                             <li><a href="/portfolio-creative-skew-slider">Creative Skew</a></li>
+                                             <li><a href="/portfolio-creative-thumb-slider">Creative Thumb</a></li>
+                                             <li><a href="/portfolio-revealing-slider">Revealing Slider</a></li>
+                                          </ul>
+                                       </div>
+                                    </div>
+                                 </div>
+                              </div>
+                           </li>
+                           <li class="has-dropdown">
+                              <a href="#">Page</a>
+                              <div class="tp-submenu submenu tp-megamenu">
+                                 <div class="row">
+                                    <div class="col-xl-4">
+                                       <div class="tp-megamenu-box">
+                                          <div class="tp-megamenu-title-wrap">
+                                             <span class="tp-megamenu-title">Special Pages</span>
+                                          </div>
+                                          <ul>
+                                             <li><a href="/about-me-dark">About Me</a></li>
+                                             <li><a href="/about-us-dark">About Us</a></li>
+                                             <li><a href="/service-dark">Service</a></li>
+                                             <li><a href="/service-2-dark">Service Two</a></li>
+                                             <li><a href="/service-details-dark">Service Details</a></li>
+                                             <li><a href="/faq-dark">Faq</a></li>
+                                          </ul>
+                                       </div>
+                                    </div>
+                                    <div class="col-xl-4">
+                                       <div class="tp-megamenu-box">
+                                          <div class="tp-megamenu-title-wrap">
+                                             <span class="tp-megamenu-title">Special Pages</span>
+                                          </div>
+                                          <ul>
+                                             <li><a href="/team-dark">Team</a></li>
+                                             <li><a href="/team-details-dark">Team Details</a></li>
+                                             <li><a href="/pricing-dark">Pricing</a></li>
+                                             <li><a href="/login-dark">Login</a></li>
+                                             <li><a href="/register-dark">Register</a></li>
+                                             <li><a href="/forgot-dark">Forgot</a></li>
+                                          </ul>
+                                       </div>
+                                    </div>
+                                    <div class="col-xl-4">
+                                       <div class="tp-megamenu-box">
+                                          <div class="tp-megamenu-title-wrap">
+                                             <span class="tp-megamenu-title">Special Pages</span>
+                                          </div>
+                                          <ul>
+                                             <li><a href="/career-dark">Career</a></li>
+                                             <li><a href="/career-details-dark">Career Details</a></li>
+                                             <li><a href="/job-application-form-dark">Application Form</a></li>
+                                             <li><a href="/profile-dark">Profile</a></li>
+                                             <li><a href="/error-dark">404 Page</a></li>
+                                          </ul>
+                                       </div>
+                                    </div>
+                                 </div>
+                              </div>
+                           </li>
+                           <li class="has-dropdown">
+                              <a href="/portfolio-dark">Porject</a>
+                              <ul class="tp-submenu submenu">
+                                 <li><a href="/portfolio-dark">Portfolio</a></li>
+                                 <li><a href="/portfolio-2-dark">Portfolio Two</a></li>
+                                 <li><a href="/portfolio-3-dark">Portfolio Three</a></li>
+                                 <li><a href="/portfolio-4-dark">Portfolio Four</a></li>
+                                 <li><a href="/portfolio-col-3-dark">Three Columns</a></li>
+                                 <li><a href="/portfolio-col-4-dark">Four Columns</a></li>
+                                 <li><a href="/portfolio-details-gallery-dark">Gallery</a></li>
+                                 <li><a href="/portfolio-details">Modern</a></li>
+                              </ul>
+                           </li>
+                           <li class="has-dropdown">
+                              <a href="/shop-dark">Shop</a>
+                              <ul class="tp-submenu submenu">
+                                 <li><a href="/shop-dark">Shop</a></li>
+                                 <li><a href="/shop-details-dark">Shop Details</a></li>
+                                 <li><a href="/cart-dark">Cart</a></li>
+                                 <li><a href="/checkout-dark">Checkout</a></li>
+                                 <li><a href="/wishlist-dark">Wishlist</a></li>
+                              </ul>
+                           </li>
+                           <li class="has-dropdown">
+                              <a href="/blog-dark">News</a>
+                              <ul class="tp-submenu submenu">
+                                 <li><a href="/blog-dark">Blog</a></li>
+                                 <li><a href="/blog-list-dark">Blog List</a></li>
+                                 <li><a href="/blog-grid-with-sidebar-dark">Blog Grid Sidebar</a></li>
+                                 <li><a href="/blog-standard-dark">Blog Standard</a></li>
+                                 <li><a href="/blog-details-dark">Blog Details</a></li>
+                              </ul>
+                           </li>
+                           <li class="has-dropdown">
+                              <a href="/contact">Contact</a>
+                              <ul class="tp-submenu submenu">
+                                 <li><a href="/contact">Contact Me</a></li>
+                                 <li><a href="/contact">Contact Us</a></li>
+                              </ul>
+                           </li>
+                        </ul>
+                     </nav>
+                  </div>
+               </div>
+               <!-- <div class="col-xl-3 col-6">
+                  <div class="tp-header-right d-flex justify-content-end align-items-center">
+                     <button class="tp-header-search-btn tp-search-click">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                           <path d="M18.7508 18.5233L13.5538 13.392M13.5538 13.392C14.9604 12.0032 15.7506 10.1196 15.7506 8.15551C15.7506 6.19144 14.9604 4.30782 13.5538 2.91902C12.1472 1.53022 10.2395 0.75 8.25028 0.75C6.26108 0.75 4.35336 1.53022 2.94678 2.91902C1.54021 4.30782 0.75 6.19144 0.75 8.15551C0.75 10.1196 1.54021 12.0032 2.94678 13.392C4.35336 14.7808 6.26108 15.561 8.25028 15.561C10.2395 15.561 12.1472 14.7808 13.5538 13.392Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                     </button>
+                     <button class="tp-menu-bar tp-header-sidebar-btn ml-10">
+                        <span></span>
+                        <span></span>
+                     </button>
+                  </div>
+               </div> -->
+            </div>
+         </div>
+      </div>
+      <!-- header area end -->
+
+      <!-- sticky-menu-area -->
+      <button id="header-sticky" class="hamburger-open-btn tp-header-sidebar-btn hamburger-sticky-menu">
+         <span></span>
+         <span></span>
+      </button>
+      <!-- sticky-menu-end -->`;
+const footerHtml = `<!-- footer area start -->
+          <div class="tp-footer-area">
+            <div class="container">
+              <div class="tp-about-border pt-100">
+                <div class="row">
+                  <div class="col-xxl-3 col-xl-4 col-lg-6">
+                    <div
+                      class="tp-footer-widget tp-footer-link mb-30 tp_fade_anim"
+                      data-delay=".4"
+                    >
+                      <h5 class="tp-footer-subtitle mb-25">Quick links</h5>
+                      <div class="tp-hero-social">
+                        <a href="/audit">Free Audit</a>
+                        <a href="/contact">Contact</a>
+                        <a href="/portfolio">Recent Work</a>
+
+                        <!-- <a href="#">About</a> -->
+                        <!-- <a href="#why-us">Why us</a> -->
+                        <!-- <a href="#recent-work">Recent Work</a> -->
+                        <!-- <a href="#our-services">Our Services</a> -->
+                        <!-- <a href="#">Who we are</a> -->
+                        <!-- <a href="#">Services</a> -->
+                        <!-- <a href="#">Projects</a> -->
+                        <!-- <a href="#">Blog</a> -->
+                        <!-- <a href="#">Pricing</a> -->
+                        <!-- <a href="/contact">Contact</a> -->
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    class="col-xxl-4 col-xl-5 offset-xxl-5 offset-xl-3 col-lg-6"
+                  >
+                    <div
+                      class="tp-footer-widget ml-40 mb-30 tp_fade_anim"
+                      data-delay=".5"
+                    >
+                      <span class="tp-footer-dec"
+                        >Searching for exceptional talents?</span
+                      >
+                      <h4 class="tp-footer-email tp-ff-sequel-roman">
+                        <a href="mailto:100xlift@gmail.com">100xlift@gmail.com</a>
+                      </h4>
+                    </div>
+                  </div>
+                </div>
+                <div class="row align-items-end mt-35">
+                  <div class="col-lg-4">
+                    <div
+                      class="tp-header-logo tp-footer-logo mb-30 tp_fade_anim"
+                      data-delay=".6"
+                    >
+                      <a href="/">
+                        <img
+                          class="logo-1"
+                          data-width="229"
+                          src="/assets/img/logo/logo.png"
+                          alt=""
+                        />
+                        <img
+                          class="logo-2"
+                          data-width="229"
+                          src="/assets/img/logo/logo-white.png"
+                          alt=""
+                        />
+                      </a>
+                    </div>
+                  </div>
+                  <div class="col-lg-8">
+                    <div
+                      class="tp-footer-text text-lg-end tp_fade_anim"
+                      data-delay=".7"
+                    >
+                      <h2
+                        class="tp-footer-bigtext text-uppercase tp-ff-sequel-bold-head"
+                      >
+                        <a href="/contact" class="text-scale-anim"
+                          >Say Hello!</a
+                        >
+                      </h2>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div
+                class="tp-footer-copyright-area tp-about-border pt-30 mt-70 pb-10"
+              >
+                <div class="row align-items-center">
+                  <div class="col-xl-3 col-lg-5">
+                    <div class="tp-footer-copyright-wrap mb-20">
+                      <span class="tp-footer-copyright"
+                        >Developed by 100XLIFT</span
+                      >
+                    </div>
+                  </div>
+                  <div class="col-xl-6 col-lg-7">
+                    <div class="tp-footer-copyright-social mb-20">
+                      <a href="https://www.facebook.com/profile.php?id=61586106101272"
+                        >Facebook
+                        <svg
+                          width="10"
+                          height="12"
+                          viewBox="0 0 10 12"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            d="M0.599976 11.1001V5.1001C0.599976 4.54781 1.04769 4.1001 1.59998 4.1001H8.59998M8.59998 4.1001L5.59998 0.600098M8.59998 4.1001L5.59998 7.6001"
+                            stroke="currentColor"
+                            stroke-width="1.2"
+                            stroke-linecap="round"
+                          />
+                        </svg>
+                      </a>
+                      <a href="https://www.instagram.com/100xlift/"
+                        >Instagram
+                        <svg
+                          width="10"
+                          height="12"
+                          viewBox="0 0 10 12"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            d="M0.599976 11.1001V5.1001C0.599976 4.54781 1.04769 4.1001 1.59998 4.1001H8.59998M8.59998 4.1001L5.59998 0.600098M8.59998 4.1001L5.59998 7.6001"
+                            stroke="currentColor"
+                            stroke-width="1.2"
+                            stroke-linecap="round"
+                          />
+                        </svg>
+                      </a>
+                     
+                      <a href="https://www.linkedin.com/company/100xlift/"
+                        >LinkedIn
+                        <svg
+                          width="10"
+                          height="12"
+                          viewBox="0 0 10 12"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            d="M0.599976 11.1001V5.1001C0.599976 4.54781 1.04769 4.1001 1.59998 4.1001H8.59998M8.59998 4.1001L5.59998 0.600098M8.59998 4.1001L5.59998 7.6001"
+                            stroke="currentColor"
+                            stroke-width="1.2"
+                            stroke-linecap="round"
+                          />
+                        </svg>
+                      </a>
+                    </div>
+                  </div>
+                  <div class="col-xl-3">
+                    <div class="tp-footer-copyright-wrap text-lg-end mb-20">
+                      <span class="tp-footer-copyright"
+                        >Copyright © <span class="update-year"></span
+                      ></span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- footer area end -->`;
+const preHeaderHtml = `<!-- Begin magic cursor -->
+   <div id="magic-cursor" class="cursor-black-bg">
+      <div id="ball"></div>
+   </div>
+   <!-- End magic cursor -->
+
+   <!-- back to top start -->
+   <div class="back-to-top-wrapper">
+      <button id="back_to_top" type="button" class="back-to-top-btn">
+         <svg width="12" height="7" viewBox="0 0 12 7" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M11 6L6 1L1 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+            stroke-linejoin="round" />
+         </svg>
+      </button>
+   </div>
+   <!-- back to top end -->
+
+   <!--search-form-start -->
+   <div class="tp-search-body-overlay"></div>
+   <div class="tp-search-form-toggle">
+      <div class="container">
+         <div class="row mb-70">
+            <div class="col-lg-12">
+               <div class="tp-search-top d-flex justify-content-between align-items-center">
+                  <div class="tp-header-logo tp-search-logo">
+                     <a href="/">
+                        <img class="logo-1" data-width="140" src="/assets/img/logo/logo.png" alt="">
+                        <img class="logo-2" data-width="140" src="/assets/img/logo/logo-white.png" alt="">
+                     </a>
+                  </div>
+                  <button class="tp-search-close">
+                     <i class="fa-light fa-xmark"></i>
+                  </button>
+               </div>
+            </div>
+         </div>
+         <div class="row justify-content-center">
+            <div class="col-lg-12">
+               <div class="tp-search-form">
+                  <form action="#">
+                     <div class="tp-search-form-input">
+                        <input type="text" placeholder="What are you looking foor?" required>
+                        <span class="tp-search-focus-border"></span>
+                        <button class="tp-search-form-icon" type="submit">
+                           <i class="fa-sharp fa-regular fa-magnifying-glass"></i>
+                        </button>
+                     </div>
+                  </form>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+   <!-- search-form-end -->
+
+  <!-- tp-offcanvus-area-start -->
+   <div class="tp-offcanvas-area">
+      <div class="tp-offcanvas">
+         <div class="tp-offcanvas-top d-flex align-items-center justify-content-between">
+            <div class="tp-offcanvas-logo">
+               <a href="/">
+                  <img class="logo-1" data-width="140" src="/assets/img/logo/logo.png" alt="">
+                  <img class="logo-2" data-width="140" src="/assets/img/logo/logo-white.png" alt="">
+               </a>
+            </div>
+            <div class="tp-offcanvas-close-btn">
+               <button class="close-btn">
+                  <svg width="37" height="38" viewBox="0 0 37 38" fill="none" xmlns="http://www.w3.org/2000/svg">
+                     <path d="M9.19141 9.80762L27.5762 28.1924" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                     <path d="M9.19141 28.1924L27.5762 9.80761" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                  </svg>
+               </button>
+            </div>
+         </div>
+         <div class="tp-offcanvas-content d-none d-xl-block">
+            <h3 class="tp-offcanvas-title">Hello There!</h3>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, </p>
+         </div>
+         <div class="tp-offcanvas-menu d-xl-none">
+            <nav></nav>
+         </div>
+         <div class="tp-offcanvas-gallery d-none d-xl-block">
+            <div class="row gx-2">
+               <div class="col-md-3 col-3">
+                  <div class="tp-offcanvas-gallery-img fix">
+                     <a class="popup-image" href="/assets/img/offcanvas/offcanvas-1.jpg"><img src="/assets/img/offcanvas/offcanvas-1.jpg" alt=""></a>
+                  </div>
+               </div>
+               <div class="col-md-3 col-3">
+                  <div class="tp-offcanvas-gallery-img fix">
+                     <a class="popup-image" href="/assets/img/offcanvas/offcanvas-2.jpg"><img src="/assets/img/offcanvas/offcanvas-2.jpg" alt=""></a>
+                  </div>
+               </div>
+               <div class="col-md-3 col-3">
+                  <div class="tp-offcanvas-gallery-img fix">
+                     <a class="popup-image" href="/assets/img/offcanvas/offcanvas-3.jpg"><img src="/assets/img/offcanvas/offcanvas-3.jpg" alt=""></a>
+                  </div>
+               </div>
+               <div class="col-md-3 col-3">
+                  <div class="tp-offcanvas-gallery-img fix">
+                     <a class="popup-image" href="/assets/img/offcanvas/offcanvas-4.jpg"><img src="/assets/img/offcanvas/offcanvas-4.jpg" alt=""></a>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <div class="tp-offcanvas-contact">
+            <h3 class="tp-offcanvas-title sm">Information</h3>
+            <ul>
+               <li><a href="tel:1245654">+92 311 1960 100</a></li>
+               <li><a href="mailto:100xlift@gmail.com">100xlift@gmail.com</a></li>
+               <li><a href="#">Hyderabad, Sindh - 71000, Pakistan </a></li>
+            </ul>
+         </div>
+         <div class="tp-offcanvas-social">
+            <h3 class="tp-offcanvas-title sm">Follow Us</h3>
+            <ul>
+               <li>
+                  <a href="#">
+                     <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M11.25 1.5H4.75C2.95507 1.5 1.5 2.95507 1.5 4.75V11.25C1.5 13.0449 2.95507 14.5 4.75 14.5H11.25C13.0449 14.5 14.5 13.0449 14.5 11.25V4.75C14.5 2.95507 13.0449 1.5 11.25 1.5Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                        <path d="M10.6016 7.5907C10.6818 8.13166 10.5894 8.68414 10.3375 9.16955C10.0856 9.65497 9.68711 10.0486 9.19862 10.2945C8.71014 10.5404 8.15656 10.6259 7.61663 10.5391C7.0767 10.4522 6.57791 10.1972 6.19121 9.81055C5.80451 9.42385 5.54959 8.92506 5.46271 8.38513C5.37583 7.8452 5.46141 7.29163 5.70728 6.80314C5.95315 6.31465 6.34679 5.91613 6.83221 5.66425C7.31763 5.41238 7.87011 5.31998 8.41107 5.4002C8.96287 5.48202 9.47372 5.73915 9.86817 6.1336C10.2626 6.52804 10.5197 7.0389 10.6016 7.5907Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                        <path d="M11.5742 4.42578H11.5842" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                     </svg>
+                  </a>
+               </li>
+               <li>
+                  <a href="#">
+                     <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M2.50589 12.7494C4.57662 16.336 9.16278 17.5648 12.7494 15.4941C14.2113 14.65 15.2816 13.388 15.8962 11.9461C16.7895 9.85066 16.7208 7.37526 15.4941 5.25063C14.2674 3.12599 12.1581 1.82872 9.89669 1.55462C8.34063 1.366 6.71259 1.66183 5.25063 2.50589C1.66403 4.57662 0.435172 9.16278 2.50589 12.7494Z" stroke="currentColor" stroke-width="1.5" />
+                        <path d="M12.7127 15.4292C12.7127 15.4292 12.0086 10.4867 10.5011 7.87559C8.99362 5.26451 5.28935 2.57155 5.28935 2.57155M5.68449 15.6124C6.79553 12.2606 12.34 8.54524 16.3975 9.43537M12.311 2.4082C11.1953 5.72344 5.75732 9.38453 1.71875 8.58915" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+                     </svg>
+                  </a>
+               </li>
+               <li>
+                  <a href="#">
+                     <svg width="18" height="11" viewBox="0 0 18 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M1 5.5715H6.33342C7.62867 5.5715 8.61917 6.56199 8.61917 7.85725C8.61917 9.15251 7.62867 10.143 6.33342 10.143H1.76192C1.30477 10.143 1 9.83823 1 9.38108V1.76192C1 1.30477 1.30477 1 1.76192 1H5.5715C6.86676 1 7.85725 1.99049 7.85725 3.28575C7.85725 4.58101 6.86676 5.5715 5.5715 5.5715H1Z" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10"></path>
+                        <path d="M10.9062 7.09454H17.0016C17.0016 5.41832 15.6301 4.04688 13.9539 4.04688C12.2777 4.04688 10.9062 5.41832 10.9062 7.09454ZM10.9062 7.09454C10.9062 8.77076 12.2777 10.1422 13.9539 10.1422H15.2492" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"></path>
+                        <path d="M16.1125 1.44434H11.668" stroke="currentColor" stroke-width="1.2" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"></path>
+                     </svg>
+                  </a>
+               </li>
+               <li>
+                  <a href="#">
+                     <svg width="18" height="14" viewBox="0 0 18 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12.75 13H5.25C3 13 1.5 11.5 1.5 9.25V4.75C1.5 2.5 3 1 5.25 1H12.75C15 1 16.5 2.5 16.5 4.75V9.25C16.5 11.5 15 13 12.75 13Z" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                        <path d="M8.70676 5.14837L10.8006 6.40465C11.5543 6.90716 11.5543 7.66093 10.8006 8.16344L8.70676 9.41972C7.86923 9.92224 7.19922 9.50348 7.19922 8.5822V6.06964C7.19922 4.98086 7.86923 4.64585 8.70676 5.14837Z" fill="currentColor" />
+                     </svg>
+                  </a>
+               </li>
+            </ul>
+         </div>
+      </div>
+   </div>
+   <div class="body-overlay"></div>
+   <!-- tp-offcanvus-area-end -->
+
+   <!-- offcanvas 2 start -->
+   <div class="tp-offcanvas-2-area p-relative">
+      <div class="offcanvas-bg"></div>
+      <div class="tp-offcanvas-2-wrapper offcanvas-menu">
+         <div class="tp-offcanvas-2-left">
+            <div class="tp-header-logo d-flex justify-content-between align-items-center mb-50">
+               <a href="/">
+                  <img class="logo-1" data-width="170" src="/assets/img/logo/logo.png" alt="">
+                  <img class="logo-2" data-width="170" src="/assets/img/logo/logo-white.png" alt="">
+               </a>
+               <span class="hamburger-close-btn">
+                  <svg width="37" height="38" viewBox="0 0 37 38" fill="none" xmlns="http://www.w3.org/2000/svg">
+                     <path d="M9.19141 9.80762L27.5762 28.1924" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                     <path d="M9.19141 28.1924L27.5762 9.80761" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                  </svg>
+               </span>
+            </div>
+            <div class="tp-offcanvas-menu counter-row">
+               <nav></nav>
+            </div>
+            <span class="hamburger-close-btn hamburger-mobile-close-btn d-md-none">CLOSE</span>
+         </div>
+      </div>
+   </div>
+   <!-- offcanvas 2 end -->`;
+---
+
+<!doctype html>
+<html class={htmlClass} lang={lang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Primary SEO -->
+    <title>{safeTitle}</title>
+    {safeDescription && <meta name="description" content={safeDescription} />}
+    {keywords && <meta name="keywords" content={keywords} />}
+    {author && <meta name="author" content={author} />}
+    <meta name="robots" content={robots} />
+    <link rel="canonical" href={resolvedCanonical} />
+
+    <!-- Performance basics -->
+    <meta name="theme-color" content={themeColor} />
+
+    <!-- Open Graph -->
+    <meta property="og:site_name" content={siteName} />
+    <meta property="og:locale" content={locale} />
+    <meta property="og:type" content={ogType} />
+    <meta property="og:title" content={resolvedOgTitle} />
+    {resolvedOgDescription && (
+      <meta property="og:description" content={resolvedOgDescription} />
+    )}
+    <meta property="og:url" content={resolvedOgUrl} />
+    <meta property="og:image" content={ogImageUrl} />
+
+    <!-- Article timing (only if provided) -->
+    {publishedTime && <meta property="article:published_time" content={publishedTime} />}
+    {modifiedTime && <meta property="article:modified_time" content={modifiedTime} />}
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={resolvedTwitterTitle} />
+    {resolvedTwitterDescription && (
+      <meta name="twitter:description" content={resolvedTwitterDescription} />
+    )}
+    <meta name="twitter:image" content={ogImageUrl} />
+    {twitterSite && <meta name="twitter:site" content={twitterSite} />}
+    {twitterCreator && <meta name="twitter:creator" content={twitterCreator} />}
+
+    <!-- Favicons (put these files in /public) -->
+    <link rel="shortcut icon" type="image/x-icon" href="/assets/img/logo/favicon.png" />
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+    <!-- Optional: Web manifest (put in /public/site.webmanifest) -->
+    <link rel="manifest" href="/site.webmanifest" />
+
+    <!-- CSS here -->
+    <link rel="stylesheet" href="/assets/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/assets/css/swiper-bundle.css" />
+    <link rel="stylesheet" href="/assets/css/nice-select.css" />
+    <link rel="stylesheet" href="/assets/css/magnific-popup.css" />
+    <link rel="stylesheet" href="/assets/css/font-awesome-pro.css" />
+    <link rel="stylesheet" href="/assets/css/spacing.css" />
+    <link rel="stylesheet" href="/assets/css/main.css" />
+
+    <!-- Structured Data (JSON-LD) -->
+    {structuredData && (
+      <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
+    )}
+
+    <slot name="head" />
+  </head>
+
+  <body class={bodyClass}>
+    {showPreloader && (
+      <>
+        <!-- preloader -->
+        <div id="preloader">
+          <div class="preloader">
+            <span></span>
+            <span></span>
+          </div>
+        </div>
+        <!-- preloader end  -->
+      </>
+    )}
+
+    <Fragment set:html={preHeaderHtml} />
+
+    <header>
+      <Fragment set:html={headerVariant === "promo" ? headerPromoHtml : headerSimpleHtml} />
+    </header>
+
+    <div id="smooth-wrapper">
+      <div id="smooth-content">
+        <slot />
+        <footer>
+          <Fragment set:html={footerHtml} />
+        </footer>
+      </div>
+    </div>
+
+    <!-- JS here -->
+    <script is:inline src="/assets/js/vendor/jquery.js" defer></script>
+    <script is:inline src="/assets/js/bootstrap.min.js" defer></script>
+    <script is:inline src="/assets/js/plugin.js" defer></script>
+    <script is:inline src="/assets/js/split-type.js" defer></script>
+    <script is:inline src="/assets/js/three.js" defer></script>
+    <script is:inline src="/assets/js/hover-effect.umd.js" defer></script>
+    <script is:inline src="/assets/js/swiper-bundle.js" defer></script>
+    <script is:inline src="/assets/js/magnific-popup.js" defer></script>
+    <script is:inline src="/assets/js/nice-select.js" defer></script>
+    <script is:inline src="/assets/js/purecounter.js" defer></script>
+    <script is:inline src="/assets/js/ajax-form.js" defer></script>
+    <script is:inline src="/assets/js/gsap-config.js" defer></script>
+    <script is:inline src="/assets/js/slider-init.js" defer></script>
+    <script is:inline src="/assets/js/parallax.js" defer></script>
+    <script is:inline src="/assets/js/main.js" defer></script>
+    <script is:inline src="/assets/js/tp-cursor.js" defer></script>
+
+    <slot name="body-end" />
+  </body>
+</html>
