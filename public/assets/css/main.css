@@ -10507,7 +10507,7 @@ body.tp-magic-cursor #magic-cursor {
 }
 
 .cs-brand-logo img {
-  opacity: 0.5;
+  /* opacity: 0.5; */
   transition: all 0.4s ease;
 }
 .cs-brand-logo img:hover {
@@ -14917,7 +14917,8 @@ body.tp-magic-cursor #magic-cursor {
   color: rgba(255, 255, 255, 0.6);
 }
 .cunnet-dark .cs-brand-logo img {
-  filter: invert(1);
+  /* filter: invert(1); */
+  border-radius: 20px;
 }
 .cunnet-dark .cs-section-title {
   color: var(--tp-common-white);
