@@ -1,6 +1,45 @@
 ---
-
+import LeadLoop from "../../components/LeadLoop.astro";
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import { getCollection } from "astro:content";
+
+const projects = await getCollection("portfolio");
+const normalizeText = (value) => String(value || "").toLowerCase();
+const hasAny = (text, terms) => terms.some((term) => text.includes(term));
+const getFilters = (project) => {
+  const haystack = normalizeText([
+    project.servicesValue,
+    ...(project.tags || []),
+  ].join(" "));
+  const filters = new Set();
+
+  if (hasAny(haystack, ["design", "ui/ux", "branding"])) {
+    filters.add("design");
+  }
+  if (hasAny(haystack, ["dev", "development", "web", "cms", "saas", "platform"])) {
+    filters.add("web-dev");
+  }
+  if (hasAny(haystack, ["motion", "animation"])) {
+    filters.add("motion");
+  }
+  if (hasAny(haystack, ["ai"])) {
+    filters.add("ai-tools");
+  }
+  if (!filters.size) {
+    filters.add("design");
+  }
+
+  return Array.from(filters);
+};
+
+const portfolioData = projects.map((project) => ({
+  title: project.data.title,
+  image: project.data.cardImage,
+  detailsUrl: `/portfolio/${project.slug}`,
+  tags: project.data.tags || [],
+  filters: getFilters(project.data),
+}));
+const portfolioDataJson = JSON.stringify(portfolioData).replace(/</g, "\\u003c");
 
 ---
 
@@ -119,6 +158,12 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
             <!-- portfolio area end -->
 
 
+            <!-- Lead Loop Start -->
+
+    <LeadLoop />
+    <!-- Lead Loop End -->
+
+
          </main>
 
 <div slot="body-end" class="portfolio-popup" aria-hidden="true">
@@ -133,88 +178,11 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
       </div>
    </div>
 
-<script is:inline slot="body-end">
-      var portfolioData = [
-         {
-            title: "GOLDEN HOME",
-            image: "assets/img/portfolio/mp/portfolio.webp",
-            detailsUrl: "portfolio-details.html",
-            tags: ["Branding", "Web Design"],
-            filters: ["design"]
-         },
-         {
-            title: "PPC DESIGNS",
-            image: "assets/img/portfolio/mp/portfolio-5.webp",
-            detailsUrl: "portfolio-details.html",
-            tags: ["Branding", "Web Design"],
-            filters: ["design","web-dev"]
-         },
-         {
-            title: "BANYAN TECHNOLOGY",
-            image: "assets/img/portfolio/mp/portfolio-4.webp",
-            detailsUrl: "portfolio-details.html",
-            tags: ["Branding", "Web Development"],
-            filters: ["design","web-dev"]
-         },
-         {
-            title: "NEO LEDGE",
-            image: "assets/img/portfolio/mp/portfolio-3.webp",
-            detailsUrl: "portfolio-details.html",
-            tags: ["Web Design", "Web Development"],
-            filters: ["design", "web-dev"]
-         },
-         {
-            title: "REAL STELL SOFTWARE",
-            image: "assets/img/portfolio/mp/portfolio-2.webp",
-            detailsUrl: "portfolio-details.html",
-            tags: ["Branding", "Web Design"],
-            filters: ["design","web-dev"]
-         },
-         {
-            title: "GOLDEN HOME",
-            image: "assets/img/portfolio/mp/portfolio.webp",
-            detailsUrl: "portfolio-details.html",
-            tags: ["Branding", "Web Development"],
-            filters: ["design","web-dev"]
-         },
-         {
-            title: "MEDIEVALDEPOT",
-            image: "assets/img/portfolio/mp/portfolio-6.webp",
-            detailsUrl: "portfolio-details.html",
-            tags: ["Motion", "Web Design"],
-            filters: ["design","web-dev"]
-         },
-         {
-            title: "WORKWISE",
-            image: "assets/img/portfolio/mp/portfolio-10.webp",
-            detailsUrl: "portfolio-details.html",
-            tags: ["Motion", "Branding"],
-            filters: ["design","web-dev"]
-         },
-         {
-            title: "MIXHAEL MANCHUSO",
-            image: "assets/img/portfolio/mp/portfolio-9.webp",
-            detailsUrl: "portfolio-details.html",
-            tags: ["AI Tools", "Web Design"],
-            filters: ["design","web-dev"]
-         },
-          {
-            title: "LUXURY WELLNESS",
-            image: "assets/img/portfolio/mp/portfolio-8.webp",
-            detailsUrl: "portfolio-details.html",
-            tags: ["AI Tools", "Web Design"],
-            filters: ["design","web-dev"]
-         },
-           {
-            title: "THRIVE MASTER MIND",
-            image: "assets/img/portfolio/mp/portfolio-7.webp",
-            detailsUrl: "portfolio-details.html",
-            tags: ["AI Tools", "Web Design"],
-            filters: ["design","web-dev"]
-         }
-        
-      ];
-   </script>
+<script
+  is:inline
+  slot="body-end"
+  set:html={`window.portfolioData = ${portfolioDataJson};`}
+></script>
 <script is:inline slot="body-end">
       (function () {
          function escapeHtml(value) {

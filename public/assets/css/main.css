@@ -110,9 +110,11 @@ li,
   -o-transition: all 0.3s ease-out;
   transition: all 0.3s ease-out;
 }
-
+.middle-text-change-color{
+  color:#B9FD50
+}
 html{
-  user-select: none;
+  user-select: ;
 }
 body{
   scroll-behavior:smooth ;
@@ -4269,6 +4271,9 @@ body.tp-magic-cursor #magic-cursor {
 }
 .postbox-title.fs-32 {
   font-size: 32px;
+}
+.fs-32{
+    font-size: 32px;
 }
 .postbox-play-btn {
   position: absolute;

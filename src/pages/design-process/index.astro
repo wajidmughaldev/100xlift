@@ -1,0 +1,1164 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Our Process</title>
+  <style>
+    :root{
+      --bg:#0E0F11;
+      --accent:#B9FD50;
+      --text:rgba(255,255,255,.92);
+      --muted:rgba(255,255,255,.62);
+      --dim:rgba(255,255,255,.10);
+      --card:rgba(255,255,255,.04);
+      --card2:rgba(255,255,255,.06);
+      --border:rgba(255,255,255,.10);
+      --shadow: 0 24px 70px rgba(0,0,0,.55);
+      --r-lg:28px;
+      --r-md:18px;
+      --r-sm:12px;
+      --max:1180px;
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      background:var(--bg);
+      color:var(--text);
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      letter-spacing:-0.02em;
+      overflow-x:hidden;
+    }
+
+    a{color:inherit;text-decoration:none}
+    .wrap{max-width:var(--max); margin:0 auto; padding:0 20px}
+    .section{padding:92px 0}
+    .eyebrow{
+      display:inline-flex; align-items:center; gap:10px;
+      font-size:12px; letter-spacing:.14em; text-transform:uppercase;
+      color:var(--muted);
+    }
+    .dot{width:8px;height:8px;border-radius:999px;background:var(--accent); box-shadow:0 0 22px rgba(185,253,80,.55)}
+    .h1{
+      font-size: clamp(40px, 5vw, 68px);
+      line-height:1.02;
+      margin:14px 0 16px;
+    }
+    .lead{
+      font-size: clamp(16px, 1.7vw, 19px);
+      line-height:1.55;
+      color:var(--muted);
+      max-width: 62ch;
+      margin:0;
+    }
+
+    /* Top bar */
+    .topbar{
+      position:sticky; top:0; z-index:50;
+      backdrop-filter: blur(14px);
+      background: linear-gradient(to bottom, rgba(14,15,17,.78), rgba(14,15,17,.35));
+      border-bottom:1px solid rgba(255,255,255,.06);
+    }
+    .topbar-inner{
+      display:flex; align-items:center; justify-content:space-between;
+      padding:16px 0;
+    }
+    .brand{
+      display:flex; align-items:center; gap:10px;
+      font-weight:700; letter-spacing:-.03em;
+    }
+    .brand-mark{
+      width:34px; height:34px; border-radius:12px;
+      background:
+        radial-gradient(60% 60% at 30% 30%, rgba(185,253,80,.95), rgba(185,253,80,.25) 55%, rgba(185,253,80,0) 75%),
+        linear-gradient(135deg, rgba(255,255,255,.10), rgba(255,255,255,0));
+      border:1px solid rgba(185,253,80,.35);
+      box-shadow:0 12px 30px rgba(185,253,80,.10);
+    }
+    .nav{
+      display:flex; gap:10px; align-items:center;
+    }
+    .pill{
+      display:inline-flex; align-items:center; gap:8px;
+      padding:10px 12px;
+      border-radius:999px;
+      background:rgba(255,255,255,.04);
+      border:1px solid rgba(255,255,255,.08);
+      color:rgba(255,255,255,.78);
+      font-size:13px;
+    }
+    .pill:hover{border-color:rgba(185,253,80,.28); color:rgba(255,255,255,.90)}
+    .cta{
+      padding:10px 14px;
+      border-radius:999px;
+      background:rgba(185,253,80,.10);
+      border:1px solid rgba(185,253,80,.35);
+      color:rgba(255,255,255,.92);
+      font-size:13px;
+      box-shadow:0 18px 40px rgba(185,253,80,.06);
+    }
+    .cta:hover{background:rgba(185,253,80,.14)}
+
+    /* Hero */
+    .hero{
+      position:relative;
+      padding:74px 0 54px;
+      overflow:hidden;
+    }
+    .hero-grid{
+      display:grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap:38px;
+      align-items:center;
+    }
+
+    /* Neon blob like the reference */
+    .blob{
+      position:absolute;
+      right:-220px;
+      top:-260px;
+      width:720px;
+      height:720px;
+      border-radius: 46% 54% 58% 42% / 46% 44% 56% 54%;
+      background:
+        radial-gradient(closest-side at 35% 35%, rgba(185,253,80,.95), rgba(185,253,80,.35) 55%, rgba(185,253,80,0) 72%),
+        radial-gradient(closest-side at 70% 70%, rgba(185,253,80,.65), rgba(185,253,80,.18) 52%, rgba(185,253,80,0) 75%);
+      filter: blur(.3px);
+      opacity:.9;
+      transform: rotate(18deg);
+      pointer-events:none;
+    }
+    .blob:after{
+      content:"";
+      position:absolute;
+      inset:88px;
+      border-radius: 48% 52% 42% 58% / 52% 46% 54% 48%;
+      background: radial-gradient(closest-side at 55% 45%, rgba(14,15,17,1), rgba(14,15,17,.75) 55%, rgba(14,15,17,0) 78%);
+      border:1px solid rgba(255,255,255,.06);
+      box-shadow: inset 0 0 0 1px rgba(185,253,80,.08);
+    }
+    .hero-card{
+      background: linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.03));
+      border:1px solid rgba(255,255,255,.09);
+      border-radius: var(--r-lg);
+      padding:22px;
+      box-shadow: var(--shadow);
+      position:relative;
+      overflow:hidden;
+    }
+    .hero-card:before{
+      content:"";
+      position:absolute; inset:-1px;
+      background:
+        radial-gradient(600px 180px at 30% -10%, rgba(185,253,80,.16), transparent 55%),
+        radial-gradient(520px 220px at 110% 30%, rgba(185,253,80,.10), transparent 58%);
+      pointer-events:none;
+    }
+    .hero-meta{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:14px;
+      margin-top:14px;
+      position:relative;
+      z-index:1;
+    }
+    .meta-box{
+      padding:14px 14px;
+      border-radius: 16px;
+      background: rgba(255,255,255,.035);
+      border:1px solid rgba(255,255,255,.08);
+    }
+    .meta-k{font-size:12px;color:var(--muted); letter-spacing:.08em; text-transform:uppercase}
+    .meta-v{margin-top:6px; font-size:14px; color:rgba(255,255,255,.86); line-height:1.35}
+
+    .hero-actions{
+      display:flex; gap:12px; align-items:center;
+      margin-top:22px;
+    }
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center;
+      gap:10px;
+      padding:12px 16px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.05);
+      color:rgba(255,255,255,.90);
+      font-size:14px;
+    }
+    .btn:hover{border-color:rgba(185,253,80,.35)}
+    .btn.primary{
+      background: rgba(185,253,80,.12);
+      border-color: rgba(185,253,80,.38);
+    }
+    .btn .arrow{
+      width:9px;height:9px; border-right:2px solid rgba(255,255,255,.85); border-top:2px solid rgba(255,255,255,.85);
+      transform: rotate(45deg);
+    }
+
+    /* Ticker */
+    .ticker{
+      border-top:1px solid rgba(255,255,255,.06);
+      border-bottom:1px solid rgba(255,255,255,.06);
+      background: rgba(255,255,255,.02);
+      overflow:hidden;
+    }
+    .ticker-row{
+      display:flex; gap:28px;
+      padding:14px 0;
+      white-space:nowrap;
+      color:rgba(255,255,255,.60);
+      font-size:12px;
+      letter-spacing:.18em;
+      text-transform:uppercase;
+      animation: scroll 26s linear infinite;
+    }
+    @keyframes scroll{
+      from{ transform: translateX(0) }
+      to{ transform: translateX(-50%) }
+    }
+
+    /* Process overview */
+    .grid-steps{
+      display:grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap:14px;
+      margin-top:26px;
+    }
+    .step-card{
+      border-radius: 22px;
+      border:1px solid rgba(255,255,255,.09);
+      background: rgba(255,255,255,.03);
+      padding:18px 16px 16px;
+      position:relative;
+      overflow:hidden;
+      min-height:122px;
+    }
+    .step-card:before{
+      content:"";
+      position:absolute; inset:-1px;
+      background: radial-gradient(420px 160px at 20% 0%, rgba(185,253,80,.10), transparent 55%);
+      opacity:.9;
+      pointer-events:none;
+    }
+    .step-no{
+      font-size:12px;
+      letter-spacing:.14em;
+      text-transform:uppercase;
+      color:rgba(255,255,255,.55);
+      display:flex;
+      align-items:center;
+      gap:10px;
+      position:relative;
+      z-index:1;
+    }
+    .step-title{
+      margin-top:10px;
+      font-size:18px;
+      letter-spacing:-.03em;
+      position:relative;
+      z-index:1;
+    }
+    .step-tags{
+      margin-top:10px;
+      display:flex; flex-wrap:wrap; gap:8px;
+      position:relative;
+      z-index:1;
+    }
+    .tag{
+      font-size:12px;
+      padding:7px 10px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.03);
+      color:rgba(255,255,255,.72);
+    }
+    .tag.accent{
+      border-color: rgba(185,253,80,.34);
+      background: rgba(185,253,80,.08);
+      color:rgba(255,255,255,.86);
+    }
+
+    /* Deep dive layout */
+    .deep{
+      display:grid;
+      grid-template-columns: 340px 1fr;
+      gap:18px;
+      margin-top:32px;
+      align-items:start;
+    }
+    .side{
+      position:sticky; top:94px;
+      border-radius: var(--r-lg);
+      border:1px solid rgba(255,255,255,.09);
+      background: rgba(255,255,255,.03);
+      overflow:hidden;
+    }
+    .side-head{
+      padding:18px 18px 14px;
+      border-bottom:1px solid rgba(255,255,255,.06);
+      background: rgba(255,255,255,.02);
+    }
+    .side-head .t{font-size:14px;color:rgba(255,255,255,.86); letter-spacing:-.02em}
+    .side-head .s{margin-top:6px;font-size:13px;color:var(--muted); line-height:1.5}
+    .side-nav{padding:10px}
+    .side-btn{
+      width:100%;
+      text-align:left;
+      display:flex; justify-content:space-between; align-items:center;
+      gap:12px;
+      padding:12px 12px;
+      border-radius: 16px;
+      border:1px solid transparent;
+      background: transparent;
+      color:rgba(255,255,255,.82);
+      cursor:pointer;
+      font-size:14px;
+    }
+    .side-btn:hover{background: rgba(255,255,255,.03); border-color: rgba(255,255,255,.06)}
+    .side-btn[aria-current="true"]{
+      background: rgba(185,253,80,.08);
+      border-color: rgba(185,253,80,.32);
+      color:rgba(255,255,255,.92);
+    }
+    .side-btn small{
+      color:rgba(255,255,255,.55);
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      font-size:11px;
+    }
+    .chev{
+      width:10px;height:10px;
+      border-right:2px solid rgba(255,255,255,.7);
+      border-bottom:2px solid rgba(255,255,255,.7);
+      transform: rotate(-45deg);
+      opacity:.75;
+    }
+    .side-btn[aria-current="true"] .chev{
+      border-color: rgba(185,253,80,.95);
+      opacity:1;
+    }
+
+    .panel{
+      border-radius: var(--r-lg);
+      border:1px solid rgba(255,255,255,.09);
+      background: linear-gradient(180deg, rgba(255,255,255,.045), rgba(255,255,255,.02));
+      padding:22px;
+      box-shadow: 0 24px 70px rgba(0,0,0,.40);
+      position:relative;
+      overflow:hidden;
+      min-height: 420px;
+    }
+    .panel:before{
+      content:"";
+      position:absolute; inset:-1px;
+      background:
+        radial-gradient(520px 220px at 0% 0%, rgba(185,253,80,.10), transparent 55%),
+        radial-gradient(520px 220px at 110% 30%, rgba(185,253,80,.06), transparent 58%);
+      pointer-events:none;
+    }
+    .panel-inner{position:relative; z-index:1}
+    .panel-kicker{
+      display:flex; align-items:baseline; justify-content:space-between;
+      gap:16px;
+      flex-wrap:wrap;
+      margin-bottom:10px;
+    }
+    .panel-kicker .left{
+      display:flex; gap:12px; align-items:baseline; flex-wrap:wrap;
+    }
+    .panel-step{
+      font-size:12px;
+      letter-spacing:.14em;
+      text-transform:uppercase;
+      color:rgba(255,255,255,.60);
+    }
+    .panel-title{
+      font-size:28px;
+      letter-spacing:-.04em;
+      margin:6px 0 10px;
+    }
+    .panel-desc{
+      color:var(--muted);
+      font-size:15px;
+      line-height:1.6;
+      max-width: 80ch;
+      margin:0 0 18px;
+    }
+
+    .key-acts{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:14px;
+      margin-top:14px;
+    }
+    .acts-card{
+      border-radius: 22px;
+      background: rgba(255,255,255,.03);
+      border:1px solid rgba(255,255,255,.08);
+      padding:16px;
+    }
+    .acts-head{
+      display:flex; align-items:center; justify-content:space-between;
+      gap:10px;
+      margin-bottom:12px;
+    }
+    .acts-head b{font-size:14px; letter-spacing:-.02em}
+    .badge{
+      font-size:11px;
+      letter-spacing:.14em;
+      text-transform:uppercase;
+      color:rgba(255,255,255,.70);
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.02);
+      padding:7px 10px;
+      border-radius:999px;
+    }
+    .list{
+      display:grid;
+      gap:10px;
+      margin:0;
+      padding:0;
+      list-style:none;
+    }
+    .li{
+      display:flex; align-items:flex-start; gap:10px;
+      color:rgba(255,255,255,.78);
+      font-size:14px;
+      line-height:1.45;
+    }
+    .li i{
+      width:22px; height:22px;
+      border-radius: 8px;
+      border:1px solid rgba(185,253,80,.28);
+      background: rgba(185,253,80,.08);
+      box-shadow: 0 12px 22px rgba(185,253,80,.06);
+      display:inline-flex; align-items:center; justify-content:center;
+      color:rgba(255,255,255,.88);
+      font-style:normal;
+      font-size:12px;
+      flex:0 0 auto;
+      margin-top:1px;
+    }
+
+    /* Principles */
+    .split-head{
+      display:flex; align-items:flex-end; justify-content:space-between;
+      gap:22px;
+      flex-wrap:wrap;
+      margin-bottom:22px;
+    }
+    .h2{
+      font-size: clamp(28px, 3.3vw, 44px);
+      margin:10px 0 0;
+      letter-spacing:-.04em;
+      line-height:1.05;
+    }
+    .sub{
+      color:var(--muted);
+      max-width: 62ch;
+      line-height:1.55;
+      margin: 0;
+      font-size:15px;
+    }
+    .principles{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap:14px;
+      margin-top:18px;
+    }
+    .principle{
+      border-radius: var(--r-lg);
+      border:1px solid rgba(255,255,255,.09);
+      background: rgba(255,255,255,.03);
+      padding:18px;
+      position:relative;
+      overflow:hidden;
+      min-height: 170px;
+    }
+    .principle:before{
+      content:"";
+      position:absolute; inset:-1px;
+      background: radial-gradient(520px 200px at 0% 0%, rgba(185,253,80,.10), transparent 60%);
+      pointer-events:none;
+    }
+    .principle .top{
+      display:flex; justify-content:space-between; align-items:center;
+      position:relative; z-index:1;
+    }
+    .principle .k{
+      font-size:12px;
+      letter-spacing:.14em;
+      text-transform:uppercase;
+      color:rgba(255,255,255,.60);
+    }
+    .plus{
+      width:34px;height:34px;border-radius: 12px;
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.03);
+      display:flex;align-items:center;justify-content:center;
+      color:rgba(255,255,255,.86);
+      font-size:18px;
+    }
+    .principle h3{
+      margin:14px 0 10px;
+      font-size:20px;
+      letter-spacing:-.03em;
+      position:relative; z-index:1;
+    }
+    .principle p{
+      margin:0;
+      color:var(--muted);
+      line-height:1.6;
+      font-size:14.5px;
+      position:relative; z-index:1;
+    }
+
+    /* Heroes / quotes */
+    .quotes{
+      display:grid;
+      grid-template-columns: 1.05fr .95fr;
+      gap:14px;
+      margin-top:18px;
+      align-items:start;
+    }
+    .quote-card{
+      border-radius: var(--r-lg);
+      border:1px solid rgba(255,255,255,.09);
+      background: rgba(255,255,255,.03);
+      padding:18px;
+      position:relative;
+      overflow:hidden;
+    }
+    .quote-card:before{
+      content:"";
+      position:absolute; inset:-1px;
+      background: radial-gradient(520px 200px at 30% 0%, rgba(185,253,80,.08), transparent 60%);
+      pointer-events:none;
+    }
+    .quote{
+      font-size:15px;
+      line-height:1.65;
+      color:rgba(255,255,255,.86);
+      margin:0;
+      position:relative; z-index:1;
+    }
+    .who{
+      margin-top:14px;
+      display:flex; align-items:center; justify-content:space-between;
+      gap:12px;
+      color:rgba(255,255,255,.70);
+      font-size:13px;
+      position:relative; z-index:1;
+    }
+    .who b{color:rgba(255,255,255,.92); font-weight:650}
+    .who span{
+      padding:7px 10px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.02);
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      font-size:11px;
+      color:rgba(255,255,255,.66);
+    }
+
+    /* FAQ */
+    .faq{
+      margin-top:18px;
+      border-radius: var(--r-lg);
+      border:1px solid rgba(255,255,255,.09);
+      background: rgba(255,255,255,.03);
+      overflow:hidden;
+    }
+    .q{
+      width:100%;
+      text-align:left;
+      padding:18px 18px;
+      background: transparent;
+      border:0;
+      color:rgba(255,255,255,.90);
+      display:flex; align-items:center; justify-content:space-between;
+      gap:14px;
+      cursor:pointer;
+      font-size:15px;
+      border-top:1px solid rgba(255,255,255,.06);
+    }
+    .q:first-child{border-top:0}
+    .q:hover{background: rgba(255,255,255,.02)}
+    .q .plus2{
+      width:34px;height:34px;border-radius: 12px;
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.03);
+      display:flex; align-items:center; justify-content:center;
+      font-size:18px;
+      color:rgba(255,255,255,.82);
+      flex:0 0 auto;
+    }
+    .a{
+      padding:0 18px 18px;
+      color:var(--muted);
+      line-height:1.65;
+      font-size:14.5px;
+      display:none;
+      border-top:1px solid rgba(255,255,255,.06);
+    }
+    .qa.open .a{display:block}
+    .qa.open .q .plus2{color: rgba(185,253,80,.95); border-color: rgba(185,253,80,.28); background: rgba(185,253,80,.08)}
+    .qa.open .q{background: rgba(185,253,80,.05)}
+
+    /* Footer note */
+    .foot{
+      padding:36px 0 60px;
+      border-top:1px solid rgba(255,255,255,.06);
+      color:rgba(255,255,255,.55);
+      font-size:13px;
+    }
+
+    /* Responsive */
+    @media (max-width: 980px){
+      .hero-grid{grid-template-columns: 1fr; gap:18px}
+      .deep{grid-template-columns: 1fr}
+      .side{position:relative; top:auto}
+      .grid-steps{grid-template-columns: 1fr 1fr}
+      .principles{grid-template-columns: 1fr}
+      .quotes{grid-template-columns: 1fr}
+      .key-acts{grid-template-columns: 1fr}
+    }
+    @media (max-width: 520px){
+      .nav{display:none}
+      .grid-steps{grid-template-columns: 1fr}
+    }
+
+    /* Reduced motion */
+    @media (prefers-reduced-motion: reduce){
+      .ticker-row{animation:none}
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Topbar -->
+  <header class="topbar">
+    <div class="wrap">
+      <div class="topbar-inner">
+        <a class="brand" href="#">
+          <span class="brand-mark" aria-hidden="true"></span>
+          <span>Studio</span>
+        </a>
+
+        <nav class="nav" aria-label="Primary">
+          <a class="pill" href="#process">Process</a>
+          <a class="pill" href="#principles">Principles</a>
+          <a class="pill" href="#heroes">Heroes</a>
+          <a class="pill" href="#faq">FAQ</a>
+          <a class="cta" href="#process">Start a project</a>
+        </nav>
+
+        <a class="cta" href="#process">Start a project</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <main>
+    <section class="hero">
+      <div class="blob" aria-hidden="true"></div>
+
+      <div class="wrap">
+        <div class="hero-grid">
+          <div>
+            <div class="eyebrow"><span class="dot"></span> Our process</div>
+            <h1 class="h1">Coherence from research to delivery.</h1>
+            <p class="lead">
+              Every step from research to delivery is built to keep your brand coherent, effective and ready for the future.
+              We listen, analyse and draw conclusions to recommend the most relevant solutions. Through workshops, interviews and research
+              we get to know the brand from the inside.
+            </p>
+
+            <div class="hero-actions">
+              <a class="btn primary" href="#process"><span>Explore the steps</span><span class="arrow" aria-hidden="true"></span></a>
+              <a class="btn" href="#faq"><span>Read the FAQ</span><span class="arrow" aria-hidden="true"></span></a>
+            </div>
+          </div>
+
+          <div class="hero-card">
+            <div class="eyebrow" style="position:relative;z-index:1;"><span class="dot"></span> What you get</div>
+            <h2 style="margin:10px 0 0; font-size:22px; letter-spacing:-.03em; position:relative; z-index:1;">
+              A structured process that stays simple.
+            </h2>
+            <p style="margin:10px 0 0; color:var(--muted); line-height:1.6; font-size:14.5px; position:relative; z-index:1;">
+              Clear milestones. Crisp deliverables. No chaos between discovery, design, and rollout.
+            </p>
+
+            <div class="hero-meta">
+              <div class="meta-box">
+                <div class="meta-k">Phase focus</div>
+                <div class="meta-v">Insight → Direction → Identity → Launch</div>
+              </div>
+              <div class="meta-box">
+                <div class="meta-k">Working style</div>
+                <div class="meta-v">Workshops, interviews, research, documentation</div>
+              </div>
+              <div class="meta-box">
+                <div class="meta-k">Outputs</div>
+                <div class="meta-v">Guidelines, assets, brand manual, training</div>
+              </div>
+              <div class="meta-box">
+                <div class="meta-k">Principle</div>
+                <div class="meta-v">Clarity first. Always for people.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Ticker like the reference -->
+    <div class="ticker" aria-hidden="true">
+      <div class="wrap">
+        <div class="ticker-row">
+          <span>Exploration</span><span>•</span>
+          <span>Strategy</span><span>•</span>
+          <span>Identity</span><span>•</span>
+          <span>Delivery</span><span>•</span>
+          <span>Workshops</span><span>•</span>
+          <span>Research</span><span>•</span>
+          <span>Design Systems</span><span>•</span>
+          <span>Brand Launch</span><span>•</span>
+
+          <span>Exploration</span><span>•</span>
+          <span>Strategy</span><span>•</span>
+          <span>Identity</span><span>•</span>
+          <span>Delivery</span><span>•</span>
+          <span>Workshops</span><span>•</span>
+          <span>Research</span><span>•</span>
+          <span>Design Systems</span><span>•</span>
+          <span>Brand Launch</span><span>•</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Process -->
+    <section id="process" class="section">
+      <div class="wrap">
+        <div class="split-head">
+          <div>
+            <div class="eyebrow"><span class="dot"></span> Process</div>
+            <h2 class="h2">Four steps. One coherent brand.</h2>
+          </div>
+          <p class="sub">
+            We keep the process structured so decisions compound. Each phase has clear activities and outputs,
+            so the next phase starts with confidence, not guesses.
+          </p>
+        </div>
+
+        <!-- Overview cards -->
+        <div class="grid-steps">
+          <div class="step-card">
+            <div class="step-no"><span class="dot"></span> Step 01</div>
+            <div class="step-title">Exploration</div>
+            <div class="step-tags">
+              <span class="tag accent">Workshops</span>
+              <span class="tag">Project Kickoff</span>
+            </div>
+          </div>
+
+          <div class="step-card">
+            <div class="step-no"><span class="dot"></span> Step 02</div>
+            <div class="step-title">Strategy</div>
+            <div class="step-tags">
+              <span class="tag accent">Strategy</span>
+              <span class="tag">Positioning</span>
+            </div>
+          </div>
+
+          <div class="step-card">
+            <div class="step-no"><span class="dot"></span> Step 03</div>
+            <div class="step-title">Identity</div>
+            <div class="step-tags">
+              <span class="tag">Print Design</span>
+              <span class="tag">Digital Design</span>
+              <span class="tag accent">Motion & 3D</span>
+            </div>
+          </div>
+
+          <div class="step-card">
+            <div class="step-no"><span class="dot"></span> Step 04</div>
+            <div class="step-title">Delivery</div>
+            <div class="step-tags">
+              <span class="tag accent">Brand Launch</span>
+              <span class="tag">Training</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Deep dive -->
+        <div class="deep">
+          <aside class="side" aria-label="Step navigation">
+            <div class="side-head">
+              <div class="t">Process navigation</div>
+              <div class="s">Pick a step to see key activities and what it unlocks for the next phase.</div>
+            </div>
+            <div class="side-nav">
+              <button class="side-btn" data-step="1" aria-current="true">
+                <span><small>Step 01</small><br/>Exploration</span>
+                <span class="chev" aria-hidden="true"></span>
+              </button>
+              <button class="side-btn" data-step="2" aria-current="false">
+                <span><small>Step 02</small><br/>Strategic Phase</span>
+                <span class="chev" aria-hidden="true"></span>
+              </button>
+              <button class="side-btn" data-step="3" aria-current="false">
+                <span><small>Step 03</small><br/>Design Phase</span>
+                <span class="chev" aria-hidden="true"></span>
+              </button>
+              <button class="side-btn" data-step="4" aria-current="false">
+                <span><small>Step 04</small><br/>Delivery Phase</span>
+                <span class="chev" aria-hidden="true"></span>
+              </button>
+            </div>
+          </aside>
+
+          <article class="panel" aria-live="polite">
+            <div class="panel-inner" id="panel">
+              <!-- Filled by JS -->
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Principles -->
+    <section id="principles" class="section" style="padding-top:62px;">
+      <div class="wrap">
+        <div class="split-head">
+          <div>
+            <div class="eyebrow"><span class="dot"></span> Design principles</div>
+            <h2 class="h2">Our approach</h2>
+          </div>
+          <p class="sub">03 principles. Clear work. Consistent outcomes.</p>
+        </div>
+
+        <div class="principles">
+          <div class="principle">
+            <div class="top">
+              <div class="k">Principle 01</div>
+              <div class="plus" aria-hidden="true">+</div>
+            </div>
+            <h3>Simplicity</h3>
+            <p>We believe in clarity and intention. We remove what's unnecessary so the essential can speak. Less noise, more meaning.</p>
+          </div>
+
+          <div class="principle">
+            <div class="top">
+              <div class="k">Principle 02</div>
+              <div class="plus" aria-hidden="true">+</div>
+            </div>
+            <h3>Functionality</h3>
+            <p>Design starts with function. Our work is meant to solve problems and serve a purpose. Always for people.</p>
+          </div>
+
+          <div class="principle">
+            <div class="top">
+              <div class="k">Principle 03</div>
+              <div class="plus" aria-hidden="true">+</div>
+            </div>
+            <h3>Timelessness</h3>
+            <p>Trends change. We focus on ideas that are relevant and built to last. Because strong brands need consistency, not shortcuts.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Heroes -->
+    <section id="heroes" class="section" style="padding-top:62px;">
+      <div class="wrap">
+        <div class="split-head">
+          <div>
+            <div class="eyebrow"><span class="dot"></span> Heroes</div>
+            <h2 class="h2">What inspires us</h2>
+          </div>
+          <p class="sub">Philosophy that keeps the work grounded: remove noise, respect detail, build for longevity.</p>
+        </div>
+
+        <div class="quotes">
+          <div class="quote-card">
+            <p class="quote">
+              “The ability to simplify means to eliminate the unnecessary so that the necessary may speak.”
+            </p>
+            <div class="who">
+              <div><b>Hans Hoffmann</b><div style="color:var(--muted); font-size:13px; margin-top:4px;">About Simplicity</div></div>
+              <span>Clarity</span>
+            </div>
+          </div>
+
+          <div class="quote-card">
+            <p class="quote">
+              “The attention to details requires discipline. There is no room for sloppiness, for carelessness, for procrastination.
+              Every detail is important because the end result is the sum of the all details involved.”
+            </p>
+            <div class="who">
+              <div><b>Massimo Vignelli</b><div style="color:var(--muted); font-size:13px; margin-top:4px;">About Discipline</div></div>
+              <span>Discipline</span>
+            </div>
+          </div>
+
+          <div class="quote-card" style="grid-column: 1 / -1;">
+            <p class="quote">
+              “Good design is innovative, makes a product useful, is aesthetic, makes a product understandable, is unobtrusive, is honest,
+              is long-lasting, is thorough down to the last detail, is environmentally friendly, and involves as little design as possible.”
+            </p>
+            <div class="who">
+              <div><b>Dieter Rams</b><div style="color:var(--muted); font-size:13px; margin-top:4px;">Ten Principles of Good Design</div></div>
+              <span>Longevity</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq" class="section" style="padding-top:62px;">
+      <div class="wrap">
+        <div class="split-head">
+          <div>
+            <div class="eyebrow"><span class="dot"></span> FAQ</div>
+            <h2 class="h2">Questions? Answered.</h2>
+          </div>
+          <p class="sub">Process FAQ. Straight answers, no fluff.</p>
+        </div>
+
+        <div class="faq" role="list">
+          <div class="qa" role="listitem">
+            <button class="q" type="button">
+              <span>Does my business need a brand strategy?</span>
+              <span class="plus2" aria-hidden="true">+</span>
+            </button>
+            <div class="a">
+              If your messaging feels inconsistent, your audience is unclear, or your design choices keep changing, strategy gives you a stable base.
+              It helps you decide what to say, how to say it, and what to prioritise before design work begins.
+            </div>
+          </div>
+
+          <div class="qa" role="listitem">
+            <button class="q" type="button">
+              <span>How do you plan the process of creating a brand identity?</span>
+              <span class="plus2" aria-hidden="true">+</span>
+            </button>
+            <div class="a">
+              We run the four steps as a sequence of decisions: exploration to gather truth, strategy to choose direction, identity to build the system,
+              and delivery to implement it properly with guidance and training.
+            </div>
+          </div>
+
+          <div class="qa" role="listitem">
+            <button class="q" type="button">
+              <span>What are the main benefits of implementing such a process in your brand?</span>
+              <span class="plus2" aria-hidden="true">+</span>
+            </button>
+            <div class="a">
+              You get consistency across channels, faster decision-making, clearer differentiation, and a brand system your team can actually use.
+              It reduces rework and prevents “random design” over time.
+            </div>
+          </div>
+
+          <div class="qa" role="listitem">
+            <button class="q" type="button">
+              <span>How do I choose the right elements for my brand?</span>
+              <span class="plus2" aria-hidden="true">+</span>
+            </button>
+            <div class="a">
+              We choose elements that match your positioning and audience needs, then stress-test them across real use cases:
+              website, social, print, motion, and internal assets. The system must hold up everywhere.
+            </div>
+          </div>
+
+          <div class="qa" role="listitem">
+            <button class="q" type="button">
+              <span>Can I actively participate in the design process?</span>
+              <span class="plus2" aria-hidden="true">+</span>
+            </button>
+            <div class="a">
+              Yes. Workshops and reviews are built into the process. You’ll help shape direction early, then we’ll keep decisions focused so
+              progress stays fast and clean.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="foot">
+      <div class="wrap">
+        <div style="display:flex; justify-content:space-between; gap:18px; flex-wrap:wrap;">
+          <div>© Studio. Built with clarity.</div>
+          <div style="color:rgba(255,255,255,.45)">Colors: #B9FD50, #0E0F11</div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    const steps = {
+      1: {
+        step: "Step 01",
+        title: "Exploration Phase",
+        desc: "We listen, analyse and draw conclusions to recommend the most relevant solutions. Through workshops, interviews and research we get to know the brand from the inside. This stage allows us to uncover key insights and gather essential information for the next phases of the project.",
+        badge: "Key Activities",
+        leftTitle: "What we do",
+        leftItems: [
+          "Research & Analysis",
+          "Brand Audit",
+          "Identifying Problems and Needs",
+          "Defining Project Goals",
+          "Discovery Workshops"
+        ],
+        rightTitle: "What it unlocks",
+        rightItems: [
+          "Shared clarity on the real problem",
+          "Aligned goals and constraints",
+          "Better decisions in strategy and design",
+          "Less rework later"
+        ]
+      },
+      2: {
+        step: "Step 02",
+        title: "Strategic Phase",
+        desc: "Based on collected data and insights, we develop a concept that defines the brand's identity, positioning and communication approach. The outcome is a clear strategy that reflects the brand's context, goals and ambition, delivered as a document with guidelines for design, marketing and communication.",
+        badge: "Key Activities",
+        leftTitle: "What we define",
+        leftItems: [
+          "Defining Brand Personality",
+          "Brand Positioning",
+          "Defining Unique Value Proposition",
+          "Establishing Tone of Voice",
+          "Selecting Communication Channels",
+          "Brand Architecture",
+          "Moodboards",
+          "Communication Strategy"
+        ],
+        rightTitle: "What you receive",
+        rightItems: [
+          "Strategy document with clear direction",
+          "Messaging and tone guidance",
+          "Positioning you can defend",
+          "A decision framework for design"
+        ]
+      },
+      3: {
+        step: "Step 03",
+        title: "Design Phase",
+        desc: "We create the key assets and tools that support effective communication with the brand's audience. Everything is adapted to a range of media, from print materials and websites to social platforms. All of it is designed to build a cohesive and recognisable brand identity.",
+        badge: "Key Activities",
+        leftTitle: "What we design",
+        leftItems: [
+          "Defining the Core Visual Direction",
+          "Designing the Logo and its System",
+          "Developing the Brand's Visual Language",
+          "Creating Supporting Graphic Elements",
+          "Copywriting",
+          "Establishing the Brand's Communication Style",
+          "Designing Printed and Digital Brand Assets"
+        ],
+        rightTitle: "What stays consistent",
+        rightItems: [
+          "A visual system your team can scale",
+          "Assets that work across channels",
+          "Cohesive look and feel everywhere",
+          "Clear rules, flexible execution"
+        ]
+      },
+      4: {
+        step: "Step 04",
+        title: "Delivery Phase",
+        desc: "We finalise and deliver all key materials and make sure the designed elements are applied correctly. We also support brand activation, internal launch and team training to ensure smooth use of the new assets. This allows the brand to make full use of its new identity.",
+        badge: "Key Activities",
+        leftTitle: "What we deliver",
+        leftItems: [
+          "Brand Manual",
+          "Brand Implementation Supervision",
+          "Brand Launch",
+          "Team Training",
+          "Post-Launch Support"
+        ],
+        rightTitle: "How it lands",
+        rightItems: [
+          "Clean rollout with oversight",
+          "Team adoption, not confusion",
+          "Consistency from day one",
+          "Support after launch"
+        ]
+      }
+    };
+
+    const panel = document.getElementById("panel");
+    const navBtns = Array.from(document.querySelectorAll(".side-btn"));
+
+    function renderStep(n){
+      const s = steps[n];
+      panel.innerHTML = `
+        <div class="panel-kicker">
+          <div class="left">
+            <div class="panel-step">${s.step}</div>
+            <div style="width:6px;height:6px;border-radius:999px;background:rgba(255,255,255,.20)"></div>
+            <div style="color:rgba(255,255,255,.72); font-size:13px; letter-spacing:.12em; text-transform:uppercase;">Process</div>
+          </div>
+          <div class="badge">${s.badge}</div>
+        </div>
+
+        <div class="panel-title">${s.title}</div>
+        <p class="panel-desc">${s.desc}</p>
+
+        <div class="key-acts">
+          <div class="acts-card">
+            <div class="acts-head">
+              <b>${s.leftTitle}</b>
+              <span class="badge">Primary</span>
+            </div>
+            <ul class="list">
+              ${s.leftItems.map((x,i)=>`<li class="li"><i>${String(i+1).padStart(2,"0")}</i><span>${x}</span></li>`).join("")}
+            </ul>
+          </div>
+
+          <div class="acts-card">
+            <div class="acts-head">
+              <b>${s.rightTitle}</b>
+              <span class="badge">Outcome</span>
+            </div>
+            <ul class="list">
+              ${s.rightItems.map((x,i)=>`<li class="li"><i>${String(i+1).padStart(2,"0")}</i><span>${x}</span></li>`).join("")}
+            </ul>
+
+            <div style="margin-top:14px; padding:14px; border-radius:18px; border:1px solid rgba(185,253,80,.22); background: rgba(185,253,80,.06); color:rgba(255,255,255,.82); line-height:1.55; font-size:14px;">
+              <b style="color:rgba(255,255,255,.92)">Note:</b>
+              Each phase is designed to reduce uncertainty. The goal is fewer opinions, more proof.
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    navBtns.forEach(btn=>{
+      btn.addEventListener("click", ()=>{
+        navBtns.forEach(b=>b.setAttribute("aria-current","false"));
+        btn.setAttribute("aria-current","true");
+        renderStep(btn.dataset.step);
+      });
+    });
+
+    renderStep(1);
+
+    // FAQ accordion
+    const qa = Array.from(document.querySelectorAll(".qa"));
+    qa.forEach(row=>{
+      const q = row.querySelector(".q");
+      q.addEventListener("click", ()=>{
+        const open = row.classList.contains("open");
+        qa.forEach(r=>r.classList.remove("open"));
+        if(!open) row.classList.add("open");
+      });
+    });
+  </script>
+</body>
+</html>

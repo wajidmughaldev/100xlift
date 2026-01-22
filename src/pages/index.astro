@@ -1,6 +1,16 @@
 ---
-
+import PrimaryFaq from "../components/PrimaryFaq.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
+import { getCollection } from "astro:content";
+import LeadLoop from "../components/LeadLoop.astro";
+const files = import.meta.glob('/src/content/portfolio/*.{md,mdx}', { eager: true });
+const fileKeys = Object.keys(files);
+
+const projects = await getCollection("portfolio");
+
+const randomProjects = [...projects]
+  .sort(() => 0.5 - Math.random())
+  .slice(0, 6);
 
 ---
 
@@ -13,7 +23,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
   ogUrl="https://www.100xlift.com/"
   twitterTitle="100xLift – Digital Agency for Web Design & SEO"
   headerVariant="promo"
-  showPreloader={true}
+  showPreloader={false}
 >
   <Fragment slot="head">
     <link
@@ -22,46 +32,24 @@ import BaseLayout from "../layouts/BaseLayout.astro";
     />
   </Fragment>
 
-<!-- WhatsApp CTA Button -->
-    <!-- WhatsApp CTA Floating Button -->
-<!-- <div class="whatsapp-wrapper">
-    <div id="whatsapp-btn">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
-    </div>
+  <main>
+    <!-- hero area start -->
 
-    <div id="whatsapp-box">
-        <div id="whatsapp-header">
-            <span>Chat with us</span>
-            <span id="whatsapp-close">&times;</span>
-        </div>
-        <div id="whatsapp-body">
-            <p>Hello! How can we help you today?</p>
-        </div>
-        <div id="whatsapp-footer">
-            <input type="text" id="whatsapp-input" placeholder="Type your message...">
-            <button id="whatsapp-send">Send</button>
-        </div>
-    </div>
-</div> -->
-
-<main>
-          <!-- hero area start -->
-
-          <div
-            class="pp-hero-area scene p-relative z-index-1 bg-position fix pp-hero-spacing"
-            style="background: linear-gradient(-130deg, #b9fd50, #111204)"
-          >
-            <div class="pp-hero-bg">
-              <img
-                class="layer"
-                data-depth="0.8"
-                src="/assets/img/hero/pp/thumb.png"
-                alt=""
-              />
-            </div>
-            <div class="container">
-              <div class="row align-items-end">
-                <!-- <div class="col-xxl-2 col-xl-3 col-lg-4 col-md-5">
+    <div
+      class="pp-hero-area scene p-relative z-index-1 bg-position fix pp-hero-spacing"
+      style="background: linear-gradient(-130deg, #b9fd50, #111204)"
+    >
+      <div class="pp-hero-bg">
+        <img
+          class="layer"
+          data-depth="0.8"
+          src="/assets/img/hero/pp/thumb.png"
+          alt=""
+        />
+      </div>
+      <div class="container">
+        <div class="row align-items-end">
+          <!-- <div class="col-xxl-2 col-xl-3 col-lg-4 col-md-5">
                         <div class="pp-hero-video mb-30">
                            <video loop="" muted="" autoplay="" playsinline="">
                               <source src="https://html.aqlova.com/videos/cunnet/video-2.mp4" type="video/mp4">
@@ -69,53 +57,52 @@ import BaseLayout from "../layouts/BaseLayout.astro";
                         </div>
                      </div> -->
 
-                <div class="col-xxl-5 col-xl-7 offset-xxl-1">
-                  <div class="pp-hero-content ml-55">
-                    <span
-                      class="pp-hero-subtitle text-white mb-10 d-inline-block"
-                      >Turning ideas into measurable growth.</span
+          <div class="col-xxl-5 col-xl-7 offset-xxl-1">
+            <div class="pp-hero-content ml-55">
+              <span class="pp-hero-subtitle text-white mb-10 d-inline-block"
+                >Turning ideas into measurable growth.</span
+              >
+              <h2 class="pp-hero-title text-white mb-50">
+                We deliver tailored IT solutions, smart design, and scalable
+                development to elevate your Business.
+              </h2>
+              <div class="pp-hero-btn d-flex flex-wrap gap-2">
+                <a
+                  class="tp-btn text-black bg-white mb-10"
+                  href="https://calendly.com/100xlift/30min?background_color=0e0f11&text_color=ffffff&primary_color=b9fd50"
+                  onclick="if (window.Calendly) { Calendly.initPopupWidget({ url: this.href }); return false; }"
+                >
+                  <span>
+                    <span class="text-1">Book A Free Consultation</span>
+                    <span class="text-2">Book A Free Consultation</span>
+                  </span>
+                  <i>
+                    <svg
+                      width="11"
+                      height="11"
+                      viewBox="0 0 11 11"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
                     >
-                    <h2 class="pp-hero-title text-white mb-50">
-                      We deliver tailored IT solutions, smart design, and scalable development to elevate your brand.
-                    </h2>
-                    <div class="pp-hero-btn d-flex flex-wrap gap-2">
-                      <a
-                        class="tp-btn text-black bg-white mb-10"
-                        href="/audit"
-                      >
-                        <span>
-                          <span class="text-1">Get a Free Audit</span>
-                          <span class="text-2">Get a Free Audit</span>
-                        </span>
-                        <i>
-                          <svg
-                            width="11"
-                            height="11"
-                            viewBox="0 0 11 11"
-                            fill="none"
-                            xmlns="http://www.w3.org/2000/svg"
-                          >
-                            <path
-                              d="M0.21967 9.40717C-0.0732232 9.70006 -0.0732232 10.1749 0.21967 10.4678C0.512563 10.7607 0.987437 10.7607 1.28033 10.4678L0.21967 9.40717ZM10.6875 0.75C10.6875 0.335786 10.3517 2.97145e-09 9.9375 1.50485e-07L3.1875 -2.70983e-07C2.77329 -2.70983e-07 2.4375 0.335786 2.4375 0.75C2.4375 1.16421 2.77329 1.5 3.1875 1.5H9.1875V7.5C9.1875 7.91421 9.52329 8.25 9.9375 8.25C10.3517 8.25 10.6875 7.91421 10.6875 7.5L10.6875 0.75ZM0.75 9.9375L1.28033 10.4678L10.4678 1.28033L9.9375 0.75L9.40717 0.21967L0.21967 9.40717L0.75 9.9375Z"
-                              fill="currentColor"
-                            />
-                          </svg>
-                          <svg
-                            width="11"
-                            height="11"
-                            viewBox="0 0 11 11"
-                            fill="none"
-                            xmlns="http://www.w3.org/2000/svg"
-                          >
-                            <path
-                              d="M0.21967 9.40717C-0.0732232 9.70006 -0.0732232 10.1749 0.21967 10.4678C0.512563 10.7607 0.987437 10.7607 1.28033 10.4678L0.21967 9.40717ZM10.6875 0.75C10.6875 0.335786 10.3517 2.97145e-09 9.9375 1.50485e-07L3.1875 -2.70983e-07C2.77329 -2.70983e-07 2.4375 0.335786 2.4375 0.75C2.4375 1.16421 2.77329 1.5 3.1875 1.5H9.1875V7.5C9.1875 7.91421 9.52329 8.25 9.9375 8.25C10.3517 8.25 10.6875 7.91421 10.6875 7.5L10.6875 0.75ZM0.75 9.9375L1.28033 10.4678L10.4678 1.28033L9.9375 0.75L9.40717 0.21967L0.21967 9.40717L0.75 9.9375Z"
-                              fill="currentColor"
-                            />
-                          </svg>
-                        </i>
-                      </a>
-                      <a
-                        class="tp-btn tp-btn-border-white text-white mb-10"
+                      <path
+                        d="M0.21967 9.40717C-0.0732232 9.70006 -0.0732232 10.1749 0.21967 10.4678C0.512563 10.7607 0.987437 10.7607 1.28033 10.4678L0.21967 9.40717ZM10.6875 0.75C10.6875 0.335786 10.3517 2.97145e-09 9.9375 1.50485e-07L3.1875 -2.70983e-07C2.77329 -2.70983e-07 2.4375 0.335786 2.4375 0.75C2.4375 1.16421 2.77329 1.5 3.1875 1.5H9.1875V7.5C9.1875 7.91421 9.52329 8.25 9.9375 8.25C10.3517 8.25 10.6875 7.91421 10.6875 7.5L10.6875 0.75ZM0.75 9.9375L1.28033 10.4678L10.4678 1.28033L9.9375 0.75L9.40717 0.21967L0.21967 9.40717L0.75 9.9375Z"
+                        fill="currentColor"></path>
+                    </svg>
+                    <svg
+                      width="11"
+                      height="11"
+                      viewBox="0 0 11 11"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M0.21967 9.40717C-0.0732232 9.70006 -0.0732232 10.1749 0.21967 10.4678C0.512563 10.7607 0.987437 10.7607 1.28033 10.4678L0.21967 9.40717ZM10.6875 0.75C10.6875 0.335786 10.3517 2.97145e-09 9.9375 1.50485e-07L3.1875 -2.70983e-07C2.77329 -2.70983e-07 2.4375 0.335786 2.4375 0.75C2.4375 1.16421 2.77329 1.5 3.1875 1.5H9.1875V7.5C9.1875 7.91421 9.52329 8.25 9.9375 8.25C10.3517 8.25 10.6875 7.91421 10.6875 7.5L10.6875 0.75ZM0.75 9.9375L1.28033 10.4678L10.4678 1.28033L9.9375 0.75L9.40717 0.21967L0.21967 9.40717L0.75 9.9375Z"
+                        fill="currentColor"></path>
+                    </svg>
+                  </i>
+                </a>
+                <!-- <a
+                        class=" pp-hero-btn  tp-btn tp-btn-border-white text-white mb-10"
                         href="https://calendly.com/100xlift/30min?background_color=0e0f11&text_color=ffffff&primary_color=b9fd50"
                         onclick="if (window.Calendly) { Calendly.initPopupWidget({ url: this.href }); return false; }"
                       >
@@ -149,64 +136,56 @@ import BaseLayout from "../layouts/BaseLayout.astro";
                             />
                           </svg>
                         </i>
-                      </a>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-xxl-2 col-xl-2 col-lg-5 col-md-5">
-                  <div class="ca-hero-service pp-hero-service mb-30 mr-80">
-                    <ul>
-                      <li>
-                        <a href="#"
-                          ><span class="explore-text" data-text="70+ Projects"
-                            >70+ Projects</span
-                          ></a
-                        >
-                      </li>
-                      <li>
-                        <a href="#"
-                          ><span
-                            class="explore-text"
-                            data-text="100% Satisfaction"
-                            >100% Satisfaction</span
-                          ></a
-                        >
-                      </li>
-                      <li>
-                        <a href="#"
-                          ><span
-                            class="explore-text"
-                            data-text="1-3 Week Delivery"
-                            >1-3 Week Delivery</span
-                          ></a
-                        >
-                      </li>
-                      <li>
-                        <a href="#"
-                          ><span
-                            class="explore-text"
-                            data-text="Free Consultation"
-                            >Free Consultation</span
-                          ></a
-                        >
-                      </li>
-                      <li>
-                        <a href="#"
-                          ><span
-                            class="explore-text"
-                            data-text="0 Question Return"
-                            >0 Question Return</span
-                          ></a
-                        >
-                      </li>
-                    </ul>
-                  </div>
-                </div>
+                      </a> -->
               </div>
             </div>
           </div>
+          <div class="col-xxl-2 col-xl-2 col-lg-5 col-md-5">
+            <div class="ca-hero-service pp-hero-service mb-30 mr-80">
+              <ul>
+                <li>
+                  <a href="#"
+                    ><span class="explore-text" data-text="200+ Projects"
+                      >200+ Projects</span
+                    ></a
+                  >
+                </li>
+                <li>
+                  <a href="#"
+                    ><span class="explore-text" data-text="100% Satisfaction"
+                      >100% Satisfaction</span
+                    ></a
+                  >
+                </li>
+                <li>
+                  <a href="#"
+                    ><span class="explore-text" data-text="1-3 Week Delivery"
+                      >1-3 Week Delivery</span
+                    ></a
+                  >
+                </li>
+                <li>
+                  <a href="#"
+                    ><span class="explore-text" data-text="Free Consultation"
+                      >Free Consultation</span
+                    ></a
+                  >
+                </li>
+                <li>
+                  <a href="#"
+                    ><span class="explore-text" data-text="0 Question Return"
+                      >0 Question Return</span
+                    ></a
+                  >
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 
-          <!-- <div class="tp-hero-area tp-title-middle-wrap tp-hero-spacing p-relative">
+    <!-- <div class="tp-hero-area tp-title-middle-wrap tp-hero-spacing p-relative">
                <div class="container">
                   <div class="tp-hero-content-wrap">
                      <div class="row">
@@ -407,70 +386,70 @@ import BaseLayout from "../layouts/BaseLayout.astro";
                   </div>
                </div>
             </div> -->
-          <!-- hero area end -->
+    <!-- hero area end -->
 
-          <!-- Industries Served Start -->
+    <!-- Industries Served Start -->
 
-          <div class="container">
-            <div class="row align-items-center mt-80">
-              <div class="col-lg-12">
-                <h2
-                  class="tp-section-title tp-ff-sequel-roman reveal-text mb-20 pt-3 pb-3"
-                >
-                  Industries served
-                </h2>
-              </div>
+    <div class="container">
+      <div class="row align-items-center mt-80">
+        <div class="col-lg-12">
+          <h2
+            class="tp-section-title tp-ff-sequel-roman reveal-text mb-20 pt-3 pb-3"
+          >
+            Industries served
+          </h2>
+        </div>
 
-              <div class="col-lg-12">
-                <div class="pp-porfolio-slider">
-                      <div class="swiper pp-slide-active">
-                        <div class="swiper-wrapper slide-transtion">
-                          <div class="swiper-slide">
-                            <span>Real Estate <span></span></span>
-                          </div>
-                          <div class="swiper-slide">
-                            <span>Clinics <span></span></span>
-                          </div>
-                          <div class="swiper-slide">
-                            <span>E-Commerce <span></span></span>
-                          </div>
-                          <div class="swiper-slide">
-                            <span>Education <span></span></span>
-                          </div>
-                          <div class="swiper-slide">
-                            <span>SaaS <span></span></span>
-                          </div>
-                          <div class="swiper-slide">
-                            <span>Restaurants <span></span></span>
-                          </div>
-                          <div class="swiper-slide">
-                            <span>Automative <span></span></span>
-                          </div>
-                          <div class="swiper-slide">
-                            <span>Beauty & Wellness <span></span></span>
-                          </div>
-                          <div class="swiper-slide">
-                            <span>Other Businesses <span></span></span>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
+        <div class="col-lg-12">
+          <div class="pp-porfolio-slider">
+            <div class="swiper pp-slide-active">
+              <div class="swiper-wrapper slide-transtion">
+                <div class="swiper-slide">
+                  <span>Real Estate <span></span></span>
+                </div>
+                <div class="swiper-slide">
+                  <span>Clinics <span></span></span>
+                </div>
+                <div class="swiper-slide">
+                  <span>E-Commerce <span></span></span>
+                </div>
+                <div class="swiper-slide">
+                  <span>Education <span></span></span>
+                </div>
+                <div class="swiper-slide">
+                  <span>SaaS <span></span></span>
+                </div>
+                <div class="swiper-slide">
+                  <span>Restaurants <span></span></span>
+                </div>
+                <div class="swiper-slide">
+                  <span>Automative <span></span></span>
+                </div>
+                <div class="swiper-slide">
+                  <span>Beauty & Wellness <span></span></span>
+                </div>
+                <div class="swiper-slide">
+                  <span>Other Businesses <span></span></span>
+                </div>
               </div>
             </div>
           </div>
+        </div>
+      </div>
+    </div>
 
-          <!-- Industries Served End -->
+    <!-- Industries Served End -->
 
-          <!-- technology slider start  -->
+    <!-- technology slider start  -->
 
-          <!-- <div class="swiper tp-hero-slider-active pt-20" id="heroSlider">
+    <!-- <div class="swiper tp-hero-slider-active pt-20" id="heroSlider">
             <div
               class="swiper-wrapper slide-transtion"
               id="heroSliderWrapper"
             ></div>
           </div> -->
 
-          <!-- <script is:inline>
+    <!-- <script is:inline>
             // Prevent double-init issues
             let heroSwiper = null;
 
@@ -582,10 +561,231 @@ import BaseLayout from "../layouts/BaseLayout.astro";
             window.addEventListener("load", boot);
           </script> -->
 
-          <!-- technology slider end  -->
+    <!-- technology slider end  -->
 
-          <!-- portfolio-area-start -->
-          <div
+    <!-- mp-portfolio-area-start -->
+    <div class="mg-portfolio-area pt-145 pb-65">
+      <div class="container-fluid container-1886">
+        <div class="row">
+          <!-- <div class="col-lg-5 order-2 order-md-1">
+                        <div class="mg-portfolio-item-wrap ml-130 mb-40">
+                           <div class="mg-portfolio-item anim-zoomin-wrap mb-55">
+                              <div class="mg-portfolio-thumb anim-zoomin not-hide-cursor" data-cursor="View<br>Demo">
+                                 <a class="cursor-hide" href="portfolio-details-dark.html">
+                                    <img class="w-100" src="https://www.airforshare.com/files/HsstUW.png" alt="">
+                                 </a>
+                              </div>
+                              <div class="mg-portfolio-content cs-portfolio-content d-flex align-items-center flex-wrap justify-content-between">
+                                 <h3 class="cs-portfolio-title tp-title-anim fix mr-20 tp-ff-sequel-semi-bold">
+                                    <a href="portfolio-details-dark.html" class="tp-title-text">Epic Strategy App</a>
+                                 </h3>
+                                 <div class="cs-portfolio-tag">
+                                    <ul>
+                                       <li><a href="#">Branding</a></li>
+                                       <li><a href="#">Web Design</a></li>
+                                       <li><a href="#">Web development</a></li>
+                                    </ul>
+                                 </div>
+                              </div>
+                           </div>
+                           <div class="mg-portfolio-item anim-zoomin-wrap mb-55">
+                              <div class="mg-portfolio-thumb anim-zoomin not-hide-cursor" data-cursor="View<br>Demo">
+                                 <a class="cursor-hide" href="portfolio-details-dark.html">
+                                    <img class="w-100" src="assets/img/portfolio/mp/portfolio-2.webp" alt="">
+                                 </a>
+                              </div>
+                              <div class="mg-portfolio-content cs-portfolio-content d-flex align-items-center flex-wrap justify-content-between">
+                                 <h3 class="cs-portfolio-title tp-title-anim fix mr-20 tp-ff-sequel-semi-bold">
+                                    <a href="portfolio-details-dark.html" class="tp-title-text">Polygona Arct Design</a>
+                                 </h3>
+                                 <div class="cs-portfolio-tag">
+                                    <ul>
+                                       <li><a href="#">Branding</a></li>
+                                       <li><a href="#">Web Design</a></li>
+                                       <li><a href="#">Web development</a></li>
+                                    </ul>
+                                 </div>
+                              </div>
+                           </div>
+                           <div class="mg-portfolio-item anim-zoomin-wrap mb-55">
+                              <div class="mg-portfolio-thumb anim-zoomin not-hide-cursor" data-cursor="View<br>Demo">
+                                 <a class="cursor-hide" href="portfolio-details-dark.html">
+                                    <img class="w-100" src="assets/img/portfolio/mp/portfolio-3.webp" alt="">
+                                 </a>
+                              </div>
+                              <div class="mg-portfolio-content cs-portfolio-content d-flex align-items-center flex-wrap justify-content-between">
+                                 <h3 class="cs-portfolio-title tp-title-anim fix mr-20 tp-ff-sequel-semi-bold">
+                                    <a href="portfolio-details-dark.html" class="tp-title-text">Built For Success</a>
+                                 </h3>
+                                 <div class="cs-portfolio-tag">
+                                    <ul>
+                                       <li><a href="#">Branding</a></li>
+                                       <li><a href="#">Web Design</a></li>
+                                       <li><a href="#">Web development</a></li>
+                                    </ul>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div> -->
+          <div class="col-lg-5">
+            <div class="mg-portfolio-title-wrap mg-portfolio-pin mb-30">
+              <h2 class="ca-section-title fs-100 lh-1 mb-30 reveal-text">
+                Featured projects
+              </h2>
+              <div class="tp_fade_anim" data-delay=".3">
+                <!-- <p class="mg-portfolio-dec mb-50">Welcome to 100xLift, where bold design meets cutting-edge tech to elevate your brand 100XLIFT online. We're fueled by a passion for creativity that scales.</p> -->
+              </div>
+              <div
+                class="tp-btn-group tp_fade_anim"
+                data-delay=".4"
+                data-fade-from="bottom"
+                data-ease="bounce"
+              >
+                <a class="tp-btn-circle" href="/portfolio">
+                  <svg
+                    width="14"
+                    height="14"
+                    viewBox="0 0 14 14"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      clip-rule="evenodd"
+                      d="M2.41379 3.30208C5.97452 3.05821 10.6092 1.55558 14 0C12.4438 3.39014 10.9406 8.02425 10.6973 11.585L8.35765 6.59331L1.14783 13.8037C1.02165 13.9295 0.850656 14.0001 0.672431 14C0.539461 14 0.409486 13.9605 0.298934 13.8866C0.188382 13.8128 0.102217 13.7077 0.0513353 13.5849C0.000453949 13.462 -0.0128613 13.3269 0.013072 13.1965C0.0390053 13.066 0.103024 12.9462 0.197034 12.8522L7.40683 5.64241L2.41379 3.30208Z"
+                      fill="currentColor"></path>
+                  </svg>
+                </a>
+                <a class="tp-btn z-index-1" href="/portfolio">All Projects</a>
+                <a class="tp-btn-circle" href="/portfolio">
+                  <svg
+                    width="14"
+                    height="14"
+                    viewBox="0 0 14 14"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      clip-rule="evenodd"
+                      d="M2.41379 3.30208C5.97452 3.05821 10.6092 1.55558 14 0C12.4438 3.39014 10.9406 8.02425 10.6973 11.585L8.35765 6.59331L1.14783 13.8037C1.02165 13.9295 0.850656 14.0001 0.672431 14C0.539461 14 0.409486 13.9605 0.298934 13.8866C0.188382 13.8128 0.102217 13.7077 0.0513353 13.5849C0.000453949 13.462 -0.0128613 13.3269 0.013072 13.1965C0.0390053 13.066 0.103024 12.9462 0.197034 12.8522L7.40683 5.64241L2.41379 3.30208Z"
+                      fill="currentColor"></path>
+                  </svg>
+                </a>
+              </div>
+            </div>
+          </div>
+          <!-- <div class="col-lg-7 ">
+                        <div class="mg-portfolio-item-wrap ml-130 mb-40">
+                           <div class="mg-portfolio-item anim-zoomin-wrap mb-55">
+                              <div class="mg-portfolio-thumb anim-zoomin not-hide-cursor" data-cursor="View<br>Demo">
+                                 <a class="cursor-hide" href="portfolio-details-dark.html">
+                                    <img class="w-100" src="assets/img/portfolio/mp/portfolio-5.webp" alt="">
+                                 </a>
+                              </div>
+                              <div class="mg-portfolio-content cs-portfolio-content d-flex align-items-center flex-wrap justify-content-between">
+                                 <h3 class="cs-portfolio-title tp-title-anim fix mr-20 tp-ff-sequel-semi-bold">
+                                    <a href="portfolio-details-dark.html" class="tp-title-text">PPC DESIGN</a>
+                                 </h3>
+                                 <div class="cs-portfolio-tag">
+                                    <ul>
+                                       <li><a href="#">UI/UX</a></li>
+                                       <li><a href="#">CMS DEVELOPMENT</a></li>
+                                    </ul>
+                                 </div>
+                              </div>
+                           </div>
+                           <div class="mg-portfolio-item anim-zoomin-wrap mb-55">
+                              <div class="mg-portfolio-thumb anim-zoomin not-hide-cursor" data-cursor="View<br>Demo">
+                                 <a class="cursor-hide" href="portfolio-details-dark.html">
+                                    <img class="w-100" src="assets/img/portfolio/mp/portfolio-2.webp" alt="">
+                                 </a>
+                              </div>
+                              <div class="mg-portfolio-content cs-portfolio-content d-flex align-items-center flex-wrap justify-content-between">
+                                 <h3 class="cs-portfolio-title tp-title-anim fix mr-20 tp-ff-sequel-semi-bold">
+                                    <a href="portfolio-details-dark.html" class="tp-title-text">REAL STEEL</a>
+                                 </h3>
+                                 <div class="cs-portfolio-tag">
+                                    <ul>
+                                       <li><a href="#">CMS DEVELOPMENT</a></li>
+                                       <li><a href="#">WEB DESIGN</a></li>
+                                    </ul>
+                                 </div>
+                              </div>
+                           </div>
+                           <div class="mg-portfolio-item anim-zoomin-wrap mb-55">
+                              <div class="mg-portfolio-thumb anim-zoomin not-hide-cursor" data-cursor="View<br>Demo">
+                                 <a class="cursor-hide" href="portfolio-details-dark.html">
+                                    <img class="w-100" src="assets/img/portfolio/mp/portfolio-3.webp" alt="">
+                                 </a>
+                              </div>
+                              <div class="mg-portfolio-content cs-portfolio-content d-flex align-items-center flex-wrap justify-content-between">
+                                 <h3 class="cs-portfolio-title tp-title-anim fix mr-20 tp-ff-sequel-semi-bold">
+                                    <a href="portfolio-details-dark.html" class="tp-title-text">NEO LEDGE</a>
+                                 </h3>
+                                 <div class="cs-portfolio-tag">
+                                    <ul>
+                                       <li><a href="#">UI/UX</a></li>
+                                       <li><a href="#">WEB DESIGN</a></li>
+                                       <li><a href="#">CMS DEVELOPMENT</a></li>
+                                    </ul>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div> -->
+
+          <div class="col-lg-7">
+            <div class="mg-portfolio-item-wrap ml-130 mb-40">
+              {
+                randomProjects.map((p) => (
+                  <div class="mg-portfolio-item anim-zoomin-wrap mb-55">
+                    <div
+                      class="mg-portfolio-thumb anim-zoomin not-hide-cursor"
+                      data-cursor="View<br>Demo"
+                    >
+                      <a class="cursor-hide" href={`/portfolio/${p.slug}`}>
+                        <img
+                          class="w-100"
+                          src={p.data.cardImage}
+                          alt={p.data.title}
+                        />
+                      </a>
+                    </div>
+
+                    <div class="mg-portfolio-content cs-portfolio-content d-flex align-items-center flex-wrap justify-content-between">
+                      <h3 class="cs-portfolio-title tp-title-anim fix mr-20 tp-ff-sequel-semi-bold">
+                        <a
+                          href={`/portfolio/${p.slug}`}
+                          class="tp-title-text"
+                        >
+                          {p.data.title}
+                        </a>
+                      </h3>
+
+                      <div class="cs-portfolio-tag">
+                        <ul>
+                          {p.data.tags.map((t) => (
+                            <li>
+                              <a href="#">{t}</a>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                ))
+              }
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- mg-portfolio-area-end -->
+
+    <!-- portfolio-area-start -->
+    <!-- <div
             class="mp-portfolio-area tp-animate-tab pt-145 pb-145"
             id="portfolio"
           >
@@ -643,26 +843,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
                         </svg>
                       </a>
                     </div>
-                  <!-- <div class="mp-portfolio-tab text-lg-end mt-20">
-                    <ul role="tablist">
-                      <li class="nav-tab-item" role="presentation">
-                        <a href="#web-dev" class="active" data-bs-toggle="tab"
-                          >Web Dev</a
-                        >
-                      </li>
-                      <li class="nav-tab-item" role="presentation">
-                        <a href="#cms-dev" data-bs-toggle="tab"
-                          >CMS Development</a
-                        >
-                      </li>
-                      <li class="nav-tab-item" role="presentation">
-                        <a href="#uiux" data-bs-toggle="tab">UI/UX Designing</a>
-                      </li>
-                      <li class="nav-tab-item" role="presentation">
-                        <a href="#seo" data-bs-toggle="tab">SEO</a>
-                      </li>
-                    </ul>
-                  </div> -->
+                  
                 </div>
                 <div class="col-12">
                   <div class="tab-content p-relative">
@@ -722,43 +903,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
                               </div>
                             </div>
 
-                            <!-- Popup Modal for portfolio section start  -->
-                            <!-- <div class="modal fade mp-portfolio-modal" id="portfolioModal" tabindex="-1">
-                              <div class="modal-dialog modal-xl modal-dialog-centered">
-                                <div class="modal-content">
-
-                                  <button type="button" class="btn-close modal-close" data-bs-dismiss="modal"></button>
-
-                                  <div class="row g-0 align-items-center">
-
-                                    <div class="col-lg-6">
-                                      <div class="modal-img-wrap">
-                                        <img id="modalImage" src="" alt="">
-                                      </div>
-                                    </div>
-
-                                    <div class="col-lg-6">
-                                      <div class="modal-content-wrap">
-                                        <h2 id="modalTitle"></h2>
-                                        <p class="modal-category" id="modalCategory"></p>
-
-                                        <div class="modal-tags" id="modalTags"></div>
-
-                                        <p class="modal-desc" id="modalDesc"></p>
-
-                                        <a id="modalLink" href="#" target="_blank" class="btn visit-btn">
-                                          Visit Project →
-                                        </a>
-                                      </div>
-                                    </div>
-
-                                  </div>
-
-                                </div>
-                              </div>
-                            </div> -->
-
-                            <!-- Popup Modal for portfolio section end  -->
+                         
 
                             <div class="swiper mp-portfolio-slider">
                               <div class="swiper-wrapper">
@@ -2322,124 +2467,85 @@ import BaseLayout from "../layouts/BaseLayout.astro";
                 </div>
               </div>
             </div>
-          </div>
-          <!-- portfolio-area-end -->
+          </div> -->
+    <!-- portfolio-area-end -->
 
-          <!-- Lead Loop Start -->
+    <!-- Lead Loop Start -->
 
-          <div class="container">
-            <div class="row justify-content-center">
-              <div
-                class="col-md-8 col-11"
-                style="
-                  background-color: var(--tp-theme-primary);
-                  border-radius: 20px;
-                "
-              >
-                <h2
-                  class="tp-section-title tp-ff-sequel-roman reveal-text mb-20 p-3"
-                  style="
-                    border-bottom-right-radius: 20px;
-                    border-bottom-left-radius: 20px;
-                    background-color: #0e0f11;
-                  "
-                >
-                  Want quick wins? <br />
-                  Get a free audit in 24 hours.
-                </h2>
-                <span class="tp-about-btn-transform d-inline-block ml-20">
-                  <a class="tp-btn tp-ff-inter" href="/audit" target="_blank">
-                    <span>
-                      <span class="text-1">GET IT NOW</span>
-                      <span class="text-2">GET IT NOW</span>
-                    </span>
-                    <i>
-                      <svg
-                        width="11"
-                        height="11"
-                        viewBox="0 0 11 11"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path
-                          d="M0.21967 9.40717C-0.0732232 9.70006 -0.0732232 10.1749 0.21967 10.4678C0.512563 10.7607 0.987437 10.7607 1.28033 10.4678L0.21967 9.40717ZM10.6875 0.75C10.6875 0.335786 10.3517 2.97145e-09 9.9375 1.50485e-07L3.1875 -2.70983e-07C2.77329 -2.70983e-07 2.4375 0.335786 2.4375 0.75C2.4375 1.16421 2.77329 1.5 3.1875 1.5H9.1875V7.5C9.1875 7.91421 9.52329 8.25 9.9375 8.25C10.3517 8.25 10.6875 7.91421 10.6875 7.5L10.6875 0.75ZM0.75 9.9375L1.28033 10.4678L10.4678 1.28033L9.9375 0.75L9.40717 0.21967L0.21967 9.40717L0.75 9.9375Z"
-                          fill="currentColor"
-                        />
-                      </svg>
-                      <svg
-                        width="11"
-                        height="11"
-                        viewBox="0 0 11 11"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path
-                          d="M0.21967 9.40717C-0.0732232 9.70006 -0.0732232 10.1749 0.21967 10.4678C0.512563 10.7607 0.987437 10.7607 1.28033 10.4678L0.21967 9.40717ZM10.6875 0.75C10.6875 0.335786 10.3517 2.97145e-09 9.9375 1.50485e-07L3.1875 -2.70983e-07C2.77329 -2.70983e-07 2.4375 0.335786 2.4375 0.75C2.4375 1.16421 2.77329 1.5 3.1875 1.5H9.1875V7.5C9.1875 7.91421 9.52329 8.25 9.9375 8.25C10.3517 8.25 10.6875 7.91421 10.6875 7.5L10.6875 0.75ZM0.75 9.9375L1.28033 10.4678L10.4678 1.28033L9.9375 0.75L9.40717 0.21967L0.21967 9.40717L0.75 9.9375Z"
-                          fill="currentColor"
-                        />
-                      </svg>
-                    </i>
-                  </a>
+    <LeadLoop />
+    <!-- Lead Loop End -->
+
+    <!-- about-area-start -->
+    <div class="tp-about-area pt-50" id="why-us">
+      <div class="container">
+        <div class="tp-about-border mt-20 pt-55">
+          <div class="row">
+            <div class="col-lg-4">
+              <div class="tp-about-subtitle-wrap mb-30">
+                <span class="tp-about-subtitle">
+                  <svg
+                    width="23"
+                    height="20"
+                    viewBox="0 0 23 20"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M1 1V13.8182H20.7232"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"></path>
+                    <path
+                      d="M23 13.8182L15.0349 19.1718L15.0349 8.46456L23 13.8182Z"
+                      fill="currentColor"></path>
+                  </svg>
+                  Why Us
                 </span>
               </div>
             </div>
-          </div>
+            <div class="col-xxl-8 col-xl-9">
+              <div class="pp-about-content">
+                <h2
+                  class="pp-about-title mb-35 tp_fade_anim reveal-text"
+                  data-delay=".3"
+                >
+                  <a href="#">Growth-Driven</a> Digital Solutions
+                </h2>
+                <div class="pp-about-dec-wrap ml-115">
+                  <div class="tp_fade_anim" data-delay=".5">
+                    <p class="pp-about-dec mb-50">
+                      100xLift is a results-driven digital agency providing
+                      end-to-end solutions for businesses that want to grow,
+                      scale, and stand out online. Founded in 2025, we’ve
+                      already delivered 200+ projects in a short span of time,
+                      helping brands turn ideas into high-performing digital
+                      products.<br /><br />
 
-          <!-- Lead Loop End -->
+                      We work with startups, growing companies, and established
+                      businesses that need more than just a website. Our focus
+                      is on building scalable digital systems that drive real
+                      business results, not just good-looking designs.<br /><br
+                      />
 
-          <!-- about-area-start -->
-          <div class="tp-about-area pt-50" id="why-us">
-            <div class="container">
-              <div class="tp-about-border mt-20 pt-55">
-                <div class="row">
-                  <div class="col-lg-4">
-                    <div class="tp-about-subtitle-wrap mb-30">
-                      <span class="tp-about-subtitle">
-                        <svg
-                          width="23"
-                          height="20"
-                          viewBox="0 0 23 20"
-                          fill="none"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path
-                            d="M1 1V13.8182H20.7232"
-                            stroke="currentColor"
-                            stroke-width="2"
-                            stroke-linecap="round"
-                          />
-                          <path
-                            d="M23 13.8182L15.0349 19.1718L15.0349 8.46456L23 13.8182Z"
-                            fill="currentColor"
-                          />
-                        </svg>
-                        Why Us
-                      </span>
-                    </div>
+                      At 100xLift, strategy comes first. We take the time to
+                      understand your goals, your users, and your market, then
+                      design and build solutions that are fast,
+                      conversion-focused, and built for long-term growth. We
+                      don’t just execute projects, we partner with brands to
+                      help them move forward with clarity and confidence.
+                    </p>
                   </div>
-                  <div class="col-xxl-8 col-xl-9">
-                        <div class="pp-about-content">
-                           <h2 class="pp-about-title mb-35 tp_fade_anim reveal-text" data-delay=".3"><a href="#">Growth-Driven</a> Digital
-                              Solutions</h2>
-                           <div class="pp-about-dec-wrap ml-115">
-                              <div class="tp_fade_anim" data-delay=".5">
-                                 <p class="pp-about-dec mb-50">100xLift is a results-driven digital agency providing end-to-end solutions for businesses that want to grow, scale, and stand out online. Founded in 2025, we’ve already delivered 200+ projects in a short span of time, helping brands turn ideas into high-performing digital products.<br /><br />
-                                  
-                                  We work with startups, growing companies, and established businesses that need more than just a website. Our focus is on building scalable digital systems that drive real business results — not just good-looking designs.<br /><br />
-                                  
-                                  At 100xLift, strategy comes first. We take the time to understand your goals, your users, and your market, then design and build solutions that are fast, conversion-focused, and built for long-term growth. We don’t just execute projects — we partner with brands to help them move forward with clarity and confidence.</p>
-                              </div>
-                           </div>
-                        </div>
-                     </div>
                 </div>
               </div>
             </div>
           </div>
-          <!-- about-area-end -->
+        </div>
+      </div>
+    </div>
+    <!-- about-area-end -->
 
-          <!-- services-area-start -->
-          <div class="pp-porfolio-area p-relative fix pt-120 pb-120 mb-50" id="services">
+    <!-- services-area-start -->
+    <!-- <div class="pp-porfolio-area p-relative fix pt-120 pb-120 mb-50" id="services">
             <div class="pp-porfolio-bg-wrap">
               <div id="pp-porfolio-bg-box" class="pp-porfolio-bg-1">
                 <img
@@ -2514,152 +2620,331 @@ import BaseLayout from "../layouts/BaseLayout.astro";
                 </div>
               </div>
             </div>
-          </div>
-          <!-- services-area-end -->
+          </div> -->
+    <!-- services-area-end -->
 
-          <div class="ca-testimonial-spacing" data-bg-color="#1a1b1e" id="testimonials">
-            <!-- ca-testimonial-area-start -->
-            <div class="ca-testimonial-area pt-135 pb-155">
-              <div class="container">
-                <div class="row justify-content-center">
-                  <div class="col-xl-5">
-                    <div class="ca-testimonial-title-wrap mb-30">
-                      <div class="ca-testimonial-review mb-15">
-                        <h3
-                          class="ca-testimonial-ratings tp-ff-inter p-relative reveal-text"
-                        >
-                          4.8
-                          <svg
-                            width="18"
-                            height="17"
-                            viewBox="0 0 18 17"
-                            fill="none"
-                            xmlns="http://www.w3.org/2000/svg"
-                          >
-                            <path
-                              d="M8.55951 0L10.5801 6.21885H17.119L11.829 10.0623L13.8496 16.2812L8.55951 12.4377L3.26944 16.2812L5.29007 10.0623L9.53674e-07 6.21885H6.53888L8.55951 0Z"
-                              fill="#F9A811"
-                            />
-                          </svg>
-                        </h3>
-                        <span class="ca-testimonial-review-count"
-                          >86+ reviews</span
-                        >
-                      </div>
-                      <h2
-                        class="ca-section-title fs-52 text-white mb-115 reveal-text"
-                      >
-                        Helping world-class<br />
-                        company by creative<br />
-                        design & development.
-                      </h2>
-                      <div class="ca-testimonial-navigation">
-                        <span class="ca-testimonial-arrow-prev"
-                          ><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <line x1="19" y1="12" x2="5" y2="12"/>
-                            <polyline points="12 19 5 12 12 5"/>
-                          </svg>
-                        </span>
-                        <span class="ca-testimonial-arrow-next"
-                          ><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <line x1="5" y1="12" x2="19" y2="12"/>
-                            <polyline points="12 5 19 12 12 19"/>
-                          </svg>
-                        </span>
-                      </div>
+    <!-- services-area-start -->
+    <div id="services" class="about-me-resume-area pt-145 pb-160">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-2">
+            <div
+              class="tp-about-subtitle-wrap mb-20 mt-15 tp_fade_anim"
+              data-delay=".3"
+            >
+              <span class="tp-section-subtitle text-uppercase">Specialties</span
+              >
+            </div>
+          </div>
+          <div class="col-lg-10">
+            <div
+              class="about-me-resume-content mb-20 tp_fade_anim"
+              data-delay=".5"
+            >
+              <h2 class="tp-section-title reveal-text">
+                At <span style="color:#B9FD50 !important;">100XLIFT</span>, we
+                don’t just<br />
+                build website or campaigns<br />
+                we craft purpose.
+              </h2>
+            </div>
+          </div>
+          <div class="col-12">
+            <div class="inner-service-2-wrap about-me-resume-wrap mt-50">
+              <div class="about-me-resume-item tp_fade_anim" data-delay=".3">
+                <div class="row">
+                  <div class="col-lg-2">
+                    <div class="about-me-resume-date mb-30">
+                      <span>2019 - 2026</span>
                     </div>
                   </div>
-                  <div class="col-xxl-6 col-xl-7">
-                    <div class="p-relative">
-                      <span class="ca-testimonial-bg-transparent"></span>
-                      <div class="ca-testimonial-slider-wrap p-relative mb-30">
-                        <span class="ca-testimonial-pagination"></span>
-                        <div class="swiper ca-testimonial-slider-active">
-                          <div class="swiper-wrapper">
-                            <div class="swiper-slide">
-                              <div class="ca-testimonial-item text-center">
-                                <span class="ca-testimonial-reviewed d-block"
-                                  >reviewed On</span
-                                >
-                                <img
-                                  class="mb-15"
-                                  src="/assets/img/team/membar.jpg"
-                                  alt=""
-                                />
-                                <p class="ca-testimonial-comment mb-30">
-                                  “ 100xLift completely transformed our website and digital strategy. Their team was professional, responsive, and delivered results beyond our expectations. Our leads have increased by 40% since launch! ”
-                                </p>
-                                <div class="ca-testimonial-author-name">
-                                  <b>Sarah M.</b>
-                                  <span class="d-block"
-                                    >Marketing Director, FinTech Startup</span
-                                  >
-                                </div>
-                              </div>
-                            </div>
-                            <div class="swiper-slide">
-                              <div class="ca-testimonial-item text-center">
-                                <span class="ca-testimonial-reviewed d-block"
-                                  >reviewed On</span
-                                >
-                                <img
-                                  class="mb-30"
-                                  src="/assets/img/team/membar-2.jpg"
-                                  alt=""
-                                />
-                                <p class="ca-testimonial-comment mb-30">
-                                  “ Working with 100xLift was a game-changer. They understood our vision and built a solution that not only looks amazing but also converts. Highly recommended for any business looking to grow. ”
-                                </p>
-                                <div class="ca-testimonial-author-name">
-                                  <b>James K.</b>
-                                  <span class="d-block"
-                                    >CEO, E-commerce Brand</span
-                                  >
-                                </div>
-                              </div>
-                            </div>
-                            <div class="swiper-slide">
-                              <div class="ca-testimonial-item text-center">
-                                <span class="ca-testimonial-reviewed d-block"
-                                  >reviewed On</span
-                                >
-                                <img
-                                  class="mb-30"
-                                  src="/assets/img/team/membar-3.jpg"
-                                  alt=""
-                                />
-                                <p class="ca-testimonial-comment mb-30">
-                                  “ From day one, their team took the time to understand our needs and delivered a scalable solution that fit perfectly with our workflow. The project was smooth, on time, and on budget. ”
-                                </p>
-                                <div class="ca-testimonial-author-name">
-                                  <b>Priya R.</b>
-                                  <span class="d-block"
-                                    >Operations Manager, SaaS Company</span
-                                  >
-                                </div>
-                              </div>
-                            </div>
-                            <div class="swiper-slide">
-                              <div class="ca-testimonial-item text-center">
-                                <span class="ca-testimonial-reviewed d-block"
-                                  >reviewed On</span
-                                >
-                                <img
-                                  class="mb-30"
-                                  src="/assets/img/team/membar-4.jpg"
-                                  alt=""
-                                />
-                                <p class="ca-testimonial-comment mb-30">
-                                  “ I’ve worked with several agencies before, but 100xLift stands out. Their attention to detail, communication, and problem-solving skills made the process seamless. Our website performance and traffic have skyrocketed. ”
-                                </p>
-                                <div class="ca-testimonial-author-name">
-                                  <b>Philip A.</b>
-                                  <span class="d-block"
-                                    >Founder, Online Education Platform</span
-                                  >
-                                </div>
-                              </div>
-                            </div>
+                  <div class="col-lg-5">
+                    <div class="about-me-resume-info ml-40 mb-30">
+                      <h3 class="about-me-resume-title tp-ff-sequel-semi-bold">
+                        <a href="service-details-dark.html"
+                          >Web Design <span class="middle-text-change-color"
+                            >&</span
+                          ><br /> Development</a>
+                      </h3>
+                    </div>
+                  </div>
+                  <div class="col-lg-5">
+                    <div class="about-me-resume-dec ml-50 mb-30">
+                      <p>
+                        Whether you need a high-performing website, compelling
+                        visuals for your brand, or intuitive UI/UX for your
+                        product, our team designs and builds digital experiences
+                        that look sharp, work flawlessly, and drive real
+                        business results.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="about-me-resume-item tp_fade_anim" data-delay=".3">
+                <div class="row">
+                  <div class="col-lg-2">
+                    <div class="about-me-resume-date mb-30">
+                      <span>2019 - 2026</span>
+                    </div>
+                  </div>
+                  <div class="col-lg-5">
+                    <div class="about-me-resume-info ml-40 mb-30">
+                      <h3 class="about-me-resume-title tp-ff-sequel-semi-bold">
+                        <a href="service-details-dark.html"
+                          >CMS<br />Development</a>
+                      </h3>
+                    </div>
+                  </div>
+                  <div class="col-lg-5">
+                    <div class="about-me-resume-dec ml-50 mb-30">
+                      <p>
+                        We build flexible, scalable CMS solutions across
+                        WordPress, Shopify, Webflow, and custom platforms,
+                        giving you full control over your content with strong
+                        performance, security, and a seamless user experience
+                        designed to grow with your business.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="about-me-resume-item tp_fade_anim" data-delay=".3">
+                <div class="row">
+                  <div class="col-lg-2">
+                    <div class="about-me-resume-date mb-30">
+                      <span>2022 - 2026</span>
+                    </div>
+                  </div>
+                  <div class="col-lg-5">
+                    <div class="about-me-resume-info ml-40 mb-30">
+                      <h3 class="about-me-resume-title tp-ff-sequel-semi-bold">
+                        <a href="service-details-dark.html"
+                          >SEO <span class="middle-text-change-color">&</span
+                          ><br /> Content Strategy</a>
+                      </h3>
+                    </div>
+                  </div>
+                  <div class="col-lg-5">
+                    <div class="about-me-resume-dec ml-50 mb-30">
+                      <p>
+                        We develop data-driven SEO and content strategies that
+                        improve search visibility, attract the right audience,
+                        and turn traffic into measurable business growth. From
+                        technical SEO and keyword research to content planning
+                        and optimization, every decision is made to support
+                        long-term rankings and sustainable results.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="about-me-resume-item tp_fade_anim" data-delay=".3">
+                <div class="row">
+                  <div class="col-lg-2">
+                    <div class="about-me-resume-date mb-30">
+                      <span>2025 - 2026</span>
+                    </div>
+                  </div>
+                  <div class="col-lg-5">
+                    <div class="about-me-resume-info ml-40 mb-30">
+                      <h3 class="about-me-resume-title tp-ff-sequel-semi-bold">
+                        <a href="service-details-dark.html"
+                          >Workflow <br /> Automation</a>
+                      </h3>
+                    </div>
+                  </div>
+                  <div class="col-lg-5">
+                    <div class="about-me-resume-dec ml-50 mb-30">
+                      <p>
+                        We design and implement workflow automation that removes
+                        manual work, reduces errors, and keeps your operations
+                        running efficiently. By connecting your tools, data, and
+                        processes, we build reliable systems that scale with
+                        your business and free your team to focus on
+                        higher-value work.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Services-area-end -->
+
+    <div
+      class="ca-testimonial-spacing"
+      data-bg-color="#1a1b1e"
+      id="testimonials"
+    >
+      <!-- ca-testimonial-area-start -->
+      <div class="ca-testimonial-area pt-135 pb-155">
+        <div class="container">
+          <div class="row justify-content-center">
+            <div class="col-xl-5">
+              <div class="ca-testimonial-title-wrap mb-30">
+                <div class="ca-testimonial-review mb-15">
+                  <h3
+                    class="ca-testimonial-ratings tp-ff-inter p-relative reveal-text"
+                  >
+                    5.00
+                    <svg
+                      width="18"
+                      height="17"
+                      viewBox="0 0 18 17"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M8.55951 0L10.5801 6.21885H17.119L11.829 10.0623L13.8496 16.2812L8.55951 12.4377L3.26944 16.2812L5.29007 10.0623L9.53674e-07 6.21885H6.53888L8.55951 0Z"
+                        fill="#F9A811"></path>
+                    </svg>
+                  </h3>
+                  <span class="ca-testimonial-review-count">20+ reviews</span>
+                </div>
+                <h2
+                  class="ca-section-title fs-52 text-white mb-115 reveal-text"
+                >
+                  Helping growing businesses through thoughtful design and
+                  reliable development.
+                </h2>
+                <div class="ca-testimonial-navigation">
+                  <span class="ca-testimonial-arrow-prev"
+                    ><svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      fill="none"
+                      stroke="white"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <line x1="19" y1="12" x2="5" y2="12"></line>
+                      <polyline points="12 19 5 12 12 5"></polyline>
+                    </svg>
+                  </span>
+                  <span class="ca-testimonial-arrow-next"
+                    ><svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      fill="none"
+                      stroke="white"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <line x1="5" y1="12" x2="19" y2="12"></line>
+                      <polyline points="12 5 19 12 12 19"></polyline>
+                    </svg>
+                  </span>
+                </div>
+              </div>
+            </div>
+            <div class="col-xxl-6 col-xl-7">
+              <div class="p-relative">
+                <span class="ca-testimonial-bg-transparent"></span>
+                <div class="ca-testimonial-slider-wrap p-relative mb-30">
+                  <span class="ca-testimonial-pagination"></span>
+                  <div class="swiper ca-testimonial-slider-active">
+                    <div class="swiper-wrapper">
+                      <div class="swiper-slide">
+                        <div class="ca-testimonial-item text-center">
+                          <span class="ca-testimonial-reviewed d-block"
+                            >reviewed On</span
+                          >
+                          <img
+                            class="mb-15"
+                            src="/assets/img/team/membar.jpg"
+                            alt=""
+                          />
+                          <p class="ca-testimonial-comment mb-30">
+                            “ 100xLift completely transformed our website and
+                            digital strategy. Their team was professional,
+                            responsive, and delivered results beyond our
+                            expectations. Our leads have increased by 40% since
+                            launch! ”
+                          </p>
+                          <div class="ca-testimonial-author-name">
+                            <b>Sarah M.</b>
+                            <span class="d-block"
+                              >Marketing Director, FinTech Startup</span
+                            >
+                          </div>
+                        </div>
+                      </div>
+                      <div class="swiper-slide">
+                        <div class="ca-testimonial-item text-center">
+                          <span class="ca-testimonial-reviewed d-block"
+                            >reviewed On</span
+                          >
+                          <img
+                            class="mb-30"
+                            src="/assets/img/team/membar-2.jpg"
+                            alt=""
+                          />
+                          <p class="ca-testimonial-comment mb-30">
+                            “ Working with 100xLift was a game-changer. They
+                            understood our vision and built a solution that not
+                            only looks amazing but also converts. Highly
+                            recommended for any business looking to grow. ”
+                          </p>
+                          <div class="ca-testimonial-author-name">
+                            <b>James K.</b>
+                            <span class="d-block">CEO, E-commerce Brand</span>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="swiper-slide">
+                        <div class="ca-testimonial-item text-center">
+                          <span class="ca-testimonial-reviewed d-block"
+                            >reviewed On</span
+                          >
+                          <img
+                            class="mb-30"
+                            src="/assets/img/team/membar-3.jpg"
+                            alt=""
+                          />
+                          <p class="ca-testimonial-comment mb-30">
+                            “ From day one, their team took the time to
+                            understand our needs and delivered a scalable
+                            solution that fit perfectly with our workflow. The
+                            project was smooth, on time, and on budget. ”
+                          </p>
+                          <div class="ca-testimonial-author-name">
+                            <b>Priya R.</b>
+                            <span class="d-block"
+                              >Operations Manager, SaaS Company</span
+                            >
+                          </div>
+                        </div>
+                      </div>
+                      <div class="swiper-slide">
+                        <div class="ca-testimonial-item text-center">
+                          <span class="ca-testimonial-reviewed d-block"
+                            >reviewed On</span
+                          >
+                          <img
+                            class="mb-30"
+                            src="/assets/img/team/membar-4.jpg"
+                            alt=""
+                          />
+                          <p class="ca-testimonial-comment mb-30">
+                            “ I’ve worked with several agencies before, but
+                            100xLift stands out. Their attention to detail,
+                            communication, and problem-solving skills made the
+                            process seamless. Our website performance and
+                            traffic have skyrocketed. ”
+                          </p>
+                          <div class="ca-testimonial-author-name">
+                            <b>Philip A.</b>
+                            <span class="d-block"
+                              >Founder, Online Education Platform</span
+                            >
                           </div>
                         </div>
                       </div>
@@ -2668,165 +2953,159 @@ import BaseLayout from "../layouts/BaseLayout.astro";
                 </div>
               </div>
             </div>
-            <!-- ca-testimonial-area-end -->
+          </div>
+        </div>
+      </div>
+      <!-- ca-testimonial-area-end -->
 
-            <!-- ca-team-area-start -->
-            <div class="ca-team-area pb-80">
-              <div class="container">
-                <div class="ca-team-border pt-150"></div>
-                <div class="row">
-                  <div class="col-lg-5">
-                    <div class="ca-team-subtitle-wrap mb-30">
-                      <span class="ca-team-subtitle text-white"
-                        ><span>[</span> 100xLift Founders <span>]</span></span
-                      >
-                    </div>
+      <!-- ca-team-area-start -->
+      <div class="ca-team-area pb-80">
+        <div class="container">
+          <div class="ca-team-border pt-150"></div>
+          <div class="row">
+            <div class="col-lg-5">
+              <div class="ca-team-subtitle-wrap mb-30">
+                <span class="ca-team-subtitle text-white"
+                  ><span>[</span> 100xLift Founders <span>]</span></span
+                >
+              </div>
+            </div>
+            <div class="col-lg-7">
+              <div class="ca-team-title-wrap mb-50">
+                <h2 class="ca-section-title fs-100 text-white lh-1 reveal-text">
+                  Who you’ll work<br />
+                  with.
+                </h2>
+              </div>
+            </div>
+            <div class="col-lg-6 col-md-6">
+              <div
+                class="ca-team-item tp-hover-item mb-30 tp_fade_anim"
+                data-delay=".3"
+              >
+                <a
+                  href="#"
+                  class="ca-portfolio-thumb mb-20 p-relative fix d-block"
+                >
+                  <div
+                    class="tp-hover-img"
+                    data-displacement="assets/img/imghover/fluid.jpg"
+                    data-intensity="0.2"
+                    data-speedin="1"
+                    data-speedout="1"
+                  >
+                    <img
+                      class="w-100"
+                      src="/assets/img/team/abdul-wajid.webp"
+                      alt=""
+                    />
                   </div>
-                  <div class="col-lg-7">
-                    <div class="ca-team-title-wrap mb-50">
-                      <h2
-                        class="ca-section-title fs-100 text-white lh-1 reveal-text"
-                      >
-                        Who you’ll work<br />
-                        with.
-                      </h2>
-                    </div>
-                  </div>
-                  <div class="col-lg-6 col-md-6">
-                    <div
-                      class="ca-team-item tp-hover-item mb-30 tp_fade_anim"
-                      data-delay=".3"
-                    >
-                      <a
-                        href="#"
-                        class="ca-portfolio-thumb mb-20 p-relative fix d-block"
-                      >
-                        <div
-                          class="tp-hover-img"
-                          data-displacement="assets/img/imghover/fluid.jpg"
-                          data-intensity="0.2"
-                          data-speedin="1"
-                          data-speedout="1"
-                        >
-                          <img
-                            class="w-100"
-                            src="/assets/img/team/abdul-wajid.webp"
-                            alt=""
-                          />
-                        </div>
-                      </a>
-                      <div class="ca-team-content">
-                        <h5 class="ca-team-title tp-ff-inter text-white mb-0">
-                          <a
-                            href="#"
-                            class="common-underline"
-                            >Abdul Wajid</a
-                          >
-                        </h5>
-                        <span>Founder & CEO</span>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-lg-6 col-md-6">
-                    <div
-                      class="ca-team-item tp-hover-item mb-30 tp_fade_anim"
-                      data-delay=".5"
-                    >
-                      <a
-                        href="#"
-                        class="ca-portfolio-thumb mb-20 p-relative fix d-block"
-                      >
-                        <div
-                          class="tp-hover-img"
-                          data-displacement="assets/img/imghover/fluid.jpg"
-                          data-intensity="0.2"
-                          data-speedin="1"
-                          data-speedout="1"
-                        >
-                          <img
-                            class="w-100"
-                            src="/assets/img/team/ebad-khan.webp"
-                            alt=""
-                          />
-                        </div>
-                      </a>
-                      <div class="ca-team-content">
-                        <h5 class="ca-team-title tp-ff-inter text-white mb-0">
-                          <a
-                            href="#"
-                            class="common-underline"
-                            >M. Ebad Khan</a
-                          >
-                        </h5>
-                        <span>Co-Founder & COO</span>
-                      </div>
-                    </div>
-                  </div>
+                </a>
+                <div class="ca-team-content">
+                  <h5 class="ca-team-title tp-ff-inter text-white mb-0">
+                    <a href="#" class="common-underline">Abdul Wajid</a>
+                  </h5>
+                  <span>Founder & CEO</span>
                 </div>
               </div>
             </div>
-            <!-- ca-team-area-end -->
-          </div>
-
-          <!-- tp-contact-area-start -->
-          <div id="contact" class="tp-contact-area pt-160">
-            <div class="container">
-              <div class="row mb-55">
-                <div class="col-xl-7 col-lg-9 mb-20">
-                  <div class="tp-footer-title-wrap">
-                    <h2 class="tp-section-title tp-text-perspective">
-                      Let’s build something amazing together
-                    </h2>
-                  </div>
-                </div>
-                <div class="col-xl-5 col-lg-3">
+            <div class="col-lg-6 col-md-6">
+              <div
+                class="ca-team-item tp-hover-item mb-30 tp_fade_anim"
+                data-delay=".5"
+              >
+                <a
+                  href="#"
+                  class="ca-portfolio-thumb mb-20 p-relative fix d-block"
+                >
                   <div
-                      class="tp-btn-group tp_fade_anim ms-md-auto"
-                      data-delay=".4"
-                      data-fade-from="bottom"
-                      data-ease="bounce"
-                    >
-                      <a class="tp-btn-circle" href="/contact">
-                        <svg
-                          width="14"
-                          height="14"
-                          viewBox="0 0 14 14"
-                          fill="none"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path
-                            fill-rule="evenodd"
-                            clip-rule="evenodd"
-                            d="M2.41379 3.30208C5.97452 3.05821 10.6092 1.55558 14 0C12.4438 3.39014 10.9406 8.02425 10.6973 11.585L8.35765 6.59331L1.14783 13.8037C1.02165 13.9295 0.850656 14.0001 0.672431 14C0.539461 14 0.409486 13.9605 0.298934 13.8866C0.188382 13.8128 0.102217 13.7077 0.0513353 13.5849C0.000453949 13.462 -0.0128613 13.3269 0.013072 13.1965C0.0390053 13.066 0.103024 12.9462 0.197034 12.8522L7.40683 5.64241L2.41379 3.30208Z"
-                            fill="currentColor"
-                          />
-                        </svg>
-                      </a>
-                      <a
-                        class="tp-btn z-index-1"
-                        href="/contact"
-                        >Contact Us</a
-                      >
-                      <a class="tp-btn-circle" href="/contact">
-                        <svg
-                          width="14"
-                          height="14"
-                          viewBox="0 0 14 14"
-                          fill="none"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path
-                            fill-rule="evenodd"
-                            clip-rule="evenodd"
-                            d="M2.41379 3.30208C5.97452 3.05821 10.6092 1.55558 14 0C12.4438 3.39014 10.9406 8.02425 10.6973 11.585L8.35765 6.59331L1.14783 13.8037C1.02165 13.9295 0.850656 14.0001 0.672431 14C0.539461 14 0.409486 13.9605 0.298934 13.8866C0.188382 13.8128 0.102217 13.7077 0.0513353 13.5849C0.000453949 13.462 -0.0128613 13.3269 0.013072 13.1965C0.0390053 13.066 0.103024 12.9462 0.197034 12.8522L7.40683 5.64241L2.41379 3.30208Z"
-                            fill="currentColor"
-                          />
-                        </svg>
-                      </a>
-                    </div>
+                    class="tp-hover-img"
+                    data-displacement="assets/img/imghover/fluid.jpg"
+                    data-intensity="0.2"
+                    data-speedin="1"
+                    data-speedout="1"
+                  >
+                    <img
+                      class="w-100"
+                      src="/assets/img/team/ebad-khan.webp"
+                      alt=""
+                    />
+                  </div>
+                </a>
+                <div class="ca-team-content">
+                  <h5 class="ca-team-title tp-ff-inter text-white mb-0">
+                    <a href="#" class="common-underline">M. Ebad Khan</a>
+                  </h5>
+                  <span>Co-Founder & COO</span>
                 </div>
               </div>
-              <!-- <div class="tp-contact-bg">
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- ca-team-area-end -->
+    </div>
+
+    <!-- tp-faq-area-start -->
+   <PrimaryFaq/>
+             
+
+    <!-- tp-faq-area-end -->
+
+    <!-- tp-contact-area-start -->
+    <div id="contact" class="tp-contact-area pt-160">
+      <div class="container">
+        <div class="row mb-55">
+          <div class="col-xl-7 col-lg-9 mb-20">
+            <div class="tp-footer-title-wrap">
+              <h2 class="tp-section-title tp-text-perspective">
+                Let’s build something amazing together
+              </h2>
+            </div>
+          </div>
+          <div class="col-xl-5 col-lg-3">
+            <div
+              class="tp-btn-group tp_fade_anim ms-md-auto"
+              data-delay=".4"
+              data-fade-from="bottom"
+              data-ease="bounce"
+            >
+              <a class="tp-btn-circle" href="/contact">
+                <svg
+                  width="14"
+                  height="14"
+                  viewBox="0 0 14 14"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    clip-rule="evenodd"
+                    d="M2.41379 3.30208C5.97452 3.05821 10.6092 1.55558 14 0C12.4438 3.39014 10.9406 8.02425 10.6973 11.585L8.35765 6.59331L1.14783 13.8037C1.02165 13.9295 0.850656 14.0001 0.672431 14C0.539461 14 0.409486 13.9605 0.298934 13.8866C0.188382 13.8128 0.102217 13.7077 0.0513353 13.5849C0.000453949 13.462 -0.0128613 13.3269 0.013072 13.1965C0.0390053 13.066 0.103024 12.9462 0.197034 12.8522L7.40683 5.64241L2.41379 3.30208Z"
+                    fill="currentColor"></path>
+                </svg>
+              </a>
+              <a class="tp-btn z-index-1" href="/contact">Contact Us</a>
+              <a class="tp-btn-circle" href="/contact">
+                <svg
+                  width="14"
+                  height="14"
+                  viewBox="0 0 14 14"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    clip-rule="evenodd"
+                    d="M2.41379 3.30208C5.97452 3.05821 10.6092 1.55558 14 0C12.4438 3.39014 10.9406 8.02425 10.6973 11.585L8.35765 6.59331L1.14783 13.8037C1.02165 13.9295 0.850656 14.0001 0.672431 14C0.539461 14 0.409486 13.9605 0.298934 13.8866C0.188382 13.8128 0.102217 13.7077 0.0513353 13.5849C0.000453949 13.462 -0.0128613 13.3269 0.013072 13.1965C0.0390053 13.066 0.103024 12.9462 0.197034 12.8522L7.40683 5.64241L2.41379 3.30208Z"
+                    fill="currentColor"></path>
+                </svg>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- <div class="tp-contact-bg">
                 <div class="row">
                   <div class="col-lg-6 col-md-6">
                     <div class="tp-contact-info mb-30">
@@ -2908,17 +3187,16 @@ import BaseLayout from "../layouts/BaseLayout.astro";
                   </div>
                 </div>
               </div> -->
-            </div>
-          </div>
-          <!-- tp-contact-area-end -->
-        </main>
+      </div>
+    </div>
+    <!-- tp-contact-area-end -->
+  </main>
 
-<script
-  slot="body-end"
-  src="https://assets.calendly.com/assets/external/widget.js"
-  type="text/javascript"
-  async
-></script>
-<script is:inline slot="body-end" src="/assets/js/portfolio.js" defer></script>
-
+  <script
+    slot="body-end"
+    src="https://assets.calendly.com/assets/external/widget.js"
+    type="text/javascript"
+    async></script>
+  <script is:inline slot="body-end" src="/assets/js/portfolio.js" defer
+  ></script>
 </BaseLayout>
