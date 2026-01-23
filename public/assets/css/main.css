@@ -9245,6 +9245,12 @@ body.tp-magic-cursor #magic-cursor {
 .mg-portfolio-content .cs-portfolio-title {
   font-size: 26px;
 }
+@media(max-width:576px){
+  
+.mg-portfolio-content .cs-portfolio-title {
+  font-size: 15px;
+}
+}
 .mg-portfolio-item {
   border-radius: 10px;
   overflow: hidden;
