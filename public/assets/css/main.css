@@ -17236,8 +17236,14 @@ body.tp-magic-cursor #magic-cursor {
 /* } */
 
 
+main #awm-page-top-margin{
+  margin-top:450px !important;
+  display: block;
+}
+
 @media(max-width: 767.98px) {
 #awm-portfolio-title{
   padding-top: 70px;
 }  
 }
+
