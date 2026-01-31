@@ -17,9 +17,43 @@ const slug = project.slug;
 // Related: pick 2 other projects
 const all = await getCollection("portfolio");
 const related = all.filter((x) => x.slug !== slug).slice(0, 2);
+
+const siteUrl = "https://www.100xlift.com";
+const canonical = new URL(`/portfolio/${slug}`, siteUrl).href;
+const pageTitle = `100xLift - ${d.title}`;
+const pageDescription = (d.overviewParagraphs && d.overviewParagraphs[0]) || `See the ${d.title} project delivered by 100xLift.`;
+const pageKeywords = [d.title, ...(d.tags || [])].filter(Boolean).join(", ");
+const ogImage = d.cardImage || d.galleryMain || "/assets/img/logo/logo-white.png";
 ---
 
-<BaseLayout title={`100XLIFT - ${d.title}`} headerVariant="promo" >
+<BaseLayout
+  title={pageTitle}
+  description={pageDescription}
+  canonical={canonical}
+  robots="index,follow"
+  ogImage={ogImage}
+  ogType="article"
+  locale="en_US"
+  siteName="100xLift"
+  twitterSite=""
+  twitterCreator=""
+  themeColor="#0b0f1a"
+  keywords={pageKeywords}
+  author="100xLift"
+  publishedTime=""
+  modifiedTime=""
+  structuredData={null}
+  lang="en"
+  htmlClass="no-js cunnet-dark"
+  bodyClass="tp-magic-cursor"
+  ogTitle={pageTitle}
+  ogDescription={pageDescription}
+  ogUrl={canonical}
+  twitterTitle={pageTitle}
+  twitterDescription={pageDescription}
+  headerVariant="promo"
+  showPreloader={true}
+>
   <main>
 
     <!-- portfolio details 2 area start -->

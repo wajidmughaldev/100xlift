@@ -41,17 +41,41 @@ const portfolioData = projects.map((project) => ({
 }));
 const portfolioDataJson = JSON.stringify(portfolioData).replace(/</g, "\\u003c");
 
+const siteUrl = "https://www.100xlift.com";
+const canonical = new URL(Astro.url.pathname, siteUrl).href;
+const pageTitle = "100xLift - Portfolio";
+const pageDescription = "Explore a selection of 100xLift projects across web design, development, and SEO-driven growth.";
+const pageKeywords = "100xlift portfolio, web design projects, web development, SEO case studies, branding";
+const ogImage = "/assets/img/logo/logo-white.png";
 ---
 
 <BaseLayout
-  title="100XLIFT – Portfolio"
-  description="100xLift is a full-service digital agency delivering web design, development, SEO, and branding solutions to help businesses grow online."
-  keywords="digital agency, web design, web development, SEO services, branding, UI UX design, website optimization, business growth online"
-  ogTitle="100xLift – Digital Agency for Web Design & SEO"
-  ogImage="/assets/img/logo/logo-white.png"
-  ogUrl="https://www.100xlift.com/"
-  twitterTitle="100xLift – Digital Agency for Web Design & SEO"
+  title={pageTitle}
+  description={pageDescription}
+  canonical={canonical}
+  robots="index,follow"
+  ogImage={ogImage}
+  ogType="website"
+  locale="en_US"
+  siteName="100xLift"
+  twitterSite=""
+  twitterCreator=""
+  themeColor="#0b0f1a"
+  keywords={pageKeywords}
+  author="100xLift"
+  publishedTime=""
+  modifiedTime=""
+  structuredData={null}
+  lang="en"
+  htmlClass="no-js cunnet-dark"
+  bodyClass="tp-magic-cursor"
+  ogTitle={pageTitle}
+  ogDescription={pageDescription}
+  ogUrl={canonical}
+  twitterTitle={pageTitle}
+  twitterDescription={pageDescription}
   headerVariant="promo"
+  showPreloader={true}
 >
 
 <style slot="head">

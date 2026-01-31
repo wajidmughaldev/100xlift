@@ -1,9 +1,41 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+
+const siteUrl = "https://www.100xlift.com";
+const canonical = new URL(Astro.url.pathname, siteUrl).href;
+const pageTitle = "100xLift - 404 Not Found";
+const pageDescription = "The page you are looking for could not be found.";
+const pageKeywords = "404, not found, 100xlift";
+const ogImage = "/assets/img/logo/logo-white.png";
 ---
-<BaseLayout title="404 – Not Found"
- headerVariant="promo"
-  showPreloader={false}>
+<BaseLayout
+  title={pageTitle}
+  description={pageDescription}
+  canonical={canonical}
+  robots="noindex,follow"
+  ogImage={ogImage}
+  ogType="website"
+  locale="en_US"
+  siteName="100xLift"
+  twitterSite=""
+  twitterCreator=""
+  themeColor="#0b0f1a"
+  keywords={pageKeywords}
+  author="100xLift"
+  publishedTime=""
+  modifiedTime=""
+  structuredData={null}
+  lang="en"
+  htmlClass="no-js cunnet-dark"
+  bodyClass="tp-magic-cursor"
+  ogTitle={pageTitle}
+  ogDescription={pageDescription}
+  ogUrl={canonical}
+  twitterTitle={pageTitle}
+  twitterDescription={pageDescription}
+  headerVariant="promo"
+  showPreloader={false}
+>
   <main class="d-flex flex-column col align-items-center justify-content-center mt-5" style="height: 60vh;  ">
       <h1 class="about-us-title tp-ff-sequel-medium tp-text-perspective mt-5">Lost?</h1>
       <p class="text-white">You took a wrong turn somewhere.</p>

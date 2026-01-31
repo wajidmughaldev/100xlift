@@ -12,16 +12,39 @@ const randomProjects = [...projects]
   .sort(() => 0.5 - Math.random())
   .slice(0, 6);
 
+const siteUrl = "https://www.100xlift.com";
+const canonical = new URL(Astro.url.pathname, siteUrl).href;
+const pageTitle = "100xLift - Digital Agency for Web Design, Development & SEO";
+const pageDescription = "100xLift is a full-service digital agency delivering web design, development, SEO, and branding solutions to help businesses grow online.";
+const pageKeywords = "digital agency, web design, web development, SEO services, branding, UI UX design, website optimization, business growth online";
+const ogImage = "/assets/img/logo/logo-white.png";
 ---
 
 <BaseLayout
-  title="100xLift – Digital Agency for Web Design, Development & SEO"
-  description="100xLift is a full-service digital agency delivering web design, development, SEO, and branding solutions to help businesses grow online."
-  keywords="digital agency, web design, web development, SEO services, branding, UI UX design, website optimization, business growth online"
-  ogTitle="100xLift – Digital Agency for Web Design & SEO"
-  ogImage="/assets/img/logo/logo-white.png"
-  ogUrl="https://www.100xlift.com/"
-  twitterTitle="100xLift – Digital Agency for Web Design & SEO"
+  title={pageTitle}
+  description={pageDescription}
+  canonical={canonical}
+  robots="index,follow"
+  ogImage={ogImage}
+  ogType="website"
+  locale="en_US"
+  siteName="100xLift"
+  twitterSite=""
+  twitterCreator=""
+  themeColor="#0b0f1a"
+  keywords={pageKeywords}
+  author="100xLift"
+  publishedTime=""
+  modifiedTime=""
+  structuredData={null}
+  lang="en"
+  htmlClass="no-js cunnet-dark"
+  bodyClass="tp-magic-cursor"
+  ogTitle="100xLift - Digital Agency for Web Design & SEO"
+  ogDescription={pageDescription}
+  ogUrl={canonical}
+  twitterTitle="100xLift - Digital Agency for Web Design & SEO"
+  twitterDescription={pageDescription}
   headerVariant="promo"
   showPreloader={false}
 >

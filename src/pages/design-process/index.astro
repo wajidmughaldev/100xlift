@@ -1,10 +1,43 @@
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Our Process</title>
-  <style>
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+const siteUrl = "https://www.100xlift.com";
+const canonical = new URL(Astro.url.pathname, siteUrl).href;
+const pageTitle = "100xLift - Design Process";
+const pageDescription = "See how 100xLift plans, designs, and delivers high-performing websites and digital experiences.";
+const pageKeywords = "design process, web design workflow, UX process, 100xlift";
+const ogImage = "/assets/img/logo/logo-white.png";
+---
+
+<BaseLayout
+  title={pageTitle}
+  description={pageDescription}
+  canonical={canonical}
+  robots="index,follow"
+  ogImage={ogImage}
+  ogType="website"
+  locale="en_US"
+  siteName="100xLift"
+  twitterSite=""
+  twitterCreator=""
+  themeColor="#0b0f1a"
+  keywords={pageKeywords}
+  author="100xLift"
+  publishedTime=""
+  modifiedTime=""
+  structuredData={null}
+  lang="en"
+  htmlClass="no-js cunnet-dark"
+  bodyClass="tp-magic-cursor"
+  ogTitle={pageTitle}
+  ogDescription={pageDescription}
+  ogUrl={canonical}
+  twitterTitle={pageTitle}
+  twitterDescription={pageDescription}
+  headerVariant="simple"
+  showPreloader={true}
+>
+  <style slot="head">
     :root{
       --bg:#0E0F11;
       --accent:#B9FD50;
@@ -636,9 +669,7 @@
       .ticker-row{animation:none}
     }
   </style>
-</head>
-
-<body>
+  <main>
   <!-- Topbar -->
   <header class="topbar">
     <div class="wrap">
@@ -662,7 +693,7 @@
   </header>
 
   <!-- Hero -->
-  <main>
+  <div>
     <section class="hero">
       <div class="blob" aria-hidden="true"></div>
 
@@ -997,7 +1028,7 @@
         </div>
       </div>
     </div>
-  </main>
+  </div>
 
   <script>
     const steps = {
@@ -1160,5 +1191,5 @@
       });
     });
   </script>
-</body>
-</html>
+  </main>
+</BaseLayout>

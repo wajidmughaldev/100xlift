@@ -6,9 +6,43 @@ const services = await getCollection("services");
 const sorted = services
   .slice()
   .sort((a, b) => (a.data.order ?? 0) - (b.data.order ?? 0));
+
+const siteUrl = "https://www.100xlift.com";
+const canonical = new URL(Astro.url.pathname, siteUrl).href;
+const pageTitle = "100xLift - Services";
+const pageDescription = "Explore 100xLift services including web design, development, SEO, and growth-focused digital strategy.";
+const pageKeywords = "100xlift services, web design, web development, SEO services, digital strategy";
+const ogImage = "/assets/img/logo/logo-white.png";
 ---
 
-<BaseLayout headerVariant="promo" title="100XLIFT - Services">
+<BaseLayout
+  title={pageTitle}
+  description={pageDescription}
+  canonical={canonical}
+  robots="index,follow"
+  ogImage={ogImage}
+  ogType="website"
+  locale="en_US"
+  siteName="100xLift"
+  twitterSite=""
+  twitterCreator=""
+  themeColor="#0b0f1a"
+  keywords={pageKeywords}
+  author="100xLift"
+  publishedTime=""
+  modifiedTime=""
+  structuredData={null}
+  lang="en"
+  htmlClass="no-js cunnet-dark"
+  bodyClass="tp-magic-cursor"
+  ogTitle={pageTitle}
+  ogDescription={pageDescription}
+  ogUrl={canonical}
+  twitterTitle={pageTitle}
+  twitterDescription={pageDescription}
+  headerVariant="promo"
+  showPreloader={true}
+>
   <main>
     <!-- services-area-start -->
     <div id="services" class="about-me-resume-area pt-145 pb-160">

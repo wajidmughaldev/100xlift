@@ -15,9 +15,49 @@ const d = service.data;
 const slug = service.slug;
 const faqOneGroup = `service-faq-one-${slug}`;
 const faqTwoGroup = `service-faq-two-${slug}`;
+
+const siteUrl = "https://www.100xlift.com";
+const canonical = new URL(`/services/${slug}`, siteUrl).href;
+const pageTitle = `100xLift - ${d.title}`;
+const pageDescription = d.listSummary || d.overviewDescription || `Explore ${d.title} services from 100xLift.`;
+const pageKeywords = [d.title, ...(d.heroLinks || [])]
+  .filter(Boolean)
+  .join(", ");
+const normalizeOgImage = (value) => {
+  if (!value) return "/assets/img/logo/logo-white.png";
+  return value.startsWith("/") ? value : `/${value}`;
+};
+const ogImage = normalizeOgImage(d.bannerTop || d.overviewImage);
 ---
 
-<BaseLayout headerVariant="promo" title={`100XLIFT - ${d.title}`}>
+<BaseLayout
+  title={pageTitle}
+  description={pageDescription}
+  canonical={canonical}
+  robots="index,follow"
+  ogImage={ogImage}
+  ogType="article"
+  locale="en_US"
+  siteName="100xLift"
+  twitterSite=""
+  twitterCreator=""
+  themeColor="#0b0f1a"
+  keywords={pageKeywords}
+  author="100xLift"
+  publishedTime=""
+  modifiedTime=""
+  structuredData={null}
+  lang="en"
+  htmlClass="no-js cunnet-dark"
+  bodyClass="tp-magic-cursor"
+  ogTitle={pageTitle}
+  ogDescription={pageDescription}
+  ogUrl={canonical}
+  twitterTitle={pageTitle}
+  twitterDescription={pageDescription}
+  headerVariant="promo"
+  showPreloader={true}
+>
   <div id="smooth-wrapper">
     <div id="smooth-content">
       <main>
