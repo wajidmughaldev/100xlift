@@ -1054,14 +1054,33 @@ const preHeaderHtml = `<!-- Begin magic cursor -->
     <!-- Optional: Web manifest (put in /public/site.webmanifest) -->
     <link rel="manifest" href="/site.webmanifest" />
 
-    <!-- CSS here -->
-    <link rel="stylesheet" href="/assets/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="/assets/css/swiper-bundle.css" />
-    <link rel="stylesheet" href="/assets/css/nice-select.css" />
-    <link rel="stylesheet" href="/assets/css/magnific-popup.css" />
-    <link rel="stylesheet" href="/assets/css/font-awesome-pro.css" />
-    <link rel="stylesheet" href="/assets/css/spacing.css" />
-    <link rel="stylesheet" href="/assets/css/main.css" />
+
+    <style>
+  html { background: #0b0f1a; }
+  body { margin: 0; }
+</style>
+
+   <!-- CSS here (non-blocking) -->
+<link rel="preload" as="style" href="/assets/css/bootstrap.min.css" onload="this.onload=null;this.rel='stylesheet'">
+<link rel="preload" as="style" href="/assets/css/spacing.css" onload="this.onload=null;this.rel='stylesheet'">
+<link rel="preload" as="style" href="/assets/css/main.css" onload="this.onload=null;this.rel='stylesheet'">
+
+<link rel="preload" as="style" href="/assets/css/font-awesome-pro.css" onload="this.onload=null;this.rel='stylesheet'">
+
+<link rel="preload" as="style" href="/assets/css/swiper-bundle.css" onload="this.onload=null;this.rel='stylesheet'">
+<link rel="preload" as="style" href="/assets/css/nice-select.css" onload="this.onload=null;this.rel='stylesheet'">
+<link rel="preload" as="style" href="/assets/css/magnific-popup.css" onload="this.onload=null;this.rel='stylesheet'">
+
+<noscript>
+  <link rel="stylesheet" href="/assets/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="/assets/css/spacing.css" />
+  <link rel="stylesheet" href="/assets/css/main.css" />
+  <link rel="stylesheet" href="/assets/css/font-awesome-pro.css" />
+  <link rel="stylesheet" href="/assets/css/swiper-bundle.css" />
+  <link rel="stylesheet" href="/assets/css/nice-select.css" />
+  <link rel="stylesheet" href="/assets/css/magnific-popup.css" />
+</noscript>
+
 
     <!-- Structured Data (JSON-LD) -->
     {structuredData && (
@@ -1105,7 +1124,8 @@ const preHeaderHtml = `<!-- Begin magic cursor -->
     <script is:inline src="/assets/js/bootstrap.min.js" defer></script>
     <script is:inline src="/assets/js/plugin.js" defer></script>
     <script is:inline src="/assets/js/split-type.js" defer></script>
-    <script is:inline src="/assets/js/three.js" defer></script>
+    <!-- <script is:inline src="/assets/js/three.js" defer></script> -->
+     
     <script is:inline src="/assets/js/hover-effect.umd.js" defer></script>
     <script is:inline src="/assets/js/swiper-bundle.js" defer></script>
     <script is:inline src="/assets/js/magnific-popup.js" defer></script>
